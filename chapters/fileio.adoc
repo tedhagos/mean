@@ -1,0 +1,69 @@
+
+== Reading and Writing Files
+
+
+
+[[app-listing]]
+[source,javascript]
+.FileReadExample.js
+----
+const fs = require('fs'); // <1>
+const filename = 'index.html';
+
+fs.readFile(filename,'utf-8', function(err, data){
+  if(err) { // <2>
+    console.log(err.message);
+  }
+  else {
+    console.log(data); // <3>
+  }
+});
+
+----
+<1> Import the `fs` library into our app. Anything that requires file io is
+contained in this module
+<2> If the call fails, `err` won't be null. Lots of things can cause
+the `readFile()` to fail e.g. if the file is not there, the OS ran out
+of file handles etc. If err isn't null, the `if` block will find it
+_truthy_
+<3> If the call succeeds, `err` will be null (falsy) and the contents
+of the file would have been loaded into the second parameter of our
+callback function
+
+If you ran the code listing above, you would seen  an error message 
+because the file _index.html_ does not exist yet. Create the html file
+and save it on the same folder where _FileReadExample.js_ is located.
+
+[[app-listing]]
+[source,html]
+.index.html
+----
+<!DOCTYPE html>
+<html>
+  <h1>Hello World</h1>
+</html>
+----
+
+Run the code sample again. This time, the contents of _index.html_
+will be echoed to the screen.
+
+=== Reading a File from a Web App
+
+[[app-listing]]
+[source,javascript]
+----
+
+----
+
+
+
+
+=== Synchronous File Operation
+
+
+
+
+=== Dealing with Asynchrony
+
+
+

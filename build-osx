@@ -1,0 +1,8 @@
+
+rm -fvr *.html
+asciidoctor -b docbook -o temp.xml index.adoc
+sed  's/id=\"_'/id=\"/g temp.xml > index.xml
+xsltproc --stringparam use.id.as.filename 1 ~/progtools/docbook/xhtml/chunk.xsl index.xml
+
+
+

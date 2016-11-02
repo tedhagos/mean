@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?asciidoc-toc?>
+<?asciidoc-numbered?>
+<book xmlns="http://docbook.org/ns/docbook" xmlns:xl="http://www.w3.org/1999/xlink" version="5.0" xml:lang="en">
+<info>
+<title>Programming using the MEAN stack</title>
+<date>2016-11-02</date>
+</info>
+<chapter xml:id="_preface">
+<title>Preface</title>
+<variablelist>
+<varlistentry>
+<term>Chapter 1</term>
+<listitem>
+<simpara>A Javascript refresher. Ideally, you will approach the book with book with some Javascript experience</simpara>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term>Chapter 2</term>
+<listitem>
+<simpara>== Introduction</simpara>
+</listitem>
+</varlistentry>
+</variablelist>
+</chapter>
+<chapter xml:id="_installation">
+<title>Installation</title>
+
+</chapter>
+<chapter xml:id="_working_with_files">
+<title>Working with files</title>
+<programlisting language="javascript" linenumbering="unnumbered"></programlisting>
+</chapter>
+<chapter xml:id="_reading_and_writing_files">
+<title>Reading and Writing Files</title>
+<formalpara xml:id="app-listing">
+<title>FileReadExample.js</title>
+<para>
+<programlisting language="javascript" linenumbering="unnumbered">const fs = require('fs'); <co xml:id="CO1-1"/>
+const filename = 'index.html';
+
+fs.readFile(filename,'utf-8', function(err, data){
+  if(err) { <co xml:id="CO1-2"/>
+    console.log(err.message);
+  }
+  else {
+    console.log(data); <co xml:id="CO1-3"/>
+  }
+});</programlisting>
+</para>
+</formalpara>
+<calloutlist>
+<callout arearefs="CO1-1">
+<para>Import the <emphasis role="strong">fs</emphasis> library into our app. Anything that requires file io is
+contained in this module</para>
+</callout>
+<callout arearefs="CO1-2">
+<para>If the call fails, <literal>err</literal> won&#8217;t be null. Lots of things can cause
+the <literal>readFile()</literal> to fail e.g. if the file is not there, the OS ran out
+of file handles etc. If err isn&#8217;t null, the <literal>if</literal> block will find it
+<emphasis>truthy</emphasis></para>
+</callout>
+<callout arearefs="CO1-3">
+<para>If the call succeeds, <literal>err</literal> will be null (falsy) and the contents
+of the file would have been loaded into the second parameter of our
+callback function</para>
+</callout>
+</calloutlist>
+<simpara>If you ran the code listing above, you would seen  an error message
+because the file <emphasis>index.html</emphasis> does not exist yet. Create the html file
+and save it on the same folder where <emphasis>FileReadExample.js</emphasis> is located.</simpara>
+<formalpara xml:id="app-listing">
+<title>index.html</title>
+<para>
+<programlisting language="html" linenumbering="unnumbered">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;h1&gt;Hello World&lt;/h1&gt;
+&lt;/html&gt;</programlisting>
+</para>
+</formalpara>
+<simpara>Run the code sample again. This time, the contents of <emphasis>index.html</emphasis>
+will be echoed to the screen.</simpara>
+<section xml:id="_reading_a_file_from_a_web_app">
+<title>Reading a File from a Web App</title>
+<programlisting xml:id="app-listing" language="javascript" linenumbering="unnumbered"></programlisting>
+</section>
+<section xml:id="_synchronous_file_operation">
+<title>Synchronous File Operation</title>
+
+</section>
+<section xml:id="_dealing_with_asynchrony">
+<title>Dealing with Asynchrony</title>
+
+</section>
+</chapter>
+</book>

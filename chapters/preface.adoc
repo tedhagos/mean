@@ -1,0 +1,26 @@
+== Preface
+
+////
+Important Javascript concepts
+Hello Node
+Basic routing
+File I/O
+Middleware
+Connecting to Relational Databases
+Introduction to MongoDB and NOSQL
+Basic CRUD using Mongoose
+ExpressJS
+Route Params
+Templating
+Logging
+AngularJS
+Authentication and Sessions
+////
+
+
+Chapter 1::
+  A Javascript refresher. Ideally, you will approach the book with book with some Javascript experience
+
+Chapter 2::
+
+

@@ -1,0 +1,39 @@
+:stylesheet: style.css
+:doctype: book
+
+
+////
+Important Javascript concepts
+Hello Node
+Basic routing
+File I/O
+Middleware
+Connecting to Relational Databases
+Introduction to MongoDB and NOSQL
+Basic CRUD using Mongoose
+ExpressJS
+Route Params
+Templating
+Logging
+AngularJS
+Authentication and Sessions
+////
+
+= Programming using the MEAN stack
+
+include::chapters/preface.adoc[]
+include::chapters/javascript-concepts.adoc[]
+include::chapters/node.adoc[]
+include::chapters/hello-node.adoc[]
+include::chapters/fileio.adoc[]
+include::chapters/middleware.adoc[]
+include::chapters/relational-dbs.adoc[]
+include::chapters/intro-mongo-nosql.adoc[]
+include::chapters/mongoose.adoc[]
+include::chapters/expressjs.adoc[]
+include::chapters/route-parameters.adoc[]
+include::chapters/templating.adoc[]
+include::chapters/logging.adoc[]
+include::chapters/introduction-angularjs.adoc[]
+include::chapters/authentication.adoc[]
+
