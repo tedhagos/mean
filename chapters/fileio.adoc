@@ -85,7 +85,6 @@ http.createServer(function(req, res){
 
 === Synchronous File Operation
 
-image::images/1.png[]
 
 
 === Dealing with Asynchrony
