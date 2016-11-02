@@ -1,9 +1,9 @@
 
-== Reading and Writing Files
+== File IO
 
 
 
-[[app-listing]]
+[[filereadexample.js]]
 [source,javascript]
 .FileReadExample.js
 ----
@@ -34,7 +34,7 @@ If you ran the code listing above, you would seen  an error message
 because the file _index.html_ does not exist yet. Create the html file
 and save it on the same folder where _FileReadExample.js_ is located.
 
-[[app-listing]]
+[[index.html]]
 [source,html]
 .index.html
 ----
@@ -49,9 +49,34 @@ will be echoed to the screen.
 
 === Reading a File from a Web App
 
-[[app-listing]]
+Let's use the file reading technique we learned in the last section
+and apply it in a simple web app. The basic idea is as follows (1) The
+user navigates to the root document or the home page (2) we will call a
+function that will read an html file and (3) we will write the
+contents of the html file into the `response` stream.
+
+[[app.js]]
 [source,javascript]
+.app.js
 ----
+const http = require('http');
+const fs = require('fs');
+
+const port = process.env.PORT || 3000;
+
+http.createServer(function(req, res){
+  var url = req.url.toUpperCase();
+  switch(url) {
+    case "/":
+      // were in the home page
+      break;
+    case "/ABOUT":
+      // were in the about page
+      break;
+    default:
+      // Good place to write a 404 response
+  }
+});
 
 ----
 
@@ -60,7 +85,7 @@ will be echoed to the screen.
 
 === Synchronous File Operation
 
-
+image::images/1.png[]
 
 
 === Dealing with Asynchrony

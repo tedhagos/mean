@@ -31,12 +31,9 @@
 <title>Working with files</title>
 <programlisting language="javascript" linenumbering="unnumbered"></programlisting>
 </chapter>
-<chapter xml:id="reading_and_writing_files">
-<title>Reading and Writing Files</title>
-<formalpara xml:id="app-listing">
-<title>FileReadExample.js</title>
-<para>
-<programlisting language="javascript" linenumbering="unnumbered">const fs = require('fs'); <co xml:id="CO1-1"/>
+<chapter xml:id="file_io">
+<title>File IO</title>
+<programlisting xml:id="filereadexample.js" language="javascript" linenumbering="unnumbered">const fs = require('fs'); <co xml:id="CO1-1"/>
 const filename = 'index.html';
 
 fs.readFile(filename,'utf-8', function(err, data){
@@ -47,11 +44,9 @@ fs.readFile(filename,'utf-8', function(err, data){
     console.log(data); <co xml:id="CO1-3"/>
   }
 });</programlisting>
-</para>
-</formalpara>
 <calloutlist>
 <callout arearefs="CO1-1">
-<para>Import the <emphasis role="strong">fs</emphasis> library into our app. Anything that requires file io is
+<para>Import the <literal>fs</literal> library into our app. Anything that requires file io is
 contained in this module</para>
 </callout>
 <callout arearefs="CO1-2">
@@ -82,11 +77,45 @@ and save it on the same folder where <emphasis>FileReadExample.js</emphasis> is 
 will be echoed to the screen.</simpara>
 <section xml:id="reading_a_file_from_a_web_app">
 <title>Reading a File from a Web App</title>
-<programlisting xml:id="app-listing" language="javascript" linenumbering="unnumbered"></programlisting>
+<simpara>Let&#8217;s use the file reading technique we learned in the last section
+and apply it in a simple web app. The basic idea is as follows (1) The
+user navigates to the root document or the home page (2) we will call a
+function that will read an html file and (3) we will write the
+contents of the html file into the <literal>response</literal> stream.</simpara>
+<formalpara xml:id="app.js">
+<title>app.js</title>
+<para>
+<programlisting language="javascript" linenumbering="unnumbered">const http = require('http');
+const fs = require('fs');
+
+const port = process.env.PORT || 3000;
+
+http.createServer(function(req, res){
+  var url = req.url.toUpperCase();
+  switch(url) {
+    case "/":
+      // were in the home page
+      break;
+    case "/ABOUT":
+      // were in the about page
+      break;
+    default:
+      // Good place to write a 404 response
+  }
+});</programlisting>
+</para>
+</formalpara>
 </section>
 <section xml:id="synchronous_file_operation">
 <title>Synchronous File Operation</title>
-
+<informalfigure>
+<mediaobject>
+<imageobject>
+<imagedata fileref="images/1.png"/>
+</imageobject>
+<textobject><phrase>1</phrase></textobject>
+</mediaobject>
+</informalfigure>
 </section>
 <section xml:id="dealing_with_asynchrony">
 <title>Dealing with Asynchrony</title>
