@@ -4,37 +4,44 @@
 <p><a id="filereadexample.js"></a>
 <strong>FileReadExample.js. </strong>
 
-</p><pre class="programlisting">const fs = require('fs'); <a id="CO1-1"></a><span><img src="images/callouts/1.png" alt="1" border="0" /></span>
-const filename = 'index.html';
+</p><pre class="programlisting">const fs = require('fs'); // &lt;1&gt; const filename = 'index.html';
 
-fs.readFile(filename,'utf-8', function(err, data){ <a id="CO1-2"></a><span><img src="images/callouts/2.png" alt="2" border="0" /></span><a id="CO1-3"></a><span><img src="images/callouts/3.png" alt="3" border="0" /></span><a id="CO1-4"></a><span><img src="images/callouts/4.png" alt="4" border="0" /></span>
-  if(err) { <a id="CO1-5"></a><span><img src="images/callouts/5.png" alt="5" border="0" /></span>
+fs.readFile(filename,'utf-8', function(err, data){ <a id="CO1-1"></a><span><img src="images/callouts/1.png" alt="1" border="0" /></span><a id="CO1-2"></a><span><img src="images/callouts/2.png" alt="2" border="0" /></span><a id="CO1-3"></a><span><img src="images/callouts/3.png" alt="3" border="0" /></span>
+  if(err) { <a id="CO1-4"></a><span><img src="images/callouts/4.png" alt="4" border="0" /></span>
     console.log(err.message);
   }
   else {
-    console.log(data); <a id="CO1-6"></a><span><img src="images/callouts/6.png" alt="6" border="0" /></span>
+    console.log(data); <a id="CO1-5"></a><span><img src="images/callouts/5.png" alt="5" border="0" /></span>
   }
 });</pre><p>
 
 </p>
-<div class="calloutlist"><table border="0" summary="Callout list"><tr><td width="5%" valign="top" align="left"><p><a href="#CO1-1"><span><img src="images/callouts/1.png" alt="1" border="0" /></span></a> </p></td><td valign="top" align="left">
-<p>Import the <code class="literal">fs</code> library into our app. Anything that requires file io is
-contained in this module</p>
+<div class="calloutlist"><table border="0" summary="Callout list"><tr><td width="5%" valign="top" align="left"><p></p></td><td valign="top" align="left">
+<p>Import the <code class="literal">fs</code> library into our app. Anything that requires
+file io is contained in this module</p>
+</td></tr><tr><td width="5%" valign="top" align="left"><p><a href="#CO1-1"><span><img src="images/callouts/1.png" alt="1" border="0" /></span></a> </p></td><td valign="top" align="left">
+<p>First parameter of <code class="literal">readFile()</code> is the filename to read. You can
+check for file existence first if you prefer using <code class="literal">fs.lstat</code> or
+<code class="literal">fs.access</code>, but if you generally would just like to read the file,
+just call <code class="literal">readFile</code> right away. If the file does not exist, it will
+throw an error just the same</p>
 </td></tr><tr><td width="5%" valign="top" align="left"><p><a href="#CO1-2"><span><img src="images/callouts/2.png" alt="2" border="0" /></span></a> </p></td><td valign="top" align="left">
-<p>First parameter of <code class="literal">readFile()</code> is the filename to read. You can check for file existence first if you prefer using <code class="literal">fs.lstat</code> or <code class="literal">fs.access</code>, but if you generally would just like to read the file, just call <code class="literal">readFile</code> right away. If the file does not exist, it will throw an error just the same</p>
+<p>Second parameter of <code class="literal">readFile</code> is the encoding, we simply set it
+to utf-8</p>
 </td></tr><tr><td width="5%" valign="top" align="left"><p><a href="#CO1-3"><span><img src="images/callouts/3.png" alt="3" border="0" /></span></a> </p></td><td valign="top" align="left">
-<p>Second parameter of <code class="literal">readFile</code> is the encoding, we simply set it to utf-8</p>
+<p>Third parameter is a callback function. When <code class="literal">readFile</code> eventually
+finishes actually reading the file, this function will be called. The
+node runtime will pass to our function two things (a) an error object,
+should an error occur and (b) if readFile went ahead without problems,
+all of the contents of <code class="literal">filename</code> would have been loaded to the <code class="literal">data</code>
+variable</p>
 </td></tr><tr><td width="5%" valign="top" align="left"><p><a href="#CO1-4"><span><img src="images/callouts/4.png" alt="4" border="0" /></span></a> </p></td><td valign="top" align="left">
-<p>Third parameter is a callback function. When <code class="literal">readFile</code> eventually finishes actually reading the file, this function will be called. The node runtime will pass to our function two things (a) an error object, should an error occur and (b) if readFile went ahead without problems, all of the contents of <code class="literal">filename</code> would have been loaded to the <code class="literal">data</code> variable</p>
-</td></tr><tr><td width="5%" valign="top" align="left"><p><a href="#CO1-5"><span><img src="images/callouts/5.png" alt="5" border="0" /></span></a> </p></td><td valign="top" align="left">
 <p>If the call fails, <code class="literal">err</code> won’t be null. Lots of things can cause
 the <code class="literal">readFile()</code> to fail e.g. if the file is not there, the OS ran out
 of file handles etc. If err isn’t null, the <code class="literal">if</code> block will find it
-<span class="emphasis"><em>truthy</em></span></p>
-</td></tr><tr><td width="5%" valign="top" align="left"><p><a href="#CO1-6"><span><img src="images/callouts/6.png" alt="6" border="0" /></span></a> </p></td><td valign="top" align="left">
-<p>If the call succeeds, <code class="literal">err</code> will be null (falsy) and the contents
-of the file would have been loaded into the second parameter of our
-callback function</p>
+<span class="emphasis"><em>truthy</em></span> &lt;6&gt; If the call succeeds, <code class="literal">err</code> will be null (falsy) and the
+contents of the file would have been loaded into the second parameter
+of our callback function</p>
 </td></tr></table></div>
 <p>If you ran the code listing above, you would seen  an error message
 because the file <span class="emphasis"><em>index.html</em></span> does not exist yet. Create the html file
@@ -54,8 +61,8 @@ will be echoed to the screen.</p>
 
 <p>Let’s use the file reading technique we learned in the last section
 and apply it in a simple web app. The basic idea is as follows (1) The
-user navigates to the root document or the home page (2) we will call a
-function that will read an html file and (3) we will write the
+user navigates to the root document or the home page (2) we will call
+a function that will read an html file and (3) we will write the
 contents of the html file into the <code class="literal">response</code> stream.</p>
 <p><a id="app.js"></a>
 <strong>app.js. </strong>
@@ -65,8 +72,7 @@ const fs = require('fs');
 
 const port = process.env.PORT || 3000;
 
-http.createServer(function(req, res){
-  var url = req.url.toUpperCase();
+http.createServer(function(req, res){ var url = req.url.toUpperCase();
   switch(url) {
     case "/": <a id="CO2-1"></a><span><img src="images/callouts/1.png" alt="1" border="0" /></span>
       openFile('index.html', res); <a id="CO2-2"></a><span><img src="images/callouts/2.png" alt="2" border="0" /></span>
@@ -76,7 +82,7 @@ http.createServer(function(req, res){
       break;
     default: <a id="CO2-3"></a><span><img src="images/callouts/3.png" alt="3" border="0" /></span>
       // Good place to write a 404 response
-  }
+    }
 }).listen(port);
 
 // HELPER FUNCTIONS -----------------------------
@@ -89,25 +95,23 @@ function openFile(filename, res) {
       res.write("Error encountered");
     }
     else {
-      res.writeHead(200, {'Content-Type':'text/html'});
-      res.write(data);
-      res.end();
+      res.writeHead(200,{'Content-Type':'text/html'});
+      res.write(data); res.end();
     }
   });
 }</pre><p>
 
 </p>
 <div class="calloutlist"><table border="0" summary="Callout list"><tr><td width="5%" valign="top" align="left"><p><a href="#CO2-1"><span><img src="images/callouts/1.png" alt="1" border="0" /></span></a> </p></td><td valign="top" align="left">
-<p>The user has went to the home page, this is the document root of our web app
+<p>The user has went to the home page, this is the docroot of the our
+web app
 &lt;2&gt;
 &lt;3&gt;</p>
 </td></tr></table></div>
 </div>
 <div class="section"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="synchronous_file_operation"></a>4.2. Synchronous File Operation</h2></div></div></div>
 
-<div class="informalfigure">
-<div class="mediaobject"><img src="images/1.png" alt="1" /></div>
-</div>
+
 </div>
 <div class="section"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="dealing_with_asynchrony"></a>4.3. Dealing with Asynchrony</h2></div></div></div>
 

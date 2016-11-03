@@ -3,48 +3,61 @@
 
 
 
-[[filereadexample.js]]
-[source,javascript]
-.FileReadExample.js
+[[filereadexample.js]] 
+[source,javascript] 
+.FileReadExample.js 
 ----
-const fs = require('fs'); // <1>
-const filename = 'index.html';
+const fs = require('fs'); // <1> const filename = 'index.html';
 
 fs.readFile(filename,'utf-8', function(err, data){ // <2><3><4>
-  if(err) { // <5>
-    console.log(err.message);
-  }
+  if(err) { // <5> 
+    console.log(err.message); 
+  } 
   else {
-    console.log(data); // <6>
-  }
+    console.log(data); // <6> 
+  } 
 });
 
 ----
-<1> Import the `fs` library into our app. Anything that requires file io is
-contained in this module
-<2> First parameter of `readFile()` is the filename to read. You can check for file existence first if you prefer using `fs.lstat` or `fs.access`, but if you generally would just like to read the file, just call `readFile` right away. If the file does not exist, it will throw an error just the same
-<3> Second parameter of `readFile` is the encoding, we simply set it to utf-8
-<4> Third parameter is a callback function. When `readFile` eventually finishes actually reading the file, this function will be called. The node runtime will pass to our function two things (a) an error object, should an error occur and (b) if readFile went ahead without problems, all of the contents of `filename` would have been loaded to the `data` variable
+<1> Import the `fs` library into our app. Anything that requires
+file io is contained in this module
+
+<2> First parameter of `readFile()` is the filename to read. You can
+check for file existence first if you prefer using `fs.lstat` or
+`fs.access`, but if you generally would just like to read the file,
+just call `readFile` right away. If the file does not exist, it will
+throw an error just the same
+
+<3> Second parameter of `readFile` is the encoding, we simply set it
+to utf-8
+
+
+<4> Third parameter is a callback function. When `readFile` eventually
+finishes actually reading the file, this function will be called. The
+node runtime will pass to our function two things (a) an error object,
+should an error occur and (b) if readFile went ahead without problems,
+all of the contents of `filename` would have been loaded to the `data`
+variable
+
 <5> If the call fails, `err` won't be null. Lots of things can cause
 the `readFile()` to fail e.g. if the file is not there, the OS ran out
 of file handles etc. If err isn't null, the `if` block will find it
-_truthy_
-<6> If the call succeeds, `err` will be null (falsy) and the contents
-of the file would have been loaded into the second parameter of our
-callback function
+_truthy_ <6> If the call succeeds, `err` will be null (falsy) and the
+contents of the file would have been loaded into the second parameter
+of our callback function
 
-If you ran the code listing above, you would seen  an error message 
+If you ran the code listing above, you would seen  an error message
 because the file _index.html_ does not exist yet. Create the html file
 and save it on the same folder where _FileReadExample.js_ is located.
 
 [[index.html]]
-[source,html]
-.index.html
-----
-<!DOCTYPE html>
+[source,html] 
+.index.html 
+---- 
+<!DOCTYPE html> 
 <html>
-  <h1>Hello World</h1>
-</html>
+  <h1>Hello World</h1> 
+</html> 
 ----
 
 Run the code sample again. This time, the contents of _index.html_
@@ -54,59 +67,57 @@ will be echoed to the screen.
 
 Let's use the file reading technique we learned in the last section
 and apply it in a simple web app. The basic idea is as follows (1) The
-user navigates to the root document or the home page (2) we will call a
-function that will read an html file and (3) we will write the
+user navigates to the root document or the home page (2) we will call
+a function that will read an html file and (3) we will write the
 contents of the html file into the `response` stream.
 
 [[app.js]]
 [source,javascript]
 .app.js
 ----
-const http = require('http');
+const http = require('http'); 
 const fs = require('fs');
 
 const port = process.env.PORT || 3000;
 
-http.createServer(function(req, res){
-  var url = req.url.toUpperCase();
-  switch(url) {
-    case "/": // <1>
-      openFile('index.html', res); <2>
-      break;
+http.createServer(function(req, res){ var url = req.url.toUpperCase();
+  switch(url) { 
+    case "/": // <1> 
+      openFile('index.html', res); // <2>
+      break; 
     case "/ABOUT":
       // were in the about page
-      break;
-    default: <3>
+      break; 
+    default: // <3>
       // Good place to write a 404 response
-  }
+    } 
 }).listen(port);
 
 // HELPER FUNCTIONS -----------------------------
 
-function openFile(filename, res) {
-  fs.readFile(filename, 'utf-8', function(err, data){
-    if(err){
-      res.writeHead(400, {'Content-Type':'text/html'});
+function openFile(filename, res) { 
+  fs.readFile(filename, 'utf-8', function(err, data){ 
+    if(err){ 
+      res.writeHead(400, {'Content-Type':'text/html'}); 
       console.log(err.message);
-      res.write("Error encountered");
-    }
-    else {
-      res.writeHead(200, {'Content-Type':'text/html'});
-      res.write(data);
-      res.end();
-    }
-  });
+      res.write("Error encountered"); 
+    } 
+    else { 
+      res.writeHead(200,{'Content-Type':'text/html'}); 
+      res.write(data); res.end(); 
+    } 
+  }); 
 }
+---- 
 
-----
-<1> The user has went to the home page, this is the document root of our web app
+<1> The user has went to the home page, this is the docroot of the our
+web app
 <2> 
 <3>
 
 
 
 === Synchronous File Operation
-
 
 
 === Dealing with Asynchrony
