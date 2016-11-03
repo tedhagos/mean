@@ -19,6 +19,7 @@ fs.readFile(filename,'utf-8', function(err, data){ // <2><3><4>
 });
 
 ----
+
 <1> Import the `fs` library into our app. Anything that requires
 file io is contained in this module
 
@@ -31,7 +32,6 @@ throw an error just the same
 <3> Second parameter of `readFile` is the encoding, we simply set it
 to utf-8
 
-
 <4> Third parameter is a callback function. When `readFile` eventually
 finishes actually reading the file, this function will be called. The
 node runtime will pass to our function two things (a) an error object,
@@ -42,7 +42,9 @@ variable
 <5> If the call fails, `err` won't be null. Lots of things can cause
 the `readFile()` to fail e.g. if the file is not there, the OS ran out
 of file handles etc. If err isn't null, the `if` block will find it
-_truthy_ <6> If the call succeeds, `err` will be null (falsy) and the
+_truthy_ 
+
+<6> If the call succeeds, `err` will be null (falsy) and the
 contents of the file would have been loaded into the second parameter
 of our callback function
 
@@ -51,12 +53,12 @@ because the file _index.html_ does not exist yet. Create the html file
 and save it on the same folder where _FileReadExample.js_ is located.
 
 [[index.html]]
-[source,html] 
+[source,html]
 .index.html 
 ---- 
-<!DOCTYPE html> 
-<html>
-  <h1>Hello World</h1> 
+<!DOCTYPE html>
+  <html>
+  <h1>Hello World</h1>
 </html> 
 ----
 
@@ -108,14 +110,10 @@ function openFile(filename, res) {
     } 
   }); 
 }
----- 
+----
 
 <1> The user has went to the home page, this is the docroot of the our
 web app
-<2> 
-<3>
-
-
 
 === Synchronous File Operation
 
