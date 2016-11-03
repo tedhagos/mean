@@ -33,29 +33,43 @@
 </chapter>
 <chapter xml:id="_file_io">
 <title>File IO</title>
-<programlisting xml:id="filereadexample.js" language="javascript" linenumbering="unnumbered">const fs = require('fs'); <co xml:id="CO1-1"/>
+<formalpara xml:id="filereadexample.js">
+<title>FileReadExample.js</title>
+<para>
+<programlisting language="javascript" linenumbering="unnumbered">const fs = require('fs'); <co xml:id="CO1-1"/>
 const filename = 'index.html';
 
-fs.readFile(filename,'utf-8', function(err, data){
-  if(err) { <co xml:id="CO1-2"/>
+fs.readFile(filename,'utf-8', function(err, data){ <co xml:id="CO1-2"/><co xml:id="CO1-3"/><co xml:id="CO1-4"/>
+  if(err) { <co xml:id="CO1-5"/>
     console.log(err.message);
   }
   else {
-    console.log(data); <co xml:id="CO1-3"/>
+    console.log(data); <co xml:id="CO1-6"/>
   }
 });</programlisting>
+</para>
+</formalpara>
 <calloutlist>
 <callout arearefs="CO1-1">
 <para>Import the <literal>fs</literal> library into our app. Anything that requires file io is
 contained in this module</para>
 </callout>
 <callout arearefs="CO1-2">
+<para>First parameter of <literal>readFile()</literal> is the filename to read. You can check for file existence first if you prefer using <literal>fs.lstat</literal> or <literal>fs.access</literal>, but if you generally would just like to read the file, just call <literal>readFile</literal> right away. If the file does not exist, it will throw an error just the same</para>
+</callout>
+<callout arearefs="CO1-3">
+<para>Second parameter of <literal>readFile</literal> is the encoding, we simply set it to utf-8</para>
+</callout>
+<callout arearefs="CO1-4">
+<para>Third parameter is a callback function. When <literal>readFile</literal> eventually finishes actually reading the file, this function will be called. The node runtime will pass to our function two things (a) an error object, should an error occur and (b) if readFile went ahead without problems, all of the contents of <literal>filename</literal> would have been loaded to the <literal>data</literal> variable</para>
+</callout>
+<callout arearefs="CO1-5">
 <para>If the call fails, <literal>err</literal> won&#8217;t be null. Lots of things can cause
 the <literal>readFile()</literal> to fail e.g. if the file is not there, the OS ran out
 of file handles etc. If err isn&#8217;t null, the <literal>if</literal> block will find it
 <emphasis>truthy</emphasis></para>
 </callout>
-<callout arearefs="CO1-3">
+<callout arearefs="CO1-6">
 <para>If the call succeeds, <literal>err</literal> will be null (falsy) and the contents
 of the file would have been loaded into the second parameter of our
 callback function</para>
@@ -64,7 +78,7 @@ callback function</para>
 <simpara>If you ran the code listing above, you would seen  an error message
 because the file <emphasis>index.html</emphasis> does not exist yet. Create the html file
 and save it on the same folder where <emphasis>FileReadExample.js</emphasis> is located.</simpara>
-<formalpara xml:id="app-listing">
+<formalpara xml:id="index.html">
 <title>index.html</title>
 <para>
 <programlisting language="html" linenumbering="unnumbered">&lt;!DOCTYPE html&gt;
@@ -93,18 +107,42 @@ const port = process.env.PORT || 3000;
 http.createServer(function(req, res){
   var url = req.url.toUpperCase();
   switch(url) {
-    case "/":
-      // were in the home page
+    case "/": <co xml:id="CO2-1"/>
+      openFile('index.html', res); <co xml:id="CO2-2"/>
       break;
     case "/ABOUT":
       // were in the about page
       break;
-    default:
+    default: <co xml:id="CO2-3"/>
       // Good place to write a 404 response
   }
-});</programlisting>
+}).listen(port);
+
+// HELPER FUNCTIONS -----------------------------
+
+function openFile(filename, res) {
+  fs.readFile(filename, 'utf-8', function(err, data){
+    if(err){
+      res.writeHead(400, {'Content-Type':'text/html'});
+      console.log(err.message);
+      res.write("Error encountered");
+    }
+    else {
+      res.writeHead(200, {'Content-Type':'text/html'});
+      res.write(data);
+      res.end();
+    }
+  });
+}</programlisting>
 </para>
 </formalpara>
+<calloutlist>
+<callout arearefs="CO2-1">
+<para>The user has went to the home page, this is the document root of our web app
+&lt;2&gt;
+&lt;3&gt;</para>
+</callout>
+</calloutlist>
 </section>
 <section xml:id="_synchronous_file_operation">
 <title>Synchronous File Operation</title>

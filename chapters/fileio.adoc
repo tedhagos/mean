@@ -10,23 +10,26 @@
 const fs = require('fs'); // <1>
 const filename = 'index.html';
 
-fs.readFile(filename,'utf-8', function(err, data){
-  if(err) { // <2>
+fs.readFile(filename,'utf-8', function(err, data){ // <2><3><4>
+  if(err) { // <5>
     console.log(err.message);
   }
   else {
-    console.log(data); // <3>
+    console.log(data); // <6>
   }
 });
 
 ----
 <1> Import the `fs` library into our app. Anything that requires file io is
 contained in this module
-<2> If the call fails, `err` won't be null. Lots of things can cause
+<2> First parameter of `readFile()` is the filename to read. You can check for file existence first if you prefer using `fs.lstat` or `fs.access`, but if you generally would just like to read the file, just call `readFile` right away. If the file does not exist, it will throw an error just the same
+<3> Second parameter of `readFile` is the encoding, we simply set it to utf-8
+<4> Third parameter is a callback function. When `readFile` eventually finishes actually reading the file, this function will be called. The node runtime will pass to our function two things (a) an error object, should an error occur and (b) if readFile went ahead without problems, all of the contents of `filename` would have been loaded to the `data` variable
+<5> If the call fails, `err` won't be null. Lots of things can cause
 the `readFile()` to fail e.g. if the file is not there, the OS ran out
 of file handles etc. If err isn't null, the `if` block will find it
 _truthy_
-<3> If the call succeeds, `err` will be null (falsy) and the contents
+<6> If the call succeeds, `err` will be null (falsy) and the contents
 of the file would have been loaded into the second parameter of our
 callback function
 
@@ -67,19 +70,38 @@ const port = process.env.PORT || 3000;
 http.createServer(function(req, res){
   var url = req.url.toUpperCase();
   switch(url) {
-    case "/":
-      // were in the home page
+    case "/": // <1>
+      openFile('index.html', res); <2>
       break;
     case "/ABOUT":
       // were in the about page
       break;
-    default:
+    default: <3>
       // Good place to write a 404 response
   }
-});
+}).listen(port);
+
+// HELPER FUNCTIONS -----------------------------
+
+function openFile(filename, res) {
+  fs.readFile(filename, 'utf-8', function(err, data){
+    if(err){
+      res.writeHead(400, {'Content-Type':'text/html'});
+      console.log(err.message);
+      res.write("Error encountered");
+    }
+    else {
+      res.writeHead(200, {'Content-Type':'text/html'});
+      res.write(data);
+      res.end();
+    }
+  });
+}
 
 ----
-
+<1> The user has went to the home page, this is the document root of our web app
+<2> 
+<3>
 
 
 

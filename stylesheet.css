@@ -1,4 +1,7 @@
 
+body {
+  font-size: 1.1em;
+}
 
 li>p, td>p {
   margin-before:0px;
@@ -16,7 +19,7 @@ pre {
 }
 
 pre.programlisting {
-  background: #f2f2f2;
+  /*background: #f2f2f2;*/
 }
 
 .titlepage {
