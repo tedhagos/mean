@@ -20,7 +20,12 @@ Authentication and Sessions
 
 Chapter 1::
   A Javascript refresher. Ideally, you will approach the book with book with some Javascript experience
-
 Chapter 2::
+  Whatever chapter 2 is
+
+
+This is the end of the preface
+
+
 
 

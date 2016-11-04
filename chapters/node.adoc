@@ -1,15 +1,151 @@
-
-== Introduction
-
+== NodeJS
 
 
+=== Installation
 
-== Installation
+
+==== Linux and OSX 
+
+You can use your respective package managers like aptitude and
+HomeBrew, for Linux and OSX respectively. Alternatively, you can use
+the node version manager (nvm) instead. NVM is a popular way of
+installing the node runtime and tools on both OSX and Linux. NVM
+allows us to install multiple versions of node on a single machine. If
+you are working, or will work, on projects that will use different
+versions of node, nvm is an ideal solution. 
+
+You will need to install `curl` on your system before you can proceed
+with the installation of nvm. 
+
+----
+brew install curl # <1>
+sudo apt-get install curl # <2>
+----
+<1> Use this command if you are on OSX and using HomeBrew as a package
+manager
+<2> Do this if you are on Debian derivative Linux distro
+
+NOTE: The `apt-get` package manager is for the Debian or Linux distros
+that are derived from Debian e.g. Ubuntu, Mint etc. If you are using
+Fedora or ArchLinux, see your distributions documentation on how to
+get software from your respective repos. I used the Debian technique
+here because I am assuming that most people who will read this will
+run some version of Ubuntu, it is probably one of the most popular
+distros in wide use today
+
+Next, we'll pull the install via curl, paste the following command on
+your terminal window.
+
+----
+curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.32.1/install.sh | bash
+----
+
+Wait for the command to finish. After that, node would have been
+installed on your system.
+
+NOTE: At the time of this writing, the version of nvm is *v0.3.2*, you
+should always visit the https://github.com/creationix/nvm[Creationix
+page @ github] and copy the installer command from that page
 
 
-== Working with files
+==== Windows
 
+NVM is not officially supported on Windows. There are projects like
+nvm-windows and nodist that will allow you to use nvm on a Windows
+machine but they are not officially supported. If you still want to
+try nvm on a Win machine, there are links to those resources on the
+https://github.com/creationix/nvm[Creationix website @ GitHub]. 
+
+For our purpose, we will install node using the precompiled binary
+installer.
+
+1. Download the installer from
+   https://nodejs.org/en/download/[nodejs.org website/downloads]
+2. Choose installer appropriate for your Windows platform (32 or 64
+   bit)
+3. Double click and follow the prompts. Just install it the way you
+   would normally install any other software on Windows
+
+
+=== REPL
+
+The node REPL (Read Eval Print Loop) is an interactive shell where you
+can enter Javascript expressions, statements and even control
+structures. It is a good way to learn Javascript and node when you are
+beginning to explore Node. The REPL needs to be launched from the
+command line.
+
+*Windows* 
+
+1. Launch `cmd`. There are many ways to do this in Windows, one of
+   them is to press the `Win + R` (Windows key or Super key on your
+   keyboard + R). That will open the *Run* dialog, then type `cmd`
+2. Type `node`
+
+*OSX and Linux*
+
+If you're working on these platforms, you don't need instructions on
+how to launch a terminal window. Use whatever terminal is favorite and
+then type `node` 
+
+You should see a node chevron prompt. Try a couple of commands in it
+
+----
+> var greetings = "Hello"; // <1>
+> console.log(greetings); // <2>
+
+> console.log(Date.now()); // <3>
+
+> var r = Math.random(); // <4>
+> console.log(r)
+----
+<1> Assign a string to var `greetings`
+<2> Echo the content of the `greetings` var to the screen
+<3> Print the current date
+<4> Generate a random number and assign it to a var
+
+
+If you want to exit the node REPL, press `CTRL + c` twice
+
+
+=== Running a Script
+
+The REPL is a useful learning tool, but we won't use much of it here.
+We will run our node programs as scripts. We will write the node
+programs in a Javascript source file and then we'll run it using the
+node runtime.
+
+In the following example, a program file named _multiplication.js_ is
+created. The contents of which is shown below. It's a simple
+Javascript program to print out a 5x5 multiplication table.
+
+[[multiplication.js]]
 [source,javascript]
+.multiplication.js
+----
+for(var x = 1; x < 5; x++) {
+  for(var y = 1; y < 5; y++) {
+    process.stdout.write(x * y + '\t'); // <1>
+  }
+  process.stdout.write('\n'); // <2>
+}
 ----
 
+<1> `process.stdout.write` is almost the same as `console.log`. They
+will both print out things on the screen. Console.log however, will
+add a newline at the end. The `\t` is an string escape sequence, it
+will add a tab to the output
+<2> The `\n` is another escape sequence. This one prints a newline
+
+To run the program, we'll invoke the `node` runtime and pass the name
+of the program source file as a command line argument.
+
 ----
+node multiplication.js
+----
+
+
+=== A basic web server
+
+
+

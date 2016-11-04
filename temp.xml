@@ -4,7 +4,22 @@
 <book xmlns="http://docbook.org/ns/docbook" xmlns:xl="http://www.w3.org/1999/xlink" version="5.0" xml:lang="en">
 <info>
 <title>Programming using the MEAN stack</title>
-<date>2016-11-02</date>
+<date>October 2016</date>
+<author>
+<personname>
+<firstname>Ted</firstname>
+<surname>Hagos</surname>
+</personname>
+<email>ted@thelogbox.com</email>
+</author>
+<authorinitials>tgh</authorinitials>
+<revhistory>
+<revision>
+<revnumber>1.0</revnumber>
+<date>October 2016</date>
+<authorinitials>tgh</authorinitials>
+</revision>
+</revhistory>
 </info>
 <chapter xml:id="_preface">
 <title>Preface</title>
@@ -18,18 +33,212 @@
 <varlistentry>
 <term>Chapter 2</term>
 <listitem>
-<simpara>== Introduction</simpara>
+<simpara>Whatever chapter 2 is</simpara>
 </listitem>
 </varlistentry>
 </variablelist>
+<simpara>This is the end of the preface</simpara>
 </chapter>
-<chapter xml:id="_installation">
-<title>Installation</title>
+<chapter xml:id="_javascript_concepts">
+<title>Javascript Concepts</title>
+<itemizedlist>
+<listitem>
+<simpara>JS is compiled</simpara>
+</listitem>
+<listitem>
+<simpara>The LHS and RHS</simpara>
+</listitem>
+</itemizedlist>
+<section xml:id="_scope">
+<title>Scope</title>
 
+</section>
+<section xml:id="_this_and_super">
+<title>This and Super</title>
+
+</section>
+<section xml:id="_callback">
+<title>Callback</title>
+
+</section>
+<section xml:id="_es6">
+<title>ES6</title>
+
+</section>
 </chapter>
-<chapter xml:id="_working_with_files">
-<title>Working with files</title>
-<programlisting language="javascript" linenumbering="unnumbered"></programlisting>
+<chapter xml:id="_nodejs">
+<title>NodeJS</title>
+<section xml:id="_installation">
+<title>Installation</title>
+<section xml:id="_linux_and_osx">
+<title>Linux and OSX</title>
+<simpara>You can use your respective package managers like aptitude and
+HomeBrew, for Linux and OSX respectively. Alternatively, you can use
+the node version manager (nvm) instead. NVM is a popular way of
+installing the node runtime and tools on both OSX and Linux. NVM
+allows us to install multiple versions of node on a single machine. If
+you are working, or will work, on projects that will use different
+versions of node, nvm is an ideal solution.</simpara>
+<simpara>You will need to install <literal>curl</literal> on your system before you can proceed
+with the installation of nvm.</simpara>
+<screen>brew install curl <co xml:id="CO1-1"/>
+sudo apt-get install curl <co xml:id="CO1-2"/></screen>
+<calloutlist>
+<callout arearefs="CO1-1">
+<para>Use this command if you are on OSX and using HomeBrew as a package
+manager</para>
+</callout>
+<callout arearefs="CO1-2">
+<para>Do this if you are on Debian derivative Linux distro</para>
+</callout>
+</calloutlist>
+<note>
+<simpara>The <literal>apt-get</literal> package manager is for the Debian or Linux distros
+that are derived from Debian e.g. Ubuntu, Mint etc. If you are using
+Fedora or ArchLinux, see your distributions documentation on how to
+get software from your respective repos. I used the Debian technique
+here because I am assuming that most people who will read this will
+run some version of Ubuntu, it is probably one of the most popular
+distros in wide use today</simpara>
+</note>
+<simpara>Next, we&#8217;ll pull the install via curl, paste the following command on
+your terminal window.</simpara>
+<screen>curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.32.1/install.sh | bash</screen>
+<simpara>Wait for the command to finish. After that, node would have been
+installed on your system.</simpara>
+<note>
+<simpara>At the time of this writing, the version of nvm is <emphasis role="strong">v0.3.2</emphasis>, you
+should always visit the <link xl:href="https://github.com/creationix/nvm">Creationix
+page @ github</link> and copy the installer command from that page</simpara>
+</note>
+</section>
+<section xml:id="_windows">
+<title>Windows</title>
+<simpara>NVM is not officially supported on Windows. There are projects like
+nvm-windows and nodist that will allow you to use nvm on a Windows
+machine but they are not officially supported. If you still want to
+try nvm on a Win machine, there are links to those resources on the
+<link xl:href="https://github.com/creationix/nvm">Creationix website @ GitHub</link>.</simpara>
+<simpara>For our purpose, we will install node using the precompiled binary
+installer.</simpara>
+<orderedlist numeration="arabic">
+<listitem>
+<simpara>Download the installer from
+<link xl:href="https://nodejs.org/en/download/">nodejs.org website/downloads</link></simpara>
+</listitem>
+<listitem>
+<simpara>Choose installer appropriate for your Windows platform (32 or 64
+bit)</simpara>
+</listitem>
+<listitem>
+<simpara>Double click and follow the prompts. Just install it the way you
+would normally install any other software on Windows</simpara>
+</listitem>
+</orderedlist>
+</section>
+</section>
+<section xml:id="_repl">
+<title>REPL</title>
+<simpara>The node REPL (Read Eval Print Loop) is an interactive shell where you
+can enter Javascript expressions, statements and even control
+structures. It is a good way to learn Javascript and node when you are
+beginning to explore Node. The REPL needs to be launched from the
+command line.</simpara>
+<simpara><emphasis role="strong">Windows</emphasis></simpara>
+<orderedlist numeration="arabic">
+<listitem>
+<simpara>Launch <literal>cmd</literal>. There are many ways to do this in Windows, one of
+them is to press the <literal>Win + R</literal> (Windows key or Super key on your
+keyboard + R). That will open the <emphasis role="strong">Run</emphasis> dialog, then type <literal>cmd</literal></simpara>
+</listitem>
+<listitem>
+<simpara>Type <literal>node</literal></simpara>
+</listitem>
+</orderedlist>
+<simpara><emphasis role="strong">OSX and Linux</emphasis></simpara>
+<simpara>If you&#8217;re working on these platforms, you don&#8217;t need instructions on
+how to launch a terminal window. Use whatever terminal is favorite and
+then type <literal>node</literal></simpara>
+<simpara>You should see a node chevron prompt. Try a couple of commands in it</simpara>
+<screen>&gt; var greetings = "Hello"; <co xml:id="CO2-1"/>
+&gt; console.log(greetings); <co xml:id="CO2-2"/>
+
+&gt; console.log(Date.now()); <co xml:id="CO2-3"/>
+
+&gt; var r = Math.random(); <co xml:id="CO2-4"/>
+&gt; console.log(r)</screen>
+<calloutlist>
+<callout arearefs="CO2-1">
+<para>Assign a string to var <literal>greetings</literal></para>
+</callout>
+<callout arearefs="CO2-2">
+<para>Echo the content of the <literal>greetings</literal> var to the screen</para>
+</callout>
+<callout arearefs="CO2-3">
+<para>Print the current date</para>
+</callout>
+<callout arearefs="CO2-4">
+<para>Generate a random number and assign it to a var</para>
+</callout>
+</calloutlist>
+<simpara>If you want to exit the node REPL, press <literal>CTRL + c</literal> twice</simpara>
+</section>
+<section xml:id="_running_a_script">
+<title>Running a Script</title>
+<simpara>The REPL is a useful learning tool, but we won&#8217;t use much of it here.
+We will run our node programs as scripts. We will write the node
+programs in a Javascript source file and then we&#8217;ll run it using the
+node runtime.</simpara>
+<simpara>In the following example, a program file named <emphasis>multiplication.js</emphasis> is
+created. The contents of which is shown below. It&#8217;s a simple
+Javascript program to print out a 5x5 multiplication table.</simpara>
+<formalpara xml:id="multiplication.js">
+<title>multiplication.js</title>
+<para>
+<programlisting language="javascript" linenumbering="unnumbered">for(var x = 1; x &lt; 5; x++) {
+  for(var y = 1; y &lt; 5; y++) {
+    process.stdout.write(x * y + '\t'); <co xml:id="CO3-1"/>
+  }
+  process.stdout.write('\n'); <co xml:id="CO3-2"/>
+}</programlisting>
+</para>
+</formalpara>
+<calloutlist>
+<callout arearefs="CO3-1">
+<para><literal>process.stdout.write</literal> is almost the same as <literal>console.log</literal>. They
+will both print out things on the screen. Console.log however, will
+add a newline at the end. The <literal>\t</literal> is an string escape sequence, it
+will add a tab to the output</para>
+</callout>
+<callout arearefs="CO3-2">
+<para>The <literal>\n</literal> is another escape sequence. This one prints a newline</para>
+</callout>
+</calloutlist>
+<simpara>To run the program, we&#8217;ll invoke the <literal>node</literal> runtime and pass the name
+of the program source file as a command line argument.</simpara>
+<screen>node multiplication.js</screen>
+</section>
+<section xml:id="_a_basic_web_server">
+<title>A basic web server</title>
+
+</section>
+</chapter>
+<chapter xml:id="_hello_world">
+<title>Hello World</title>
+<itemizedlist>
+<listitem>
+<simpara>Basic structure</simpara>
+</listitem>
+<listitem>
+<simpara>Response</simpara>
+</listitem>
+<listitem>
+<simpara>Request</simpara>
+</listitem>
+<listitem>
+<simpara>How to get to the body</simpara>
+</listitem>
+</itemizedlist>
 </chapter>
 <chapter xml:id="_file_io">
 <title>File IO</title>
@@ -38,12 +247,12 @@
 <para>
 <programlisting language="javascript" linenumbering="unnumbered">const fs = require('fs'); // &lt;1&gt; const filename = 'index.html';
 
-fs.readFile(filename,'utf-8', function(err, data){ <co xml:id="CO1-1"/><co xml:id="CO1-2"/><co xml:id="CO1-3"/>
-  if(err) { <co xml:id="CO1-4"/>
+fs.readFile(filename,'utf-8', function(err, data){ <co xml:id="CO4-1"/><co xml:id="CO4-2"/><co xml:id="CO4-3"/>
+  if(err) { <co xml:id="CO4-4"/>
     console.log(err.message);
   }
   else {
-    console.log(data); <co xml:id="CO1-5"/>
+    console.log(data); <co xml:id="CO4-5"/>
   }
 });</programlisting>
 </para>
@@ -53,18 +262,18 @@ fs.readFile(filename,'utf-8', function(err, data){ <co xml:id="CO1-1"/><co xml:i
 <para>Import the <literal>fs</literal> library into our app. Anything that requires
 file io is contained in this module</para>
 </callout>
-<callout arearefs="CO1-1">
+<callout arearefs="CO4-1">
 <para>First parameter of <literal>readFile()</literal> is the filename to read. You can
 check for file existence first if you prefer using <literal>fs.lstat</literal> or
 <literal>fs.access</literal>, but if you generally would just like to read the file,
 just call <literal>readFile</literal> right away. If the file does not exist, it will
 throw an error just the same</para>
 </callout>
-<callout arearefs="CO1-2">
+<callout arearefs="CO4-2">
 <para>Second parameter of <literal>readFile</literal> is the encoding, we simply set it
 to utf-8</para>
 </callout>
-<callout arearefs="CO1-3">
+<callout arearefs="CO4-3">
 <para>Third parameter is a callback function. When <literal>readFile</literal> eventually
 finishes actually reading the file, this function will be called. The
 node runtime will pass to our function two things (a) an error object,
@@ -72,11 +281,14 @@ should an error occur and (b) if readFile went ahead without problems,
 all of the contents of <literal>filename</literal> would have been loaded to the <literal>data</literal>
 variable</para>
 </callout>
-<callout arearefs="CO1-4">
+<callout arearefs="CO4-4">
 <para>If the call fails, <literal>err</literal> won&#8217;t be null. Lots of things can cause
 the <literal>readFile()</literal> to fail e.g. if the file is not there, the OS ran out
 of file handles etc. If err isn&#8217;t null, the <literal>if</literal> block will find it
-<emphasis>truthy</emphasis> &lt;6&gt; If the call succeeds, <literal>err</literal> will be null (falsy) and the
+<emphasis>truthy</emphasis></para>
+</callout>
+<callout arearefs="CO4-5">
+<para>If the call succeeds, <literal>err</literal> will be null (falsy) and the
 contents of the file would have been loaded into the second parameter
 of our callback function</para>
 </callout>
@@ -88,7 +300,7 @@ and save it on the same folder where <emphasis>FileReadExample.js</emphasis> is 
 <title>index.html</title>
 <para>
 <programlisting language="html" linenumbering="unnumbered">&lt;!DOCTYPE html&gt;
-&lt;html&gt;
+  &lt;html&gt;
   &lt;h1&gt;Hello World&lt;/h1&gt;
 &lt;/html&gt;</programlisting>
 </para>
@@ -112,13 +324,13 @@ const port = process.env.PORT || 3000;
 
 http.createServer(function(req, res){ var url = req.url.toUpperCase();
   switch(url) {
-    case "/": <co xml:id="CO2-1"/>
-      openFile('index.html', res); <co xml:id="CO2-2"/>
+    case "/": <co xml:id="CO5-1"/>
+      openFile('index.html', res); <co xml:id="CO5-2"/>
       break;
     case "/ABOUT":
       // were in the about page
       break;
-    default: <co xml:id="CO2-3"/>
+    default: <co xml:id="CO5-3"/>
       // Good place to write a 404 response
     }
 }).listen(port);
@@ -141,11 +353,9 @@ function openFile(filename, res) {
 </para>
 </formalpara>
 <calloutlist>
-<callout arearefs="CO2-1">
+<callout arearefs="CO5-1">
 <para>The user has went to the home page, this is the docroot of the our
-web app
-&lt;2&gt;
-&lt;3&gt;</para>
+web app</para>
 </callout>
 </calloutlist>
 </section>
@@ -156,6 +366,162 @@ web app
 <section xml:id="_dealing_with_asynchrony">
 <title>Dealing with Asynchrony</title>
 
+</section>
+</chapter>
+<chapter xml:id="_middleware">
+<title>Middleware</title>
+<itemizedlist>
+<listitem>
+<simpara>Router</simpara>
+</listitem>
+<listitem>
+<simpara>bodyparser</simpara>
+</listitem>
+<listitem>
+<simpara>CommonJS</simpara>
+</listitem>
+<listitem>
+<simpara>Rack</simpara>
+</listitem>
+</itemizedlist>
+</chapter>
+<chapter xml:id="_working_with_relational_databases">
+<title>Working with Relational Databases</title>
+<section xml:id="_mysql">
+<title>MySQL</title>
+
+</section>
+<section xml:id="_postgresql">
+<title>PostgreSQL</title>
+
+</section>
+<section xml:id="_sqlite">
+<title>SQLite</title>
+
+</section>
+</chapter>
+<chapter xml:id="_introduction_to_mongodb_and_nosql">
+<title>Introduction to MongoDB and NoSQL</title>
+<section xml:id="_nosql_and_relational_comparisson">
+<title>NoSQL and Relational comparisson</title>
+
+</section>
+<section xml:id="_basic_installation_and_configuration_of_mongodb">
+<title>Basic installation and configuration of MongoDB</title>
+<section xml:id="_linux">
+<title>Linux</title>
+
+</section>
+<section xml:id="_osx">
+<title>OSX</title>
+
+</section>
+<section xml:id="_windows_2">
+<title>Windows</title>
+
+</section>
+</section>
+<section xml:id="_inserting_documents">
+<title>Inserting documents</title>
+
+</section>
+<section xml:id="_finding_documents">
+<title>Finding documents</title>
+
+</section>
+<section xml:id="_deleting_documents">
+<title>Deleting documents</title>
+
+</section>
+<section xml:id="_updating_documents">
+<title>Updating documents</title>
+
+</section>
+<section xml:id="_mongoose">
+<title>Mongoose</title>
+<itemizedlist>
+<listitem>
+<simpara>Models</simpara>
+</listitem>
+<listitem>
+<simpara>Schemas</simpara>
+</listitem>
+<listitem>
+<simpara>Basic uses in an app</simpara>
+</listitem>
+</itemizedlist>
+</section>
+</chapter>
+<chapter xml:id="_working_with_route_parameters_in_express">
+<title>Working with Route parameters in Express</title>
+
+</chapter>
+<chapter xml:id="_templating_in_express">
+<title>Templating in Express</title>
+<itemizedlist>
+<listitem>
+<simpara>SWIG</simpara>
+</listitem>
+<listitem>
+<simpara>EJS or Jade</simpara>
+</listitem>
+<listitem>
+<simpara>Moustache</simpara>
+</listitem>
+</itemizedlist>
+</chapter>
+<chapter xml:id="_logging">
+<title>Logging</title>
+<itemizedlist>
+<listitem>
+<simpara>Winston</simpara>
+</listitem>
+<listitem>
+<simpara>Why not console.log</simpara>
+</listitem>
+<listitem>
+<simpara>Other choices</simpara>
+</listitem>
+</itemizedlist>
+</chapter>
+<chapter xml:id="_angularjs">
+<title>AngularJS</title>
+<itemizedlist>
+<listitem>
+<simpara>Basic usage</simpara>
+</listitem>
+<listitem>
+<simpara>Modules</simpara>
+</listitem>
+<listitem>
+<simpara>Routes</simpara>
+</listitem>
+<listitem>
+<simpara>Models</simpara>
+</listitem>
+<listitem>
+<simpara>Should I use 1.5 or 2</simpara>
+</listitem>
+<listitem>
+<simpara>Why not polymer</simpara>
+</listitem>
+</itemizedlist>
+<section xml:id="_authentication">
+<title>Authentication</title>
+<itemizedlist>
+<listitem>
+<simpara>Homegrown solution</simpara>
+</listitem>
+<listitem>
+<simpara>Passport</simpara>
+</listitem>
+<listitem>
+<simpara>Passport strategies</simpara>
+</listitem>
+<listitem>
+<simpara>Using the local strategy</simpara>
+</listitem>
+</itemizedlist>
 </section>
 </chapter>
 </book>

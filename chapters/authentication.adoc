@@ -1,0 +1,8 @@
+=== Authentication
+
+- Homegrown solution
+- Passport
+- Passport strategies
+- Using the local strategy
+
+

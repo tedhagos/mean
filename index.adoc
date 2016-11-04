@@ -1,6 +1,6 @@
 :stylesheet: style.css
 :doctype: book
-
+:copyright: Ted Hagos 2016
 
 ////
 Important Javascript concepts
@@ -20,6 +20,10 @@ Authentication and Sessions
 ////
 
 = Programming using the MEAN stack
+Ted Hagos <ted@thelogbox.com>
+v1.0, October 2016
+
+
 
 include::chapters/preface.adoc[]
 include::chapters/javascript-concepts.adoc[]

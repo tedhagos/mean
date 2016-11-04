@@ -1,0 +1,17 @@
+== Javascript Concepts
+
+- JS is compiled
+- The LHS and RHS
+
+=== Scope
+
+
+=== This and Super
+
+
+=== Callback
+
+
+=== ES6
+
+
