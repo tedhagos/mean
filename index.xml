@@ -12,16 +12,16 @@
 </personname>
 <email>ted@thelogbox.com</email>
 </author>
-<authorinitials>tgh</authorinitials>
+<authorinitials>TGH</authorinitials>
 <revhistory>
 <revision>
 <revnumber>1.0</revnumber>
 <date>October 2016</date>
-<authorinitials>tgh</authorinitials>
+<authorinitials>TGH</authorinitials>
 </revision>
 </revhistory>
 </info>
-<chapter xml:id="preface">
+<preface xml:id="preface">
 <title>Preface</title>
 <variablelist>
 <varlistentry>
@@ -38,7 +38,7 @@
 </varlistentry>
 </variablelist>
 <simpara>This is the end of the preface</simpara>
-</chapter>
+</preface>
 <chapter xml:id="javascript_concepts">
 <title>Javascript Concepts</title>
 <itemizedlist>
@@ -109,7 +109,8 @@ installed on your system.</simpara>
 <note>
 <simpara>At the time of this writing, the version of nvm is <emphasis role="strong">v0.3.2</emphasis>, you
 should always visit the <link xl:href="https://github.com/creationix/nvm">Creationix
-page @ github</link> and copy the installer command from that page</simpara>
+page @ github</link> and copy the installer command from that page instead
+of directly typing the curl command above into your system</simpara>
 </note>
 </section>
 <section xml:id="windows">
@@ -158,8 +159,7 @@ keyboard + R). That will open the <emphasis role="strong">Run</emphasis> dialog,
 <simpara><emphasis role="strong">OSX and Linux</emphasis></simpara>
 <simpara>If you&#8217;re working on these platforms, you don&#8217;t need instructions on
 how to launch a terminal window. Use whatever terminal is favorite and
-then type <literal>node</literal></simpara>
-<simpara>You should see a node chevron prompt. Try a couple of commands in it</simpara>
+then type <literal>node</literal>. You should see the node chevron prompt. Try a couple of commands in it</simpara>
 <screen>&gt; var greetings = "Hello"; <co xml:id="CO2-1"/>
 &gt; console.log(greetings); <co xml:id="CO2-2"/>
 
@@ -181,7 +181,7 @@ then type <literal>node</literal></simpara>
 <para>Generate a random number and assign it to a var</para>
 </callout>
 </calloutlist>
-<simpara>If you want to exit the node REPL, press <literal>CTRL + c</literal> twice</simpara>
+<simpara>When you want to exit the node REPL, press <literal>CTRL + C</literal> twice</simpara>
 </section>
 <section xml:id="running_a_script">
 <title>Running a Script</title>
@@ -207,7 +207,7 @@ Javascript program to print out a 5x5 multiplication table.</simpara>
 <callout arearefs="CO3-1">
 <para><literal>process.stdout.write</literal> is almost the same as <literal>console.log</literal>. They
 will both print out things on the screen. Console.log however, will
-add a newline at the end. The <literal>\t</literal> is an string escape sequence, it
+add a newline at the end. The <literal>\t</literal> is a string escape sequence, it
 will add a tab to the output</para>
 </callout>
 <callout arearefs="CO3-2">
@@ -245,35 +245,36 @@ of the program source file as a command line argument.</simpara>
 <formalpara xml:id="filereadexample.js">
 <title>FileReadExample.js</title>
 <para>
-<programlisting language="javascript" linenumbering="unnumbered">const fs = require('fs'); // &lt;1&gt; const filename = 'index.html';
+<programlisting language="javascript" linenumbering="unnumbered">const fs = require('fs'); <co xml:id="CO4-1"/>
+const filename = 'index.html';
 
-fs.readFile(filename,'utf-8', function(err, data){ <co xml:id="CO4-1"/><co xml:id="CO4-2"/><co xml:id="CO4-3"/>
-  if(err) { <co xml:id="CO4-4"/>
+fs.readFile(filename,'utf-8', function(err, data){ <co xml:id="CO4-2"/><co xml:id="CO4-3"/><co xml:id="CO4-4"/>
+  if(err) { <co xml:id="CO4-5"/>
     console.log(err.message);
   }
   else {
-    console.log(data); <co xml:id="CO4-5"/>
+    console.log(data); <co xml:id="CO4-6"/>
   }
 });</programlisting>
 </para>
 </formalpara>
 <calloutlist>
-<callout arearefs="">
+<callout arearefs="CO4-1">
 <para>Import the <literal>fs</literal> library into our app. Anything that requires
 file io is contained in this module</para>
 </callout>
-<callout arearefs="CO4-1">
+<callout arearefs="CO4-2">
 <para>First parameter of <literal>readFile()</literal> is the filename to read. You can
 check for file existence first if you prefer using <literal>fs.lstat</literal> or
 <literal>fs.access</literal>, but if you generally would just like to read the file,
 just call <literal>readFile</literal> right away. If the file does not exist, it will
 throw an error just the same</para>
 </callout>
-<callout arearefs="CO4-2">
+<callout arearefs="CO4-3">
 <para>Second parameter of <literal>readFile</literal> is the encoding, we simply set it
 to utf-8</para>
 </callout>
-<callout arearefs="CO4-3">
+<callout arearefs="CO4-4">
 <para>Third parameter is a callback function. When <literal>readFile</literal> eventually
 finishes actually reading the file, this function will be called. The
 node runtime will pass to our function two things (a) an error object,
@@ -281,13 +282,13 @@ should an error occur and (b) if readFile went ahead without problems,
 all of the contents of <literal>filename</literal> would have been loaded to the <literal>data</literal>
 variable</para>
 </callout>
-<callout arearefs="CO4-4">
+<callout arearefs="CO4-5">
 <para>If the call fails, <literal>err</literal> won&#8217;t be null. Lots of things can cause
 the <literal>readFile()</literal> to fail e.g. if the file is not there, the OS ran out
 of file handles etc. If err isn&#8217;t null, the <literal>if</literal> block will find it
 <emphasis>truthy</emphasis></para>
 </callout>
-<callout arearefs="CO4-5">
+<callout arearefs="CO4-6">
 <para>If the call succeeds, <literal>err</literal> will be null (falsy) and the
 contents of the file would have been loaded into the second parameter
 of our callback function</para>
@@ -322,7 +323,8 @@ const fs = require('fs');
 
 const port = process.env.PORT || 3000;
 
-http.createServer(function(req, res){ var url = req.url.toUpperCase();
+http.createServer(function(req, res){
+  var url = req.url.toUpperCase();
   switch(url) {
     case "/": <co xml:id="CO5-1"/>
       openFile('index.html', res); <co xml:id="CO5-2"/>
@@ -354,10 +356,20 @@ function openFile(filename, res) {
 </formalpara>
 <calloutlist>
 <callout arearefs="CO5-1">
-<para>The user has went to the home page, this is the docroot of the our
-web app</para>
+<para>The user went to the home page, the "/" represents the document
+root of our web app</para>
+</callout>
+<callout arearefs="CO5-2">
+<para>Call our <literal>openFile()</literal> function. We&#8217;ll pass two parameters (a) the
+name of the html file to open and (b) the response object</para>
+</callout>
+<callout arearefs="CO5-3">
+<para>If we get to this part of the switch, that means the user typed a
+URL address that we don&#8217;t intend to respond to. This is a good place
+to put a <emphasis>404 Page Not Found error</emphasis>.</para>
 </callout>
 </calloutlist>
+<simpara>TODO: Why do we need to pass the response object</simpara>
 </section>
 <section xml:id="synchronous_file_operation">
 <title>Synchronous File Operation</title>
@@ -400,21 +412,54 @@ web app</para>
 
 </section>
 </chapter>
-<chapter xml:id="introduction_to_mongodb_and_nosql">
-<title>Introduction to MongoDB and NoSQL</title>
-<section xml:id="nosql_and_relational_comparisson">
-<title>NoSQL and Relational comparisson</title>
+<chapter xml:id="mongodb">
+<title>MongoDB</title>
+<section xml:id="nosql_and_rdbms">
+<title>NoSQL and RDBMS</title>
 
 </section>
-<section xml:id="basic_installation_and_configuration_of_mongodb">
-<title>Basic installation and configuration of MongoDB</title>
-<section xml:id="linux">
-<title>Linux</title>
-
-</section>
-<section xml:id="osx">
-<title>OSX</title>
-
+<section xml:id="installation_and_config">
+<title>Installation and Config</title>
+<simpara>There are a couple of ways to install MongoDB on whatever platform you
+are using. We can use (a) precompiled installer binaries (b) use our
+platform&#8217;s package manager e.g. brew, apt-get, yum, chocolatey etc. or
+ (c) we can compile it from source. For our purposes, we will simply
+ use the pre-compiled binaries.</simpara>
+<section xml:id="linux_and_osx_2">
+<title>Linux and OSX</title>
+<simpara>Launch a browser window then head over to <link xl:href="http://mongodb.org">MongoDB
+website</link>. There should be a download link on the front page, click and
+follow that link. At the time of writing, there are two editions of
+MongoDB that can be downloaded, these are (a) Community server, this
+is free for use version. It is the one we will download, and
+(b) Enterprise server, this is the commercial version.</simpara>
+<orderedlist numeration="arabic">
+<listitem>
+<simpara>Choose the community server edition</simpara>
+</listitem>
+<listitem>
+<simpara>Choose either Linux or OSX</simpara>
+</listitem>
+<listitem>
+<simpara>Pay attention to the version dropdown list. If you are on Linux,
+there are a couple of choices on the dropdown list. Do not be so
+quick to hit the download button. Make sure that your Linux distro
+is the one selected on the dropdown</simpara>
+</listitem>
+<listitem>
+<simpara>Click the download button</simpara>
+</listitem>
+<listitem>
+<simpara>At the time of this writing, the Linux and OSX installers comes as
+a <emphasis>tgz</emphasis> file. Use the tar archiver tool to expand the installer
+<literal>tar -xzvf mongodb-osxOrLinux-x86_64-XXX.tgz</literal></simpara>
+</listitem>
+</orderedlist>
+<simpara>Move it, include it on your system path
+create /data/db file
+sudo chown -R <literal>id -u</literal> /data/db</simpara>
+<simpara>mongod
+mongo</simpara>
 </section>
 <section xml:id="windows_2">
 <title>Windows</title>
@@ -452,8 +497,12 @@ web app</para>
 </itemizedlist>
 </section>
 </chapter>
-<chapter xml:id="working_with_route_parameters_in_express">
-<title>Working with Route parameters in Express</title>
+<chapter xml:id="express">
+<title>Express</title>
+
+</chapter>
+<chapter xml:id="route_parameters">
+<title>Route Parameters</title>
 
 </chapter>
 <chapter xml:id="templating_in_express">
@@ -506,7 +555,8 @@ web app</para>
 <simpara>Why not polymer</simpara>
 </listitem>
 </itemizedlist>
-<section xml:id="authentication">
+</chapter>
+<chapter xml:id="authentication">
 <title>Authentication</title>
 <itemizedlist>
 <listitem>
@@ -522,6 +572,5 @@ web app</para>
 <simpara>Using the local strategy</simpara>
 </listitem>
 </itemizedlist>
-</section>
 </chapter>
 </book>

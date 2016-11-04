@@ -1,6 +1,7 @@
 :stylesheet: style.css
 :doctype: book
-:copyright: Ted Hagos 2016
+:Author Initials: TGH
+:Copyright: (c) Ted Hagos 2016
 
 ////
 Important Javascript concepts
@@ -23,8 +24,6 @@ Authentication and Sessions
 Ted Hagos <ted@thelogbox.com>
 v1.0, October 2016
 
-
-
 include::chapters/preface.adoc[]
 include::chapters/javascript-concepts.adoc[]
 include::chapters/node.adoc[]
@@ -34,7 +33,7 @@ include::chapters/middleware.adoc[]
 include::chapters/relational-dbs.adoc[]
 include::chapters/intro-mongo-nosql.adoc[]
 include::chapters/mongoose.adoc[]
-include::chapters/expressjs.adoc[]
+include::chapters/express.adoc[]
 include::chapters/route-parameters.adoc[]
 include::chapters/templating.adoc[]
 include::chapters/logging.adoc[]

@@ -7,7 +7,8 @@
 [source,javascript] 
 .FileReadExample.js 
 ----
-const fs = require('fs'); // <1> const filename = 'index.html';
+const fs = require('fs'); // <1> 
+const filename = 'index.html';
 
 fs.readFile(filename,'utf-8', function(err, data){ // <2><3><4>
   if(err) { // <5> 
@@ -82,7 +83,8 @@ const fs = require('fs');
 
 const port = process.env.PORT || 3000;
 
-http.createServer(function(req, res){ var url = req.url.toUpperCase();
+http.createServer(function(req, res){ 
+  var url = req.url.toUpperCase();
   switch(url) { 
     case "/": // <1> 
       openFile('index.html', res); // <2>
@@ -112,8 +114,18 @@ function openFile(filename, res) {
 }
 ----
 
-<1> The user has went to the home page, this is the docroot of the our
-web app
+<1> The user went to the home page, the "/" represents the document
+root of our web app
+
+<2> Call our `openFile()` function. We'll pass two parameters (a) the
+name of the html file to open and (b) the response object
+
+<3> If we get to this part of the switch, that means the user typed a
+URL address that we don't intend to respond to. This is a good place
+to put a _404 Page Not Found error_.
+
+TODO: Why do we need to pass the response object
+
 
 === Synchronous File Operation
 

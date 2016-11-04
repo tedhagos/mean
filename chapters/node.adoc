@@ -4,6 +4,8 @@
 === Installation
 
 
+
+
 ==== Linux and OSX 
 
 You can use your respective package managers like aptitude and
@@ -45,7 +47,8 @@ installed on your system.
 
 NOTE: At the time of this writing, the version of nvm is *v0.3.2*, you
 should always visit the https://github.com/creationix/nvm[Creationix
-page @ github] and copy the installer command from that page
+page @ github] and copy the installer command from that page instead
+of directly typing the curl command above into your system
 
 
 ==== Windows
@@ -86,9 +89,7 @@ command line.
 
 If you're working on these platforms, you don't need instructions on
 how to launch a terminal window. Use whatever terminal is favorite and
-then type `node` 
-
-You should see a node chevron prompt. Try a couple of commands in it
+then type `node`. You should see the node chevron prompt. Try a couple of commands in it
 
 ----
 > var greetings = "Hello"; // <1>
@@ -105,7 +106,8 @@ You should see a node chevron prompt. Try a couple of commands in it
 <4> Generate a random number and assign it to a var
 
 
-If you want to exit the node REPL, press `CTRL + c` twice
+When you want to exit the node REPL, press `CTRL + C` twice
+
 
 
 === Running a Script
@@ -133,7 +135,7 @@ for(var x = 1; x < 5; x++) {
 
 <1> `process.stdout.write` is almost the same as `console.log`. They
 will both print out things on the screen. Console.log however, will
-add a newline at the end. The `\t` is an string escape sequence, it
+add a newline at the end. The `\t` is a string escape sequence, it
 will add a tab to the output
 <2> The `\n` is another escape sequence. This one prints a newline
 
@@ -144,8 +146,26 @@ of the program source file as a command line argument.
 node multiplication.js
 ----
 
-
 === A basic web server
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
