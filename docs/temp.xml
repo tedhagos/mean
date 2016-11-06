@@ -232,17 +232,15 @@ node runtime.</simpara>
 <simpara>In the following example, a program file named <emphasis>multiplication.js</emphasis> is
 created. The contents of which is shown below. It&#8217;s a simple
 Javascript program to print out a 5x5 multiplication table.</simpara>
-<formalpara xml:id="multiplication.js">
+<example>
 <title>multiplication.js</title>
-<para>
-<programlisting language="javascript" linenumbering="unnumbered">for(var x = 1; x &lt; 5; x++) {
+<literallayout class="monospaced">for(var x = 1; x &lt; 5; x++) {
   for(var y = 1; y &lt; 5; y++) {
     process.stdout.write(x * y + '\t'); <co xml:id="CO3-1"/>
   }
   process.stdout.write('\n'); <co xml:id="CO3-2"/>
-}</programlisting>
-</para>
-</formalpara>
+}</literallayout>
+</example>
 <calloutlist>
 <callout arearefs="CO3-1">
 <para><literal>process.stdout.write</literal> is almost the same as <literal>console.log</literal>. They
@@ -278,10 +276,10 @@ of the program source file as a command line argument.</simpara>
 </chapter>
 <chapter xml:id="_file_io">
 <title>File IO</title>
-<formalpara xml:id="filereadexample.js">
+<simpara>I should see this</simpara>
+<example>
 <title>FileReadExample.js</title>
-<para>
-<programlisting language="javascript" linenumbering="unnumbered">const fs = require('fs'); <co xml:id="CO4-1"/>
+<screen>const fs = require('fs'); <co xml:id="CO4-1"/>
 const filename = 'index.html';
 
 fs.readFile(filename,'utf-8', function(err, data){ <co xml:id="CO4-2"/><co xml:id="CO4-3"/><co xml:id="CO4-4"/>
@@ -291,9 +289,8 @@ fs.readFile(filename,'utf-8', function(err, data){ <co xml:id="CO4-2"/><co xml:i
   else {
     console.log(data); <co xml:id="CO4-6"/>
   }
-});</programlisting>
-</para>
-</formalpara>
+});</screen>
+</example>
 <calloutlist>
 <callout arearefs="CO4-1">
 <para>Import the <literal>fs</literal> library into our app. Anything that requires
@@ -333,15 +330,13 @@ of our callback function</para>
 <simpara>If you ran the code listing above, you would seen  an error message
 because the file <emphasis>index.html</emphasis> does not exist yet. Create the html file
 and save it on the same folder where <emphasis>FileReadExample.js</emphasis> is located.</simpara>
-<formalpara xml:id="index.html">
+<example>
 <title>index.html</title>
-<para>
-<programlisting language="html" linenumbering="unnumbered">&lt;!DOCTYPE html&gt;
+<screen>&lt;!DOCTYPE html&gt;
   &lt;html&gt;
   &lt;h1&gt;Hello World&lt;/h1&gt;
-&lt;/html&gt;</programlisting>
-</para>
-</formalpara>
+&lt;/html&gt;</screen>
+</example>
 <simpara>Run the code sample again. This time, the contents of <emphasis>index.html</emphasis>
 will be echoed to the screen.</simpara>
 <section xml:id="_reading_a_file_from_a_web_app">
@@ -351,10 +346,9 @@ and apply it in a simple web app. The basic idea is as follows (1) The
 user navigates to the root document or the home page (2) we will call
 a function that will read an html file and (3) we will write the
 contents of the html file into the <literal>response</literal> stream.</simpara>
-<formalpara xml:id="app.js">
+<example>
 <title>app.js</title>
-<para>
-<programlisting language="javascript" linenumbering="unnumbered">const http = require('http');
+<screen>const http = require('http');
 const fs = require('fs');
 
 const port = process.env.PORT || 3000;
@@ -387,9 +381,8 @@ function openFile(filename, res) {
       res.write(data); res.end();
     }
   });
-}</programlisting>
-</para>
-</formalpara>
+}</screen>
+</example>
 <calloutlist>
 <callout arearefs="CO5-1">
 <para>The user went to the home page, the "/" represents the document

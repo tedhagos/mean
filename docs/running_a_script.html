@@ -8,17 +8,15 @@ node runtime.</p>
 <p>In the following example, a program file named <span class="emphasis"><em>multiplication.js</em></span> is
 created. The contents of which is shown below. It’s a simple
 Javascript program to print out a 5x5 multiplication table.</p>
-<p><a id="multiplication.js"></a>
-<strong>multiplication.js. </strong>
+<div class="example"><a id="idm416960687152"></a><p class="title"><strong>Example 2.1. multiplication.js</strong></p><div class="example-contents">
 
-</p><pre class="programlisting">for(var x = 1; x &lt; 5; x++) {
+<pre class="literallayout">for(var x = 1; x &lt; 5; x++) {
   for(var y = 1; y &lt; 5; y++) {
     process.stdout.write(x * y + '\t'); <a id="CO3-1"></a><span><img src="images/callouts/1.png" alt="1" border="0" /></span>
   }
   process.stdout.write('\n'); <a id="CO3-2"></a><span><img src="images/callouts/2.png" alt="2" border="0" /></span>
-}</pre><p>
-
-</p>
+}</pre>
+</div></div><br class="example-break" />
 <div class="calloutlist"><table border="0" summary="Callout list"><tr><td width="5%" valign="top" align="left"><p><a href="#CO3-1"><span><img src="images/callouts/1.png" alt="1" border="0" /></span></a> </p></td><td valign="top" align="left">
 <p><code class="literal">process.stdout.write</code> is almost the same as <code class="literal">console.log</code>. They
 will both print out things on the screen. Console.log however, will

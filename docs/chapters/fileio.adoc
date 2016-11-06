@@ -1,11 +1,10 @@
 
 == File IO
 
+I should see this
 
-
-[[filereadexample.js]] 
-[source,javascript] 
 .FileReadExample.js 
+====
 ----
 const fs = require('fs'); // <1> 
 const filename = 'index.html';
@@ -18,9 +17,8 @@ fs.readFile(filename,'utf-8', function(err, data){ // <2><3><4>
     console.log(data); // <6> 
   } 
 });
-
 ----
-
+====
 <1> Import the `fs` library into our app. Anything that requires
 file io is contained in this module
 
@@ -53,15 +51,15 @@ If you ran the code listing above, you would seen  an error message
 because the file _index.html_ does not exist yet. Create the html file
 and save it on the same folder where _FileReadExample.js_ is located.
 
-[[index.html]]
-[source,html]
 .index.html 
+====
 ---- 
 <!DOCTYPE html>
   <html>
   <h1>Hello World</h1>
 </html> 
 ----
+====
 
 Run the code sample again. This time, the contents of _index.html_
 will be echoed to the screen.
@@ -74,9 +72,9 @@ user navigates to the root document or the home page (2) we will call
 a function that will read an html file and (3) we will write the
 contents of the html file into the `response` stream.
 
-[[app.js]]
-[source,javascript]
+
 .app.js
+====
 ----
 const http = require('http'); 
 const fs = require('fs');
@@ -113,6 +111,7 @@ function openFile(filename, res) {
   }); 
 }
 ----
+====
 
 <1> The user went to the home page, the "/" represents the document
 root of our web app

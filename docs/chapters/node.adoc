@@ -139,18 +139,18 @@ In the following example, a program file named _multiplication.js_ is
 created. The contents of which is shown below. It's a simple
 Javascript program to print out a 5x5 multiplication table.
 
-[[multiplication.js]]
-[source,javascript]
+
 .multiplication.js
-----
+====
+....
 for(var x = 1; x < 5; x++) {
   for(var y = 1; y < 5; y++) {
     process.stdout.write(x * y + '\t'); // <1>
   }
   process.stdout.write('\n'); // <2>
 }
-----
-
+....
+====
 <1> `process.stdout.write` is almost the same as `console.log`. They
 will both print out things on the screen. Console.log however, will
 add a newline at the end. The `\t` is a string escape sequence, it
@@ -163,24 +163,5 @@ of the program source file as a command line argument.
 ----
 node multiplication.js
 ----
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
