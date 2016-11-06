@@ -51,7 +51,7 @@ If you ran the code listing above, you would seen  an error message
 because the file _index.html_ does not exist yet. Create the html file
 and save it on the same folder where _FileReadExample.js_ is located.
 
-.index.html 
+.Contents of index.html 
 ====
 ---- 
 <!DOCTYPE html>
@@ -73,7 +73,7 @@ a function that will read an html file and (3) we will write the
 contents of the html file into the `response` stream.
 
 
-.app.js
+.Opening index.html within createServer
 ====
 ----
 const http = require('http'); 

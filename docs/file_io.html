@@ -2,7 +2,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><title>Chapter 4. File IO</title><link rel="stylesheet" type="text/css" href="stylesheet.css" /><meta name="generator" content="DocBook XSL Stylesheets V1.79.1" /><link rel="home" href="index.html" title="Programming using the MEAN stack" /><link rel="up" href="index.html" title="Programming using the MEAN stack" /><link rel="prev" href="hello_world.html" title="Chapter 3. Hello World" /><link rel="next" href="synchronous_file_operation.html" title="4.2. Synchronous File Operation" /></head><body><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Chapter 4. File IO</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="hello_world.html">Prev</a> </td><th width="60%" align="center"> </th><td width="20%" align="right"> <a accesskey="n" href="synchronous_file_operation.html">Next</a></td></tr></table><hr /></div><div class="chapter"><div class="titlepage"><div><div><h1 class="title"><a id="file_io"></a>Chapter 4. File IO</h1></div></div></div><div class="toc"><p><strong>Table of Contents</strong></p><dl class="toc"><dt><span class="section"><a href="file_io.html#reading_a_file_from_a_web_app">4.1. Reading a File from a Web App</a></span></dt><dt><span class="section"><a href="synchronous_file_operation.html">4.2. Synchronous File Operation</a></span></dt><dt><span class="section"><a href="dealing_with_asynchrony.html">4.3. Dealing with Asynchrony</a></span></dt></dl></div>
 
 <p>I should see this</p>
-<div class="example"><a id="idm416960673408"></a><p class="title"><strong>Example 4.1. FileReadExample.js</strong></p><div class="example-contents">
+<div class="example"><a id="idm181799467904"></a><p class="title"><strong>Example 4.1. FileReadExample.js</strong></p><div class="example-contents">
 
 <pre class="screen">const fs = require('fs'); <a id="CO4-1"></a><span><img src="images/callouts/1.png" alt="1" border="0" /></span>
 const filename = 'index.html';
@@ -48,7 +48,7 @@ of our callback function</p>
 <p>If you ran the code listing above, you would seen  an error message
 because the file <span class="emphasis"><em>index.html</em></span> does not exist yet. Create the html file
 and save it on the same folder where <span class="emphasis"><em>FileReadExample.js</em></span> is located.</p>
-<div class="example"><a id="idm416960655872"></a><p class="title"><strong>Example 4.2. index.html</strong></p><div class="example-contents">
+<div class="example"><a id="idm181799450368"></a><p class="title"><strong>Example 4.2. Contents of index.html</strong></p><div class="example-contents">
 
 <pre class="screen">&lt;!DOCTYPE html&gt;
   &lt;html&gt;
@@ -64,7 +64,7 @@ and apply it in a simple web app. The basic idea is as follows (1) The
 user navigates to the root document or the home page (2) we will call
 a function that will read an html file and (3) we will write the
 contents of the html file into the <code class="literal">response</code> stream.</p>
-<div class="example"><a id="idm416960651760"></a><p class="title"><strong>Example 4.3. app.js</strong></p><div class="example-contents">
+<div class="example"><a id="idm181799446176"></a><p class="title"><strong>Example 4.3. Opening index.html within createServer</strong></p><div class="example-contents">
 
 <pre class="screen">const http = require('http');
 const fs = require('fs');

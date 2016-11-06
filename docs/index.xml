@@ -331,7 +331,7 @@ of our callback function</para>
 because the file <emphasis>index.html</emphasis> does not exist yet. Create the html file
 and save it on the same folder where <emphasis>FileReadExample.js</emphasis> is located.</simpara>
 <example>
-<title>index.html</title>
+<title>Contents of index.html</title>
 <screen>&lt;!DOCTYPE html&gt;
   &lt;html&gt;
   &lt;h1&gt;Hello World&lt;/h1&gt;
@@ -347,7 +347,7 @@ user navigates to the root document or the home page (2) we will call
 a function that will read an html file and (3) we will write the
 contents of the html file into the <literal>response</literal> stream.</simpara>
 <example>
-<title>app.js</title>
+<title>Opening index.html within createServer</title>
 <screen>const http = require('http');
 const fs = require('fs');
 
