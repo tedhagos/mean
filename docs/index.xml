@@ -276,7 +276,6 @@ of the program source file as a command line argument.</simpara>
 </chapter>
 <chapter xml:id="file_io">
 <title>File IO</title>
-<simpara>I should see this</simpara>
 <example>
 <title>FileReadExample.js</title>
 <screen>const fs = require('fs'); <co xml:id="CO4-1"/>

@@ -1,8 +1,6 @@
 
 == File IO
 
-I should see this
-
 .FileReadExample.js 
 ====
 ----
