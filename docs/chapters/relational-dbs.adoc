@@ -1,4 +1,4 @@
-== Working with Relational Databases
+== Relational Databases
 
 === MySQL
 

@@ -21,8 +21,30 @@
 </revision>
 </revhistory>
 </info>
-<preface xml:id="preface">
+<preface xml:id="_preface">
 <title>Preface</title>
+<section xml:id="_what_you_should_know">
+<title>What you should know</title>
+<simpara>Ideally you are approaching the book with some background on the
+following areas</simpara>
+<itemizedlist>
+<listitem>
+<simpara>Javascript client side programming</simpara>
+</listitem>
+<listitem>
+<simpara>Web development experience from any programming language e.g. PHP,
+ASP, Java etc</simpara>
+</listitem>
+<listitem>
+<simpara>Database programming background e.g. MySQL, SQLServer, Oracle, DB2,
+SQLite etc</simpara>
+</listitem>
+</itemizedlist>
+<simpara>You don&#8217;t need to be an expert on the above fields, but a modest
+amount of experience in them will certainly go a long way.</simpara>
+</section>
+<section xml:id="_chapter_summaries">
+<title>Chapter Summaries</title>
 <variablelist>
 <varlistentry>
 <term>Chapter 1</term>
@@ -38,8 +60,9 @@
 </varlistentry>
 </variablelist>
 <simpara>This is the end of the preface</simpara>
+</section>
 </preface>
-<chapter xml:id="javascript_concepts">
+<chapter xml:id="_javascript_concepts">
 <title>Javascript Concepts</title>
 <itemizedlist>
 <listitem>
@@ -49,28 +72,45 @@
 <simpara>The LHS and RHS</simpara>
 </listitem>
 </itemizedlist>
-<section xml:id="scope">
+<section xml:id="_scope">
 <title>Scope</title>
 
 </section>
-<section xml:id="this_and_super">
+<section xml:id="_this_and_super">
 <title>This and Super</title>
 
 </section>
-<section xml:id="callback">
+<section xml:id="_callback">
 <title>Callback</title>
 
 </section>
-<section xml:id="es6">
+<section xml:id="_es6">
 <title>ES6</title>
 
 </section>
 </chapter>
-<chapter xml:id="nodejs">
+<chapter xml:id="_nodejs">
 <title>NodeJS</title>
-<section xml:id="installation">
+<section xml:id="_installation">
 <title>Installation</title>
-<section xml:id="linux_and_osx">
+<simpara>NodeJS is available in a variety of platforms and it can be installed
+on each of those platforms in a couple of ways. It can installed by
+<emphasis role="strong">(a)</emphasis> downloading and installing a precompiled binary <emphasis role="strong">(b)</emphasis> using your
+platforms package manager <emphasis role="strong">(c)</emphasis> compiling from source and <emphasis role="strong">(d)</emphasis> using the
+node version manager. Each of these routes have their own advantages
+and disadvantages and they differ in level of difficulty.</simpara>
+<simpara>The most difficult route is probably option (c) compilation from source. But it
+is also the most flexible because you can control what features gets
+compiled and what doesn&#8217;t. The easiest route is option (a) using a
+precompiled binary because this only entails downloading, double
+clicking and following an installation wizard. Nothing you haven&#8217;t
+seend before. You would install nodejs the way you would install any
+other application in your platform.</simpara>
+<simpara>Options (b) using a package manager, and (d) using nvm are of somewhat
+equal footing in terms of difficulty. But we will use nvm whenever
+possible because it allows us to install multiple versions of node on
+a single machine.</simpara>
+<section xml:id="_linux_and_osx">
 <title>Linux and OSX</title>
 <simpara>You can use your respective package managers like aptitude and
 HomeBrew, for Linux and OSX respectively. Alternatively, you can use
@@ -101,7 +141,7 @@ here because I am assuming that most people who will read this will
 run some version of Ubuntu, it is probably one of the most popular
 distros in wide use today</simpara>
 </note>
-<simpara>Next, we&#8217;ll pull the install via curl, paste the following command on
+<simpara>Next, we&#8217;ll pull the installer via curl. Paste or type the following command on
 your terminal window.</simpara>
 <screen>curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.32.1/install.sh | bash</screen>
 <simpara>Wait for the command to finish. After that, node would have been
@@ -113,7 +153,7 @@ page @ github</link> and copy the installer command from that page instead
 of directly typing the curl command above into your system</simpara>
 </note>
 </section>
-<section xml:id="windows">
+<section xml:id="_windows">
 <title>Windows</title>
 <simpara>NVM is not officially supported on Windows. There are projects like
 nvm-windows and nodist that will allow you to use nvm on a Windows
@@ -138,7 +178,7 @@ would normally install any other software on Windows</simpara>
 </orderedlist>
 </section>
 </section>
-<section xml:id="repl">
+<section xml:id="_repl">
 <title>REPL</title>
 <simpara>The node REPL (Read Eval Print Loop) is an interactive shell where you
 can enter Javascript expressions, statements and even control
@@ -183,7 +223,7 @@ then type <literal>node</literal>. You should see the node chevron prompt. Try a
 </calloutlist>
 <simpara>When you want to exit the node REPL, press <literal>CTRL + C</literal> twice</simpara>
 </section>
-<section xml:id="running_a_script">
+<section xml:id="_running_a_script">
 <title>Running a Script</title>
 <simpara>The REPL is a useful learning tool, but we won&#8217;t use much of it here.
 We will run our node programs as scripts. We will write the node
@@ -218,12 +258,8 @@ will add a tab to the output</para>
 of the program source file as a command line argument.</simpara>
 <screen>node multiplication.js</screen>
 </section>
-<section xml:id="a_basic_web_server">
-<title>A basic web server</title>
-
-</section>
 </chapter>
-<chapter xml:id="hello_world">
+<chapter xml:id="_hello_world">
 <title>Hello World</title>
 <itemizedlist>
 <listitem>
@@ -240,7 +276,7 @@ of the program source file as a command line argument.</simpara>
 </listitem>
 </itemizedlist>
 </chapter>
-<chapter xml:id="file_io">
+<chapter xml:id="_file_io">
 <title>File IO</title>
 <formalpara xml:id="filereadexample.js">
 <title>FileReadExample.js</title>
@@ -308,7 +344,7 @@ and save it on the same folder where <emphasis>FileReadExample.js</emphasis> is 
 </formalpara>
 <simpara>Run the code sample again. This time, the contents of <emphasis>index.html</emphasis>
 will be echoed to the screen.</simpara>
-<section xml:id="reading_a_file_from_a_web_app">
+<section xml:id="_reading_a_file_from_a_web_app">
 <title>Reading a File from a Web App</title>
 <simpara>Let&#8217;s use the file reading technique we learned in the last section
 and apply it in a simple web app. The basic idea is as follows (1) The
@@ -371,16 +407,16 @@ to put a <emphasis>404 Page Not Found error</emphasis>.</para>
 </calloutlist>
 <simpara>TODO: Why do we need to pass the response object</simpara>
 </section>
-<section xml:id="synchronous_file_operation">
+<section xml:id="_synchronous_file_operation">
 <title>Synchronous File Operation</title>
 
 </section>
-<section xml:id="dealing_with_asynchrony">
+<section xml:id="_dealing_with_asynchrony">
 <title>Dealing with Asynchrony</title>
 
 </section>
 </chapter>
-<chapter xml:id="middleware">
+<chapter xml:id="_middleware">
 <title>Middleware</title>
 <itemizedlist>
 <listitem>
@@ -397,35 +433,35 @@ to put a <emphasis>404 Page Not Found error</emphasis>.</para>
 </listitem>
 </itemizedlist>
 </chapter>
-<chapter xml:id="working_with_relational_databases">
-<title>Working with Relational Databases</title>
-<section xml:id="mysql">
+<chapter xml:id="_relational_databases">
+<title>Relational Databases</title>
+<section xml:id="_mysql">
 <title>MySQL</title>
 
 </section>
-<section xml:id="postgresql">
+<section xml:id="_postgresql">
 <title>PostgreSQL</title>
 
 </section>
-<section xml:id="sqlite">
+<section xml:id="_sqlite">
 <title>SQLite</title>
 
 </section>
 </chapter>
-<chapter xml:id="mongodb">
+<chapter xml:id="_mongodb">
 <title>MongoDB</title>
-<section xml:id="nosql_and_rdbms">
+<section xml:id="_nosql_and_rdbms">
 <title>NoSQL and RDBMS</title>
 
 </section>
-<section xml:id="installation_and_config">
+<section xml:id="_installation_and_config">
 <title>Installation and Config</title>
 <simpara>There are a couple of ways to install MongoDB on whatever platform you
 are using. We can use (a) precompiled installer binaries (b) use our
 platform&#8217;s package manager e.g. brew, apt-get, yum, chocolatey etc. or
  (c) we can compile it from source. For our purposes, we will simply
  use the pre-compiled binaries.</simpara>
-<section xml:id="linux_and_osx_2">
+<section xml:id="_linux_and_osx_2">
 <title>Linux and OSX</title>
 <simpara>Launch a browser window then head over to <link xl:href="http://mongodb.org">MongoDB
 website</link>. There should be a download link on the front page, click and
@@ -461,28 +497,28 @@ sudo chown -R <literal>id -u</literal> /data/db</simpara>
 <simpara>mongod
 mongo</simpara>
 </section>
-<section xml:id="windows_2">
+<section xml:id="_windows_2">
 <title>Windows</title>
 
 </section>
 </section>
-<section xml:id="inserting_documents">
+<section xml:id="_inserting_documents">
 <title>Inserting documents</title>
 
 </section>
-<section xml:id="finding_documents">
+<section xml:id="_finding_documents">
 <title>Finding documents</title>
 
 </section>
-<section xml:id="deleting_documents">
+<section xml:id="_deleting_documents">
 <title>Deleting documents</title>
 
 </section>
-<section xml:id="updating_documents">
+<section xml:id="_updating_documents">
 <title>Updating documents</title>
 
 </section>
-<section xml:id="mongoose">
+<section xml:id="_mongoose">
 <title>Mongoose</title>
 <itemizedlist>
 <listitem>
@@ -497,15 +533,15 @@ mongo</simpara>
 </itemizedlist>
 </section>
 </chapter>
-<chapter xml:id="express">
+<chapter xml:id="_express">
 <title>Express</title>
 
 </chapter>
-<chapter xml:id="route_parameters">
+<chapter xml:id="_route_parameters">
 <title>Route Parameters</title>
 
 </chapter>
-<chapter xml:id="templating_in_express">
+<chapter xml:id="_templating_in_express">
 <title>Templating in Express</title>
 <itemizedlist>
 <listitem>
@@ -519,7 +555,7 @@ mongo</simpara>
 </listitem>
 </itemizedlist>
 </chapter>
-<chapter xml:id="logging">
+<chapter xml:id="_logging">
 <title>Logging</title>
 <itemizedlist>
 <listitem>
@@ -533,7 +569,7 @@ mongo</simpara>
 </listitem>
 </itemizedlist>
 </chapter>
-<chapter xml:id="angularjs">
+<chapter xml:id="_angularjs">
 <title>AngularJS</title>
 <itemizedlist>
 <listitem>
@@ -556,7 +592,7 @@ mongo</simpara>
 </listitem>
 </itemizedlist>
 </chapter>
-<chapter xml:id="authentication">
+<chapter xml:id="_authentication">
 <title>Authentication</title>
 <itemizedlist>
 <listitem>

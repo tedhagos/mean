@@ -19,6 +19,22 @@ AngularJS
 Authentication and Sessions
 ////
 
+=== What you should know
+
+Ideally you are approaching the book with some background on the
+following areas
+
+- Javascript client side programming
+- Web development experience from any programming language e.g. PHP,
+  ASP, Java etc
+- Database programming background e.g. MySQL, SQLServer, Oracle, DB2,
+  SQLite etc
+
+You don't need to be an expert on the above fields, but a modest
+amount of experience in them will certainly go a long way.
+
+
+=== Chapter Summaries
 
 Chapter 1::
   A Javascript refresher. Ideally, you will approach the book with book with some Javascript experience

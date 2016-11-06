@@ -1,5 +1,5 @@
 
-rm -fvr *.html
+git rm -fr *.html
 
 asciidoctor -b docbook -o temp.xml index.adoc
 

@@ -3,7 +3,25 @@
 
 === Installation
 
+NodeJS is available in a variety of platforms and it can be installed
+on each of those platforms in a couple of ways. It can installed by
+*(a)* downloading and installing a precompiled binary *(b)* using your
+platforms package manager *(c)* compiling from source and *(d)* using the
+node version manager. Each of these routes have their own advantages
+and disadvantages and they differ in level of difficulty. 
 
+The most difficult route is probably option (c) compilation from source. But it
+is also the most flexible because you can control what features gets
+compiled and what doesn't. The easiest route is option (a) using a
+precompiled binary because this only entails downloading, double
+clicking and following an installation wizard. Nothing you haven't
+seend before. You would install nodejs the way you would install any
+other application in your platform. 
+
+Options (b) using a package manager, and (d) using nvm are of somewhat
+equal footing in terms of difficulty. But we will use nvm whenever
+possible because it allows us to install multiple versions of node on
+a single machine.
 
 
 ==== Linux and OSX 
@@ -35,7 +53,7 @@ here because I am assuming that most people who will read this will
 run some version of Ubuntu, it is probably one of the most popular
 distros in wide use today
 
-Next, we'll pull the install via curl, paste the following command on
+Next, we'll pull the installer via curl. Paste or type the following command on
 your terminal window.
 
 ----
@@ -145,9 +163,6 @@ of the program source file as a command line argument.
 ----
 node multiplication.js
 ----
-
-=== A basic web server
-
 
 
 
