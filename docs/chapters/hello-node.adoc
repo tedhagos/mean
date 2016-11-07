@@ -23,15 +23,17 @@ assigned it to a constant because I don't intend to make anymore
 changes to `http` after I've defined it
 
 <2> `createServer()` is a method of the http object. It's the one
-responsible for, well, creating an HTTP server. This method returns an
-instance of an HTTP server
+responsible for, well, creating an HTTP server. This method will
+return an instance of an HTTP server which we will use to later to
+start the application
 
 <3> `fnWhenSomethingConnects`. This is a function that we haven't
-defined it, but we will very shorty. When an http client e.g. a web browser, tries to connect
+defined yet, but we will very shorty. The `createServer` method
+expects a function (either named or anonymous). When an http client e.g. a web browser, tries to connect
 to our server, this function will be called
 
-<4> `listen`. This is a method of an HTTP server, it listens to
-incoming HTTP requests
+<4> `listen`. This is a method of an HTTP server. When this method is
+called, it will start our web server
 
 <5> `3000`. The port number I chose. You can choose another number,
 preferably higher than 1024. This means that our server will listen
