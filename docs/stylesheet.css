@@ -1,4 +1,8 @@
 
+.calloutlist table tbody tr td {
+  vertical-align:center !important;
+}
+
 body {
   font-size: 1.05em;
   background: #fbfbfb;
