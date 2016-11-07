@@ -12,12 +12,12 @@
 </personname>
 <email>ted@thelogbox.com</email>
 </author>
-<authorinitials>TGH</authorinitials>
+<authorinitials>tgh</authorinitials>
 <revhistory>
 <revision>
 <revnumber>1.0</revnumber>
 <date>October 2016</date>
-<authorinitials>TGH</authorinitials>
+<authorinitials>tgh</authorinitials>
 </revision>
 </revhistory>
 </info>
@@ -259,10 +259,173 @@ of the program source file as a command line argument.</simpara>
 </chapter>
 <chapter xml:id="_hello_world">
 <title>Hello World</title>
+<simpara>A web application written in node, will need to create a server,
+specifically an HTTP server. The code listing below shows the basic
+steps in creating such as a server</simpara>
+<example>
+<title>Simple Web server</title>
+<literallayout class="monospaced">const http = require('http'); <co xml:id="CO4-1"/>
+
+const app = http.createServer(fnWhenSomethingConnects); <co xml:id="CO4-2"/> <co xml:id="CO4-3"/>
+app.listen(3000); <co xml:id="CO4-4"/> <co xml:id="CO4-5"/></literallayout>
+</example>
+<calloutlist>
+<callout arearefs="CO4-1">
+<para><literal>http</literal> is a built-in module that comes with node. A module is
+basically a Javascript source file that contains specific
+functionality. In this case, the http module contains all the codes we
+need in order to listen to incoming HTTP request and also respond to
+these request. When you want to use a module, you need to <literal>require</literal> it
+inside your app and assign it to a variable. Well, in this case, I
+assigned it to a constant because I don&#8217;t intend to make anymore
+changes to <literal>http</literal> after I&#8217;ve defined it</para>
+</callout>
+<callout arearefs="CO4-2">
+<para><literal>createServer()</literal> is a method of the http object. It&#8217;s the one
+responsible for, well, creating an HTTP server. This method returns an
+instance of an HTTP server</para>
+</callout>
+<callout arearefs="CO4-3">
+<para><literal>fnWhenSomethingConnects</literal>. This is a function that we haven&#8217;t
+defined it, but we will very shorty. When an http client e.g. a web browser, tries to connect
+to our server, this function will be called</para>
+</callout>
+<callout arearefs="CO4-4">
+<para><literal>listen</literal>. This is a method of an HTTP server, it listens to
+incoming HTTP requests</para>
+</callout>
+<callout arearefs="CO4-5">
+<para><literal>3000</literal>. The port number I chose. You can choose another number,
+preferably higher than 1024. This means that our server will listen
+only on port 3000. So any client who wants to talk to our server, will
+need to make a request like this <literal><link xl:href="http://localhost:3000">http://localhost:3000</link></literal></para>
+</callout>
+</calloutlist>
+<note>
+<simpara><literal>const</literal> keyword is available only on ES6. The node version I am
+using for all the examples in this book is v6.3.1, it perfectly
+capable of understanding ES6 syntax</simpara>
+</note>
+<warning>
+<simpara>Using port numbers lower than 1024 might require that you run
+your node process as a superuser (root). These ports are privileged
+ports in *NIX systems</simpara>
+</warning>
+<simpara>You cannot run the code as it stands right now because we haven&#8217;t
+defined <literal>fnWhenSomethingConnects</literal>, so let&#8217;s define that now. We&#8217;ll
+make it simple and return a very uninspired hello world.</simpara>
+<example>
+<title>fnWhenSomethingConnects</title>
+<literallayout class="monospaced">function fnWhenSomethingConnects(request, response) { <co xml:id="CO5-1"/> <co xml:id="CO5-2"/>
+
+  response.writeHead(200, {'Content-Type':'text/html'}); <co xml:id="CO5-3"/> <co xml:id="CO5-4"/> <co xml:id="CO5-5"/>
+  response.write("&lt;html&gt;&lt;h1&gt;Hello World&lt;/h1&gt;&lt;/html&gt;"); <co xml:id="CO5-6"/>
+  response.end(); <co xml:id="CO5-7"/>
+
+}</literallayout>
+</example>
+<calloutlist>
+<callout arearefs="CO5-1">
+<para>The HTTP <literal>request</literal> object, together with the <literal>response</literal> object are
+passed to us when a client tries to connect to our application. The
+request object contains quite a lot of information e.g. the URL that
+the client invoked or any information that the client passed to the
+request like form data for example</para>
+</callout>
+<callout arearefs="CO5-2">
+<para>This is an HTTP <literal>response</literal> object. This is what we will use to
+communicate back to the client. When you want the user to see
+something, you simply write that information to the response object</para>
+</callout>
+<callout arearefs="CO5-3">
+<para><literal>writeHead</literal> will write the header information of our response. It
+has 2 parameters (1) HTTP response and (2) the MIME type</para>
+</callout>
+<callout arearefs="CO5-4">
+<para><literal>200</literal> is the HTTP response code which means the client request was
+est. This is the <literal>OK</literal> status of HTTP</para>
+</callout>
+<callout arearefs="CO5-5">
+<para>Were just sending a simple HTML type of response. You can send
+other types like JSON or plain text</para>
+</callout>
+<callout arearefs="CO5-6">
+<para>The <literal>write</literal> method takes in a String argument. Whatever you put in
+this string parameter will be sent to the client</para>
+</callout>
+<callout arearefs="CO5-7">
+<para>The <literal>response</literal> object is a stream. Calling the <literal>end</literal> method
+signals to the client that we are done composing our response and that
+the client can start rendering the same response on his end. If you
+fail to call the <literal>end</literal> method, the client will wait forever (or until
+it times out) for a response from the server</para>
+</callout>
+</calloutlist>
+<simpara>Below is the full code listing for our simple web server</simpara>
+<example>
+<title>simpleWebServer.js</title>
+<literallayout class="monospaced">const http = require('http');
+
+const app = http.createServer(fnWhenSomethingConnects);
+app.listen(3000);
+
+function fnWhenSomethingConnects(request, response) {
+
+  response.writeHead(200, {'Content-Type':'text/html'});
+  response.write("&lt;html&gt;&lt;h1&gt;Hello World&lt;/h1&gt;&lt;/html&gt;");
+  response.end();
+
+}</literallayout>
+</example>
+<simpara>To run this code, type the following on the command line</simpara>
+<literallayout class="monospaced">node simpleWebServer.js</literallayout>
+<simpara>Launch a browser and navigate to <link xl:href="http://localhost:3000">http://localhost:3000</link></simpara>
+<section xml:id="_refactoring_simplewebserver">
+<title>Refactoring SimpleWebServer</title>
+<simpara>While our app is now functional and can respond to simple requests, it
+is not written in idiomatic node. It is not in the form that you might
+see often on code examples from the web e.g. stackoverflow. It is
+readable and verbose, which is not necessarily a bad thing, but I
+think we need to familiarize ourselves with how other programmers are
+writing their codes. I&#8217;ve refactored the code example. It is shown on
+the listing below</simpara>
+<example>
+<title>simpleWebServer v2</title>
+<literallayout class="monospaced">const http = require('http');
+
+const app = http.createServer(function (req,res){ <co xml:id="CO6-1"/>
+
+  response.writeHead(200, {'Content-Type':'text/html'});
+  response.write("&lt;html&gt;&lt;h1&gt;Hello World&lt;/h1&gt;&lt;/html&gt;");
+  response.end();
+
+});
+
+app.listen(3000, function(){ <co xml:id="CO6-2"/>
+  console.log("Started the App");
+});</literallayout>
+</example>
+<calloutlist>
+<callout arearefs="CO6-1">
+<para>The named function <literal>fnWhenSomethingConnects</literal> has disappeared. In
+its place instead is the full literal defintion of the function. You
+will also notice that the function, right now, has no name. This is
+what other programmers refer to as an anonymous function. I don&#8217;t
+agree with this because I really think we should always name our
+functions, but I&#8217;m just trying to illustrate how other programmer&#8217;s
+might code, so let&#8217;s let it slide for now</para>
+</callout>
+<callout arearefs="CO6-2">
+<para>The <literal>listen</literal> method now gets a second parameter. The anonymous
+function will be called once our server has successfully bound the
+socket, which means it has completed the startup process and is now
+actively listening on port 3000</para>
+</callout>
+</calloutlist>
+</section>
+<section xml:id="_exercises">
+<title>Exercises</title>
 <itemizedlist>
-<listitem>
-<simpara>Basic structure</simpara>
-</listitem>
 <listitem>
 <simpara>Response</simpara>
 </listitem>
@@ -273,40 +436,41 @@ of the program source file as a command line argument.</simpara>
 <simpara>How to get to the body</simpara>
 </listitem>
 </itemizedlist>
+</section>
 </chapter>
 <chapter xml:id="_file_io">
 <title>File IO</title>
 <example>
 <title>FileReadExample.js</title>
-<screen>const fs = require('fs'); <co xml:id="CO4-1"/>
+<screen>const fs = require('fs'); <co xml:id="CO7-1"/>
 const filename = 'index.html';
 
-fs.readFile(filename,'utf-8', function(err, data){ <co xml:id="CO4-2"/><co xml:id="CO4-3"/><co xml:id="CO4-4"/>
-  if(err) { <co xml:id="CO4-5"/>
+fs.readFile(filename,'utf-8', function(err, data){ <co xml:id="CO7-2"/><co xml:id="CO7-3"/><co xml:id="CO7-4"/>
+  if(err) { <co xml:id="CO7-5"/>
     console.log(err.message);
   }
   else {
-    console.log(data); <co xml:id="CO4-6"/>
+    console.log(data); <co xml:id="CO7-6"/>
   }
 });</screen>
 </example>
 <calloutlist>
-<callout arearefs="CO4-1">
+<callout arearefs="CO7-1">
 <para>Import the <literal>fs</literal> library into our app. Anything that requires
 file io is contained in this module</para>
 </callout>
-<callout arearefs="CO4-2">
+<callout arearefs="CO7-2">
 <para>First parameter of <literal>readFile()</literal> is the filename to read. You can
 check for file existence first if you prefer using <literal>fs.lstat</literal> or
 <literal>fs.access</literal>, but if you generally would just like to read the file,
 just call <literal>readFile</literal> right away. If the file does not exist, it will
 throw an error just the same</para>
 </callout>
-<callout arearefs="CO4-3">
+<callout arearefs="CO7-3">
 <para>Second parameter of <literal>readFile</literal> is the encoding, we simply set it
 to utf-8</para>
 </callout>
-<callout arearefs="CO4-4">
+<callout arearefs="CO7-4">
 <para>Third parameter is a callback function. When <literal>readFile</literal> eventually
 finishes actually reading the file, this function will be called. The
 node runtime will pass to our function two things (a) an error object,
@@ -314,13 +478,13 @@ should an error occur and (b) if readFile went ahead without problems,
 all of the contents of <literal>filename</literal> would have been loaded to the <literal>data</literal>
 variable</para>
 </callout>
-<callout arearefs="CO4-5">
+<callout arearefs="CO7-5">
 <para>If the call fails, <literal>err</literal> won&#8217;t be null. Lots of things can cause
 the <literal>readFile()</literal> to fail e.g. if the file is not there, the OS ran out
 of file handles etc. If err isn&#8217;t null, the <literal>if</literal> block will find it
 <emphasis>truthy</emphasis></para>
 </callout>
-<callout arearefs="CO4-6">
+<callout arearefs="CO7-6">
 <para>If the call succeeds, <literal>err</literal> will be null (falsy) and the
 contents of the file would have been loaded into the second parameter
 of our callback function</para>
@@ -355,13 +519,13 @@ const port = process.env.PORT || 3000;
 http.createServer(function(req, res){
   var url = req.url.toUpperCase();
   switch(url) {
-    case "/": <co xml:id="CO5-1"/>
-      openFile('index.html', res); <co xml:id="CO5-2"/>
+    case "/": <co xml:id="CO8-1"/>
+      openFile('index.html', res); <co xml:id="CO8-2"/>
       break;
     case "/ABOUT":
       // were in the about page
       break;
-    default: <co xml:id="CO5-3"/>
+    default: <co xml:id="CO8-3"/>
       // Good place to write a 404 response
     }
 }).listen(port);
@@ -383,15 +547,15 @@ function openFile(filename, res) {
 }</screen>
 </example>
 <calloutlist>
-<callout arearefs="CO5-1">
+<callout arearefs="CO8-1">
 <para>The user went to the home page, the "/" represents the document
 root of our web app</para>
 </callout>
-<callout arearefs="CO5-2">
+<callout arearefs="CO8-2">
 <para>Call our <literal>openFile()</literal> function. We&#8217;ll pass two parameters (a) the
 name of the html file to open and (b) the response object</para>
 </callout>
-<callout arearefs="CO5-3">
+<callout arearefs="CO8-3">
 <para>If we get to this part of the switch, that means the user typed a
 URL address that we don&#8217;t intend to respond to. This is a good place
 to put a <emphasis>404 Page Not Found error</emphasis>.</para>

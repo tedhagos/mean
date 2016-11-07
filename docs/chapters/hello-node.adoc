@@ -1,7 +1,174 @@
 == Hello World
 
+A web application written in node, will need to create a server,
+specifically an HTTP server. The code listing below shows the basic
+steps in creating such as a server
 
-- Basic structure
+.Simple Web server
+====
+....
+const http = require('http'); // <1>
+
+const app = http.createServer(fnWhenSomethingConnects); <2> <3>
+app.listen(3000); // <4> <5>
+....
+====
+<1> `http` is a built-in module that comes with node. A module is
+basically a Javascript source file that contains specific
+functionality. In this case, the http module contains all the codes we
+need in order to listen to incoming HTTP request and also respond to
+these request. When you want to use a module, you need to `require` it
+inside your app and assign it to a variable. Well, in this case, I
+assigned it to a constant because I don't intend to make anymore
+changes to `http` after I've defined it
+
+<2> `createServer()` is a method of the http object. It's the one
+responsible for, well, creating an HTTP server. This method returns an
+instance of an HTTP server
+
+<3> `fnWhenSomethingConnects`. This is a function that we haven't
+defined it, but we will very shorty. When an http client e.g. a web browser, tries to connect
+to our server, this function will be called
+
+<4> `listen`. This is a method of an HTTP server, it listens to
+incoming HTTP requests
+
+<5> `3000`. The port number I chose. You can choose another number,
+preferably higher than 1024. This means that our server will listen
+only on port 3000. So any client who wants to talk to our server, will
+need to make a request like this `http://localhost:3000`
+
+NOTE: `const` keyword is available only on ES6. The node version I am
+using for all the examples in this book is v6.3.1, it perfectly
+capable of understanding ES6 syntax
+
+WARNING: Using port numbers lower than 1024 might require that you run
+your node process as a superuser (root). These ports are privileged
+ports in *NIX systems
+
+You cannot run the code as it stands right now because we haven't
+defined `fnWhenSomethingConnects`, so let's define that now. We'll
+make it simple and return a very uninspired hello world. 
+
+.fnWhenSomethingConnects
+====
+....
+function fnWhenSomethingConnects(request, response) { // <1> <2>
+  
+  response.writeHead(200, {'Content-Type':'text/html'}); // <3> <4> <5>
+  response.write("<html><h1>Hello World</h1></html>"); // <6>
+  response.end(); // <7>
+
+} 
+....
+====
+
+<1> The HTTP `request` object, together with the `response` object are
+passed to us when a client tries to connect to our application. The
+request object contains quite a lot of information e.g. the URL that
+the client invoked or any information that the client passed to the
+request like form data for example
+
+<2> This is an HTTP `response` object. This is what we will use to
+communicate back to the client. When you want the user to see
+something, you simply write that information to the response object
+
+<3> `writeHead` will write the header information of our response. It
+has 2 parameters (1) HTTP response and (2) the MIME type
+
+<4> `200` is the HTTP response code which means the client request was
+est. This is the `OK` status of HTTP
+
+<5> Were just sending a simple HTML type of response. You can send
+other types like JSON or plain text
+
+<6> The `write` method takes in a String argument. Whatever you put in
+this string parameter will be sent to the client
+
+<7> The `response` object is a stream. Calling the `end` method
+signals to the client that we are done composing our response and that
+the client can start rendering the same response on his end. If you
+fail to call the `end` method, the client will wait forever (or until
+it times out) for a response from the server
+
+
+Below is the full code listing for our simple web server
+
+.simpleWebServer.js
+====
+....
+const http = require('http');
+
+const app = http.createServer(fnWhenSomethingConnects);
+app.listen(3000);
+
+function fnWhenSomethingConnects(request, response) {
+
+  response.writeHead(200, {'Content-Type':'text/html'}); 
+  response.write("<html><h1>Hello World</h1></html>"); 
+  response.end(); 
+
+}
+....
+====
+
+To run this code, type the following on the command line
+
+....
+node simpleWebServer.js
+....
+
+Launch a browser and navigate to http://localhost:3000
+
+=== Refactoring SimpleWebServer 
+
+While our app is now functional and can respond to simple requests, it
+is not written in idiomatic node. It is not in the form that you might
+see often on code examples from the web e.g. stackoverflow. It is
+readable and verbose, which is not necessarily a bad thing, but I
+think we need to familiarize ourselves with how other programmers are
+writing their codes. I've refactored the code example. It is shown on
+the listing below
+
+.simpleWebServer v2
+====
+....
+const http = require('http');
+
+const app = http.createServer(function (req,res){ // <1>
+
+  response.writeHead(200, {'Content-Type':'text/html'}); 
+  response.write("<html><h1>Hello World</h1></html>"); 
+  response.end(); 
+
+});
+
+app.listen(3000, function(){ // <2>
+  console.log("Started the App");
+});
+
+....
+====
+
+<1> The named function `fnWhenSomethingConnects` has disappeared. In
+its place instead is the full literal defintion of the function. You
+will also notice that the function, right now, has no name. This is
+what other programmers refer to as an anonymous function. I don't
+agree with this because I really think we should always name our
+functions, but I'm just trying to illustrate how other programmer's
+might code, so let's let it slide for now 
+
+<2> The `listen` method now gets a second parameter. The anonymous
+function will be called once our server has successfully bound the
+socket, which means it has completed the startup process and is now
+actively listening on port 3000
+
+
+=== Exercises 
+
+
+
+
 - Response
 - Request
 - How to get to the body
