@@ -2,6 +2,24 @@
 
 === NoSQL and RDBMS
 
+If you are new to NoSQL, it might help to see the difference (or
+similarities) between the vocabulary of SQL and mongoDB. The following
+table illustrates some terms in SQL and their counterparts in mongoDB.
+
+.SQL vs mongoDB
+[frame="topbot", options="header"]
+|==============================================
+| SQL         | mongoDB                        
+| database    | database                       
+| table       | collection                     
+| row         | document                       
+| column      | field                          
+| index       | index                          
+| table joins | embedded documents and linking 
+|==============================================
+
+
+
 // === Installation and Config
 include::mongo-installation.adoc[]
 

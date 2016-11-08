@@ -12,12 +12,12 @@
 </personname>
 <email>ted@thelogbox.com</email>
 </author>
-<authorinitials>tgh</authorinitials>
+<authorinitials>TGH</authorinitials>
 <revhistory>
 <revision>
 <revnumber>1.0</revnumber>
 <date>October 2016</date>
-<authorinitials>tgh</authorinitials>
+<authorinitials>TGH</authorinitials>
 </revision>
 </revhistory>
 </info>
@@ -610,7 +610,48 @@ to put a <emphasis>404 Page Not Found error</emphasis>.</para>
 <title>MongoDB</title>
 <section xml:id="_nosql_and_rdbms">
 <title>NoSQL and RDBMS</title>
-
+<simpara>If you are new to NoSQL, it might help to see the difference (or
+similarities) between the vocabulary of SQL and mongoDB. The following
+table illustrates some terms in SQL and their counterparts in mongoDB.</simpara>
+<table frame="topbot" rowsep="1" colsep="1">
+<title>SQL vs mongoDB</title>
+<tgroup cols="2">
+<colspec colname="col_1" colwidth="50*"/>
+<colspec colname="col_2" colwidth="50*"/>
+<thead>
+<row>
+<entry align="left" valign="top">SQL</entry>
+<entry align="left" valign="top">mongoDB</entry>
+</row>
+</thead>
+<tbody>
+<row>
+<entry align="left" valign="top"><simpara>database</simpara></entry>
+<entry align="left" valign="top"><simpara>database</simpara></entry>
+</row>
+<row>
+<entry align="left" valign="top"><simpara>table</simpara></entry>
+<entry align="left" valign="top"><simpara>collection</simpara></entry>
+</row>
+<row>
+<entry align="left" valign="top"><simpara>row</simpara></entry>
+<entry align="left" valign="top"><simpara>document</simpara></entry>
+</row>
+<row>
+<entry align="left" valign="top"><simpara>column</simpara></entry>
+<entry align="left" valign="top"><simpara>field</simpara></entry>
+</row>
+<row>
+<entry align="left" valign="top"><simpara>index</simpara></entry>
+<entry align="left" valign="top"><simpara>index</simpara></entry>
+</row>
+<row>
+<entry align="left" valign="top"><simpara>table joins</simpara></entry>
+<entry align="left" valign="top"><simpara>embedded documents and linking</simpara></entry>
+</row>
+</tbody>
+</tgroup>
+</table>
 </section>
 <section xml:id="_installation_and_config">
 <title>Installation and Config</title>
@@ -790,11 +831,17 @@ databases of our own just yet. We&#8217;ll do just that in the next section.</si
 <section xml:id="_creating_collections_and_documents">
 <title>Creating Collections and Documents</title>
 <simpara>If we were dealing with a relational database, before we can start
-adding a record, we need to (1) create the datbase first (2) create
+adding a record, we need to (1) create the database first then (2) create
 the tables and define its schema, only then can we (3) insert our
 first record.</simpara>
-<simpara>MongoDB is a schema-less database, we don&#8217;t have to pre-define
-anything before we can start adding records.</simpara>
+<simpara>In mongoDB, we don&#8217;t need to create a pre-defined schema because mongo
+databases do not enforce schemas. Schemas are optional, you may or may
+not want to use them. If ever you will use schemas, they are not
+usually defined on the database level but are rather enforced at an
+application level (nodejs). So we can just go ahead and create a
+record (document) right away.</simpara>
+<simpara>The command snippet below shows a session where we create a database
+named <emphasis>crm</emphasis>.</simpara>
 <literallayout class="monospaced">mongo <co xml:id="CO12-1"/>
 &gt; show databases <co xml:id="CO12-2"/>
 &gt; use crm; <co xml:id="CO12-3"/>
@@ -827,45 +874,74 @@ very helpful and returns to us the number of records inside the
 <emphasis>clients</emphasis> collection anyway (which is zero of course)</para>
 </callout>
 </calloutlist>
-<simpara>Explain that we don&#8217;t have to create the database or the table or any
-document before hand. Explain that a mongoDB is structureless
-database. And we only create these things we have actually inserted
-the first document.</simpara>
-<itemizedlist>
-<listitem>
-<simpara>Starting the server</simpara>
-</listitem>
-<listitem>
-<simpara>Connecting a client</simpara>
-</listitem>
-<listitem>
-<simpara>Listing all the databases</simpara>
-</listitem>
-<listitem>
-<simpara>Creating a database</simpara>
-</listitem>
-<listitem>
-<simpara>Create a collection</simpara>
-</listitem>
-<listitem>
-<simpara>Creating a document</simpara>
-</listitem>
-<listitem>
-<simpara>Finding a document</simpara>
-</listitem>
-<listitem>
-<simpara>Updating a document</simpara>
-</listitem>
-<listitem>
-<simpara>Deleting a document</simpara>
-</listitem>
-<listitem>
-<simpara>quit the client session</simpara>
-</listitem>
-<listitem>
-<simpara>quite the server</simpara>
-</listitem>
-</itemizedlist>
+<simpara>Let&#8217;s continue our session with the mongoDB REPL and try to insert
+some documents on the <emphasis>clients</emphasis> collection.</simpara>
+<literallayout class="monospaced">&gt; db.clients.insert({name: “Air BnB”, contact_owner: “Ted Hagos”,
+ contacts: [{name: “John Doe”, email: “johndoe@gmail.com”},
+ {name:”Jane Doe”, email:”janedoe@gmail.com”}], projects:
+ [{name:”project1”, status: “not moving”}, {name: “project2”}]})</literallayout>
+<simpara>The command snippet above maybe a bit ugly to look at, but if you
+inspect it closely, the parameter of the <literal>insert</literal> method is a JSON
+object, mongoDB documents are actually JSON objects.</simpara>
+<simpara>Alternatively,we can create documents this way</simpara>
+<literallayout class="monospaced">&gt; var doc = {} <co xml:id="CO13-1"/>
+&gt; doc.name = “Air BnB” <co xml:id="CO13-2"/>
+&gt; doc.contact_owner = “Ted Hagos” <co xml:id="CO13-3"/>
+&gt; doc.contacts = [{name: “John Doe”, email: “johndoe@gmail.com”},
+  {name:“Jane Doe”, email:“janedoe@gmail.com”}] <co xml:id="CO13-4"/>
+&gt; doc.projects = [{name: “project1”, status: “not moving”}, {name:
+  “project2”, status: “not moving”}] <co xml:id="CO13-5"/>
+&gt; db.clients.save(doc) <co xml:id="CO13-6"/></literallayout>
+<calloutlist>
+<callout arearefs="CO13-1">
+<para>Create an empty JSON object and assign it variable <literal>doc</literal></para>
+</callout>
+<callout arearefs="CO13-2">
+<para>Create a property named <literal>name</literal>, attach it to the <literal>doc</literal> object. We
+assign it a value of "Air BnB"</para>
+</callout>
+<callout arearefs="CO13-3">
+<para>Create a property named <literal>contact_owner</literal>, we assign it a string
+value of "Ted Hagos"</para>
+</callout>
+<callout arearefs="CO13-4">
+<para>Create a property named <literal>contacts</literal>, this is an array object which
+contains two JSON elements</para>
+</callout>
+<callout arearefs="CO13-5">
+<para>Create a property named <literal>projects</literal>, like <literal>contacts</literal>, this is also
+an array object</para>
+</callout>
+<callout arearefs="CO13-6">
+<para>The <literal>save</literal> method performs an insert action as well</para>
+</callout>
+</calloutlist>
+<simpara>MongoDB documents are just JSON objects, so you can pretty much
+compose the documents as object literals.</simpara>
+</section>
+<section xml:id="_finding_a_document">
+<title>Finding a document</title>
+
+</section>
+<section xml:id="_updating_a_document">
+<title>Updating a document</title>
+
+</section>
+<section xml:id="_deleting_a_document">
+<title>Deleting a document</title>
+
+</section>
+<section xml:id="_quitting_the_mongo_repl">
+<title>Quitting the mongo REPL</title>
+
+</section>
+<section xml:id="_quitting_the_mongod_server">
+<title>Quitting the mongod server</title>
+
+</section>
+<section xml:id="_sql_commands_vs_mongodb_commands">
+<title>SQL commands vs mongoDB commands</title>
+
 </section>
 </section>
 </chapter>

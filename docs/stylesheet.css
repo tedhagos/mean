@@ -1,4 +1,18 @@
 
+table.informaltable, table.table {
+  border-collapse: collapse;
+  margin-bottom: 2em
+}
+table.informaltable, table.table,
+  table.informaltable th, table.informaltable td,
+  table.table th, table.table th {
+    border: 1px solid #CACACA;
+  }
+  table.informaltable td, table.table td {
+    vertical-align:middle;
+    padding: 4px
+  }
+
 .calloutlist table tbody tr td {
   vertical-align:middle !important;
 }
