@@ -1,0 +1,145 @@
+=== Installation and Config
+
+There are a couple of ways to install MongoDB on whatever platform you
+are using. We can use (a) precompiled installer binaries (b) use our
+platform's package manager e.g. brew, apt-get, yum, chocolatey etc. or
+ (c) we can compile it from source. For our purposes, we will simply
+ use the pre-compiled binaries.
+
+==== Linux and OSX
+
+Launch a browser window then head over to http://mongodb.org[MongoDB
+website]. There should be a download link on the front page, click and
+follow that link. At the time of writing, there are two editions of
+MongoDB that can be downloaded, these are (a) Community server, this
+is free for use version. It is the one we will download, and
+(b) Enterprise server, this is the commercial version.  
+
+1. Choose the community server edition
+2. Choose either Linux or OSX
+3. Pay attention to the version dropdown list. If you are on Linux,
+   there are a couple of choices on the dropdown list. Do not be so
+   quick to hit the download button. Make sure that your Linux distro
+   is the one selected on the dropdown
+4. Click the download button
+5. At the time of this writing, the Linux and OSX installers comes as
+   a _tgz_ file. Use the tar archiver tool to expand the installer
+   `tar -xzvf mongodb-osxOrLinux-x86_64-XXX.tgz` 
+6. The expanded contains a directory where all the executables for
+   mongodb are located. You need to include this in your system path.
+   This can be accomplished by appending  the following lines to your
+   startup login script (`~/.bashrc` for Linux and `~/.bash_profile`
+   for macOS)
++
+----
+set MONGO_HOME=/path/where/you/extracted/mongo/installer
+set PATH=$MONGO_HOME/bin:$PATH
+----
++
+7. Exit command line shell and start another command line session, so
+   that your changes can take effect
+8. Create the database file for mongoDB
++
+----
+sudo mkdir /data/db
+sudo chown `id -u` /data/db # <1>
+----
+<1> `id -u` evaluates to the currently logged in user. Please be
+careful when writing this command, note that the `id -u` is
+surrounded by backticks and not single quotes
++
+9. Start the mongoDB server using the command
++
+----
+mongod
+----
++
+This is a server process, so your command line session won't go
+back to the shell prompt. To exit this process, press `CTRL+C`, but
+don't do it just yet because you need this process running if you
+want to communicate with the database. Terminate it when you're
+done with the database tasks
+10. To start working on a database, launch the mongo client. You may
+    need to open another command line session for this
++
+----
+mongo
+> # <1>
+----
+<1> This the mongoDB prompt, it looks the same as the node REPL, and
+like it, it is also an interactive prompt for Javascript
+
+NOTE: If you installed the mongo db file in a location other than
+`/data/db`, you need to use the `--dbpath` option when starting the
+mongod server e.g. `mongod --dbpath /path/to/data/db`
+
+
+==== Windows
+
+The mongoDB installer comes in 2 editions for Windows, at the time of
+this writing. These are (a) *MongoDB for Windows 64-bit* which runs
+only on Windows Server 2008 R2, Windows 7 64-bit, and newer versions
+of Windows. This build takes advantage of recent enhancements to the
+Windows Platform and cannot operate on older versions of Windows; and
+(b) *MongoDB for Windows 64-bit Legacy* which  runs on Windows Vista,
+and Windows Server 2008 and does not include recent performance
+enhancements. You need to find out which Windows version you are
+running. The following commands should help you find out. Launch
+either a `cmd` window or Powershell
+
+....
+wmic os get caption
+wmic os get osarchitecture
+....
+
+Launch a browser window then head over to http://mongodb.org[MongoDB
+website]. There should be a download link on the front page, click and
+follow that link. At the time of writing, there are two editions of
+MongoDB that can be downloaded, these are (a) Community server, this
+is free for use version. It is the one we will download, and
+(b) Enterprise server, this is the commercial version.  
+
+1. Download the appropriate edition of mongoDB for your platform,
+   please note that the 64-bit installer will not work on 32-bit
+   platforms
+2. Go to the location where you downloaded `.msi` file, usually, this
+   is the _Downloads_ folder
+3. Double click the `.msi` file and follow the installation wizard
++
+NOTE: These instructions assume that you have installed MongoDB to
+C:\Program Files\MongoDB\Server\x.x\.
++
+4. Open and Administrator command prompt. Press the `Win` key, type
+   `cmd` and press `CTRL+Shift+Enter` to run the command prompt as an
+   Administrator
+5. Create the database and log file for mongoDB
++
+----
+mkdir c:\data\db
+mkdir c:\data\log
+----
++
+6. Start the mongoDB server
++
+----
+"C:\Program Files\MongoDB\Server\x.x\bin\mongod.exe"
+----
++
+This is a server process, you won't go back to Windows command line
+prompt as long as the server process is running. If you want to
+terminate it, you can press `CTRL+C`, but don't do it it just yet.
+Terminate it when you no longer need the database. We still need it
+because on the next step, we will connect to the mongoDB server via
+the mongo client
+7. Launch another `cmd` window and connect to the server
++
+----
+"C:\Program Files\MongoDB\Server\x.x\bin\mongo.exe
+> # <1>
+----
+<1> This is the chevron prompt of mongo, it looks the same as the node
+REPL prompt, and like it, it also evaluates Javascript expressions,
+statements etc
+
+
+

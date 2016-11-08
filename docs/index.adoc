@@ -40,3 +40,15 @@ include::chapters/logging.adoc[]
 include::chapters/introduction-angularjs.adoc[]
 include::chapters/authentication.adoc[]
 
+== Notes
+
+- [*] Creating an HTTPS server
+- [ ] Passport Google and Facebook Strategy
+- [ ] Mustache templates/Handlebars templates
+- [ ] Polymer
+- [ ] Material Design
+- [ ] REST discussion
+- [ ] Unit testing
+  * [ ]  Unit testing express endpoints
+
+

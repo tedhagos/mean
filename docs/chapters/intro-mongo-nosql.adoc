@@ -2,55 +2,13 @@
 
 === NoSQL and RDBMS
 
-=== Installation and Config
+// === Installation and Config
+include::mongo-installation.adoc[]
 
-There are a couple of ways to install MongoDB on whatever platform you
-are using. We can use (a) precompiled installer binaries (b) use our
-platform's package manager e.g. brew, apt-get, yum, chocolatey etc. or
- (c) we can compile it from source. For our purposes, we will simply
- use the pre-compiled binaries.
-
-==== Linux and OSX
-
-Launch a browser window then head over to http://mongodb.org[MongoDB
-website]. There should be a download link on the front page, click and
-follow that link. At the time of writing, there are two editions of
-MongoDB that can be downloaded, these are (a) Community server, this
-is free for use version. It is the one we will download, and
-(b) Enterprise server, this is the commercial version.  
-
-1. Choose the community server edition
-2. Choose either Linux or OSX
-3. Pay attention to the version dropdown list. If you are on Linux,
-   there are a couple of choices on the dropdown list. Do not be so
-   quick to hit the download button. Make sure that your Linux distro
-   is the one selected on the dropdown
-4. Click the download button
-5. At the time of this writing, the Linux and OSX installers comes as
-   a _tgz_ file. Use the tar archiver tool to expand the installer
-   `tar -xzvf mongodb-osxOrLinux-x86_64-XXX.tgz` 
+// === Basic Usage
+include::mongo-basic-usage.adoc[]
 
 
-
-Move it, include it on your system path
-create /data/db file
-sudo chown -R `id -u` /data/db
-
-mongod
-mongo
-
-
-
-
-==== Windows
-
-=== Inserting documents
-
-=== Finding documents
-
-=== Deleting documents
-
-=== Updating documents
 
 
 

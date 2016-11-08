@@ -1,43 +1,64 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><title>7.2. Installation and Config</title><link rel="stylesheet" type="text/css" href="stylesheet.css" /><meta name="generator" content="DocBook XSL Stylesheets V1.79.1" /><link rel="home" href="index.html" title="Programming using the MEAN stack" /><link rel="up" href="mongodb.html" title="Chapter 7. MongoDB" /><link rel="prev" href="mongodb.html" title="Chapter 7. MongoDB" /><link rel="next" href="inserting_documents.html" title="7.3. Inserting documents" /></head><body><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">7.2. Installation and Config</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="mongodb.html">Prev</a> </td><th width="60%" align="center">Chapter 7. MongoDB</th><td width="20%" align="right"> <a accesskey="n" href="inserting_documents.html">Next</a></td></tr></table><hr /></div><div class="section"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="installation_and_config"></a>7.2. Installation and Config</h2></div></div></div>
-
-<p>There are a couple of ways to install MongoDB on whatever platform you
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><title>7.2. Installation and Config</title><link rel="stylesheet" type="text/css" href="stylesheet.css" /><meta name="generator" content="DocBook XSL Stylesheets V1.79.1" /><link rel="home" href="index.html" title="Programming using the MEAN stack" /><link rel="up" href="mongodb.html" title="Chapter 7. MongoDB" /><link rel="prev" href="mongodb.html" title="Chapter 7. MongoDB" /><link rel="next" href="basic_usage.html" title="7.3. Basic Usage" /></head><body><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">7.2. Installation and Config</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="mongodb.html">Prev</a> </td><th width="60%" align="center">Chapter 7. MongoDB</th><td width="20%" align="right"> <a accesskey="n" href="basic_usage.html">Next</a></td></tr></table><hr /></div><div class="section"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="installation_and_config"></a>7.2. Installation and Config</h2></div></div></div><p>There are a couple of ways to install MongoDB on whatever platform you
 are using. We can use (a) precompiled installer binaries (b) use our
 platform’s package manager e.g. brew, apt-get, yum, chocolatey etc. or
  (c) we can compile it from source. For our purposes, we will simply
- use the pre-compiled binaries.</p>
-<div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="linux_and_osx_2"></a>7.2.1. Linux and OSX</h3></div></div></div>
-
-<p>Launch a browser window then head over to <a class="ulink" href="http://mongodb.org" target="_top">MongoDB
+ use the pre-compiled binaries.</p><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="linux_and_osx_2"></a>7.2.1. Linux and OSX</h3></div></div></div><p>Launch a browser window then head over to <a class="link" href="http://mongodb.org" target="_top">MongoDB
 website</a>. There should be a download link on the front page, click and
 follow that link. At the time of writing, there are two editions of
 MongoDB that can be downloaded, these are (a) Community server, this
 is free for use version. It is the one we will download, and
-(b) Enterprise server, this is the commercial version.</p>
-<div class="orderedlist"><ol class="orderedlist" type="1"><li class="listitem">
-Choose the community server edition
-</li><li class="listitem">
-Choose either Linux or OSX
-</li><li class="listitem">
-Pay attention to the version dropdown list. If you are on Linux,
+(b) Enterprise server, this is the commercial version.</p><div class="orderedlist"><ol class="orderedlist" type="1"><li class="listitem">Choose the community server edition</li><li class="listitem">Choose either Linux or OSX</li><li class="listitem">Pay attention to the version dropdown list. If you are on Linux,
 there are a couple of choices on the dropdown list. Do not be so
 quick to hit the download button. Make sure that your Linux distro
-is the one selected on the dropdown
-</li><li class="listitem">
-Click the download button
-</li><li class="listitem">
-At the time of this writing, the Linux and OSX installers comes as
+is the one selected on the dropdown</li><li class="listitem">Click the download button</li><li class="listitem">At the time of this writing, the Linux and OSX installers comes as
 a <span class="emphasis"><em>tgz</em></span> file. Use the tar archiver tool to expand the installer
-<code class="literal">tar -xzvf mongodb-osxOrLinux-x86_64-XXX.tgz</code>
-</li></ol></div>
-<p>Move it, include it on your system path
-create /data/db file
-sudo chown -R <code class="literal">id -u</code> /data/db</p>
-<p>mongod
-mongo</p>
-</div>
-<div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="windows_2"></a>7.2.2. Windows</h3></div></div></div>
-
-
-</div>
-</div><div class="navfooter"><hr /><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="mongodb.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="mongodb.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="inserting_documents.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">Chapter 7. MongoDB </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> 7.3. Inserting documents</td></tr></table></div></body></html>
+<code class="literal">tar -xzvf mongodb-osxOrLinux-x86_64-XXX.tgz</code></li><li class="listitem"><p class="simpara">The expanded contains a directory where all the executables for
+mongodb are located. You need to include this in your system path.
+This can be accomplished by appending  the following lines to your
+startup login script (<code class="literal">~/.bashrc</code> for Linux and <code class="literal">~/.bash_profile</code>
+for macOS)</p><pre class="screen">set MONGO_HOME=/path/where/you/extracted/mongo/installer
+set PATH=$MONGO_HOME/bin:$PATH</pre></li><li class="listitem">Exit command line shell and start another command line session, so
+that your changes can take effect</li><li class="listitem"><p class="simpara">Create the database file for mongoDB</p><pre class="screen">sudo mkdir /data/db
+sudo chown `id -u` /data/db <a id="CO9-1"></a><span><img src="images/callouts/1.png" alt="1" border="0" /></span></pre><div class="calloutlist"><table border="0" summary="Callout list"><tr><td width="5%" valign="top" align="left"><p><a href="#CO9-1"><span><img src="images/callouts/1.png" alt="1" border="0" /></span></a> </p></td><td valign="top" align="left"><p><code class="literal">id -u</code> evaluates to the currently logged in user. Please be
+careful when writing this command, note that the <code class="literal">id -u</code> is
+surrounded by backticks and not single quotes</p></td></tr></table></div></li><li class="listitem"><p class="simpara">Start the mongoDB server using the command</p><pre class="screen">mongod</pre><p class="simpara">This is a server process, so your command line session won’t go
+back to the shell prompt. To exit this process, press <code class="literal">CTRL+C</code>, but
+don’t do it just yet because you need this process running if you
+want to communicate with the database. Terminate it when you’re
+done with the database tasks</p></li><li class="listitem"><p class="simpara">To start working on a database, launch the mongo client. You may
+need to open another command line session for this</p><pre class="screen">mongo
+&gt; <a id="CO10-1"></a><span><img src="images/callouts/1.png" alt="1" border="0" /></span></pre><div class="calloutlist"><table border="0" summary="Callout list"><tr><td width="5%" valign="top" align="left"><p><a href="#CO10-1"><span><img src="images/callouts/1.png" alt="1" border="0" /></span></a> </p></td><td valign="top" align="left"><p>This the mongoDB prompt, it looks the same as the node REPL, and
+like it, it is also an interactive prompt for Javascript</p></td></tr></table></div></li></ol></div><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note"><tr><td rowspan="2" align="center" valign="top" width="25"><img alt="[Note]" src="images/note.png" /></td><th align="left">Note</th></tr><tr><td align="left" valign="top"><p>If you installed the mongo db file in a location other than
+<code class="literal">/data/db</code>, you need to use the <code class="literal">--dbpath</code> option when starting the
+mongod server e.g. <code class="literal">mongod --dbpath /path/to/data/db</code></p></td></tr></table></div></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="windows_2"></a>7.2.2. Windows</h3></div></div></div><p>The mongoDB installer comes in 2 editions for Windows, at the time of
+this writing. These are (a) <span class="strong"><strong>MongoDB for Windows 64-bit</strong></span> which runs
+only on Windows Server 2008 R2, Windows 7 64-bit, and newer versions
+of Windows. This build takes advantage of recent enhancements to the
+Windows Platform and cannot operate on older versions of Windows; and
+(b) <span class="strong"><strong>MongoDB for Windows 64-bit Legacy</strong></span> which  runs on Windows Vista,
+and Windows Server 2008 and does not include recent performance
+enhancements. You need to find out which Windows version you are
+running. The following commands should help you find out. Launch
+either a <code class="literal">cmd</code> window or Powershell</p><pre class="literallayout">wmic os get caption
+wmic os get osarchitecture</pre><p>Launch a browser window then head over to <a class="link" href="http://mongodb.org" target="_top">MongoDB
+website</a>. There should be a download link on the front page, click and
+follow that link. At the time of writing, there are two editions of
+MongoDB that can be downloaded, these are (a) Community server, this
+is free for use version. It is the one we will download, and
+(b) Enterprise server, this is the commercial version.</p><div class="orderedlist"><ol class="orderedlist" type="1"><li class="listitem">Download the appropriate edition of mongoDB for your platform,
+please note that the 64-bit installer will not work on 32-bit
+platforms</li><li class="listitem">Go to the location where you downloaded <code class="literal">.msi</code> file, usually, this
+is the <span class="emphasis"><em>Downloads</em></span> folder</li><li class="listitem"><p class="simpara">Double click the <code class="literal">.msi</code> file and follow the installation wizard</p><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note"><tr><td rowspan="2" align="center" valign="top" width="25"><img alt="[Note]" src="images/note.png" /></td><th align="left">Note</th></tr><tr><td align="left" valign="top"><p>These instructions assume that you have installed MongoDB to
+C:\Program Files\MongoDB\Server\x.x\.</p></td></tr></table></div></li><li class="listitem">Open and Administrator command prompt. Press the <code class="literal">Win</code> key, type
+<code class="literal">cmd</code> and press <code class="literal">CTRL+Shift+Enter</code> to run the command prompt as an
+Administrator</li><li class="listitem"><p class="simpara">Create the database and log file for mongoDB</p><pre class="screen">mkdir c:\data\db
+mkdir c:\data\log</pre></li><li class="listitem"><p class="simpara">Start the mongoDB server</p><pre class="screen">"C:\Program Files\MongoDB\Server\x.x\bin\mongod.exe"</pre><p class="simpara">This is a server process, you won’t go back to Windows command line
+prompt as long as the server process is running. If you want to
+terminate it, you can press <code class="literal">CTRL+C</code>, but don’t do it it just yet.
+Terminate it when you no longer need the database. We still need it
+because on the next step, we will connect to the mongoDB server via
+the mongo client</p></li><li class="listitem"><p class="simpara">Launch another <code class="literal">cmd</code> window and connect to the server</p><pre class="screen">"C:\Program Files\MongoDB\Server\x.x\bin\mongo.exe
+&gt; <a id="CO11-1"></a><span><img src="images/callouts/1.png" alt="1" border="0" /></span></pre><div class="calloutlist"><table border="0" summary="Callout list"><tr><td width="5%" valign="top" align="left"><p><a href="#CO11-1"><span><img src="images/callouts/1.png" alt="1" border="0" /></span></a> </p></td><td valign="top" align="left"><p>This is the chevron prompt of mongo, it looks the same as the node
+REPL prompt, and like it, it also evaluates Javascript expressions,
+statements etc</p></td></tr></table></div></li></ol></div></div></div><div class="navfooter"><hr /><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="mongodb.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="mongodb.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="basic_usage.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">Chapter 7. MongoDB </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> 7.3. Basic Usage</td></tr></table></div></body></html>

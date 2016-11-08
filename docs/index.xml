@@ -12,12 +12,12 @@
 </personname>
 <email>ted@thelogbox.com</email>
 </author>
-<authorinitials>TGH</authorinitials>
+<authorinitials>tgh</authorinitials>
 <revhistory>
 <revision>
 <revnumber>1.0</revnumber>
 <date>October 2016</date>
-<authorinitials>TGH</authorinitials>
+<authorinitials>tgh</authorinitials>
 </revision>
 </revhistory>
 </info>
@@ -648,35 +648,228 @@ is the one selected on the dropdown</simpara>
 a <emphasis>tgz</emphasis> file. Use the tar archiver tool to expand the installer
 <literal>tar -xzvf mongodb-osxOrLinux-x86_64-XXX.tgz</literal></simpara>
 </listitem>
+<listitem>
+<simpara>The expanded contains a directory where all the executables for
+mongodb are located. You need to include this in your system path.
+This can be accomplished by appending  the following lines to your
+startup login script (<literal>~/.bashrc</literal> for Linux and <literal>~/.bash_profile</literal>
+for macOS)</simpara>
+<screen>set MONGO_HOME=/path/where/you/extracted/mongo/installer
+set PATH=$MONGO_HOME/bin:$PATH</screen>
+</listitem>
+<listitem>
+<simpara>Exit command line shell and start another command line session, so
+that your changes can take effect</simpara>
+</listitem>
+<listitem>
+<simpara>Create the database file for mongoDB</simpara>
+<screen>sudo mkdir /data/db
+sudo chown `id -u` /data/db <co xml:id="CO9-1"/></screen>
+<calloutlist>
+<callout arearefs="CO9-1">
+<para><literal>id -u</literal> evaluates to the currently logged in user. Please be
+careful when writing this command, note that the <literal>id -u</literal> is
+surrounded by backticks and not single quotes</para>
+</callout>
+</calloutlist>
+</listitem>
+<listitem>
+<simpara>Start the mongoDB server using the command</simpara>
+<screen>mongod</screen>
+<simpara>This is a server process, so your command line session won&#8217;t go
+back to the shell prompt. To exit this process, press <literal>CTRL+C</literal>, but
+don&#8217;t do it just yet because you need this process running if you
+want to communicate with the database. Terminate it when you&#8217;re
+done with the database tasks</simpara>
+</listitem>
+<listitem>
+<simpara>To start working on a database, launch the mongo client. You may
+need to open another command line session for this</simpara>
+<screen>mongo
+&gt; <co xml:id="CO10-1"/></screen>
+<calloutlist>
+<callout arearefs="CO10-1">
+<para>This the mongoDB prompt, it looks the same as the node REPL, and
+like it, it is also an interactive prompt for Javascript</para>
+</callout>
+</calloutlist>
+</listitem>
 </orderedlist>
-<simpara>Move it, include it on your system path
-create /data/db file
-sudo chown -R <literal>id -u</literal> /data/db</simpara>
-<simpara>mongod
-mongo</simpara>
+<note>
+<simpara>If you installed the mongo db file in a location other than
+<literal>/data/db</literal>, you need to use the <literal>--dbpath</literal> option when starting the
+mongod server e.g. <literal>mongod --dbpath /path/to/data/db</literal></simpara>
+</note>
 </section>
 <section xml:id="windows_2">
 <title>Windows</title>
-
+<simpara>The mongoDB installer comes in 2 editions for Windows, at the time of
+this writing. These are (a) <emphasis role="strong">MongoDB for Windows 64-bit</emphasis> which runs
+only on Windows Server 2008 R2, Windows 7 64-bit, and newer versions
+of Windows. This build takes advantage of recent enhancements to the
+Windows Platform and cannot operate on older versions of Windows; and
+(b) <emphasis role="strong">MongoDB for Windows 64-bit Legacy</emphasis> which  runs on Windows Vista,
+and Windows Server 2008 and does not include recent performance
+enhancements. You need to find out which Windows version you are
+running. The following commands should help you find out. Launch
+either a <literal>cmd</literal> window or Powershell</simpara>
+<literallayout class="monospaced">wmic os get caption
+wmic os get osarchitecture</literallayout>
+<simpara>Launch a browser window then head over to <link xl:href="http://mongodb.org">MongoDB
+website</link>. There should be a download link on the front page, click and
+follow that link. At the time of writing, there are two editions of
+MongoDB that can be downloaded, these are (a) Community server, this
+is free for use version. It is the one we will download, and
+(b) Enterprise server, this is the commercial version.</simpara>
+<orderedlist numeration="arabic">
+<listitem>
+<simpara>Download the appropriate edition of mongoDB for your platform,
+please note that the 64-bit installer will not work on 32-bit
+platforms</simpara>
+</listitem>
+<listitem>
+<simpara>Go to the location where you downloaded <literal>.msi</literal> file, usually, this
+is the <emphasis>Downloads</emphasis> folder</simpara>
+</listitem>
+<listitem>
+<simpara>Double click the <literal>.msi</literal> file and follow the installation wizard</simpara>
+<note>
+<simpara>These instructions assume that you have installed MongoDB to
+C:\Program Files\MongoDB\Server\x.x\.</simpara>
+</note>
+</listitem>
+<listitem>
+<simpara>Open and Administrator command prompt. Press the <literal>Win</literal> key, type
+<literal>cmd</literal> and press <literal>CTRL+Shift+Enter</literal> to run the command prompt as an
+Administrator</simpara>
+</listitem>
+<listitem>
+<simpara>Create the database and log file for mongoDB</simpara>
+<screen>mkdir c:\data\db
+mkdir c:\data\log</screen>
+</listitem>
+<listitem>
+<simpara>Start the mongoDB server</simpara>
+<screen>"C:\Program Files\MongoDB\Server\x.x\bin\mongod.exe"</screen>
+<simpara>This is a server process, you won&#8217;t go back to Windows command line
+prompt as long as the server process is running. If you want to
+terminate it, you can press <literal>CTRL+C</literal>, but don&#8217;t do it it just yet.
+Terminate it when you no longer need the database. We still need it
+because on the next step, we will connect to the mongoDB server via
+the mongo client</simpara>
+</listitem>
+<listitem>
+<simpara>Launch another <literal>cmd</literal> window and connect to the server</simpara>
+<screen>"C:\Program Files\MongoDB\Server\x.x\bin\mongo.exe
+&gt; <co xml:id="CO11-1"/></screen>
+<calloutlist>
+<callout arearefs="CO11-1">
+<para>This is the chevron prompt of mongo, it looks the same as the node
+REPL prompt, and like it, it also evaluates Javascript expressions,
+statements etc</para>
+</callout>
+</calloutlist>
+</listitem>
+</orderedlist>
 </section>
 </section>
-<section xml:id="inserting_documents">
-<title>Inserting documents</title>
-
+<section xml:id="basic_usage">
+<title>Basic Usage</title>
+<simpara><emphasis role="strong">Starting the server</emphasis>. On a terminal window, start the server by running the <literal>mongod</literal>
+executable</simpara>
+<screen>mongod</screen>
+<simpara><emphasis role="strong">Connecting a client</emphasis>. On another terminal window, start the mongo
+client by running</simpara>
+<screen>mongo</screen>
+<simpara>You should get the chevon prompt of mongodb after launching the client
+successfully.</simpara>
+<simpara><emphasis role="strong">To list all the databases</emphasis>, use the command</simpara>
+<screen>&gt; show databases</screen>
+<simpara>At this point, you won&#8217;t see much because we haven&#8217;t created any
+databases of our own just yet. We&#8217;ll do just that in the next section.</simpara>
+<section xml:id="creating_collections_and_documents">
+<title>Creating Collections and Documents</title>
+<simpara>If we were dealing with a relational database, before we can start
+adding a record, we need to (1) create the datbase first (2) create
+the tables and define its schema, only then can we (3) insert our
+first record.</simpara>
+<simpara>MongoDB is a schema-less database, we don&#8217;t have to pre-define
+anything before we can start adding records.</simpara>
+<literallayout class="monospaced">mongo <co xml:id="CO12-1"/>
+&gt; show databases <co xml:id="CO12-2"/>
+&gt; use crm; <co xml:id="CO12-3"/>
+&gt; db.clients.count(); <co xml:id="CO12-4"/>
+&gt; 0</literallayout>
+<calloutlist>
+<callout arearefs="CO12-1">
+<para>Start the mongo client, you need to make sure that you have
+started the <literal>mongod</literal> server on another terminal before you invoke the
+<literal>mongo</literal> command</para>
+</callout>
+<callout arearefs="CO12-2">
+<para>You&#8217;ve seen this from the previous section. This will list all the
+existing databases in our system. At the moment, this won&#8217;t show much</para>
+</callout>
+<callout arearefs="CO12-3">
+<para>The <literal>use</literal> command will switch databases. At the moment, we haven&#8217;t
+defined the <emphasis>crm</emphasis> database yet, but that does not matter to mongo,
+it will assume that you actually have that database and switch to it
+anyway</para>
+</callout>
+<callout arearefs="CO12-4">
+<para><literal>db</literal> is the alias for the currently used database, in our case,
+db is an alias to the <emphasis>crm</emphasis> database. You could think of this command
+as <literal>crm.clients.count()</literal>, if that helps. The level of organization
+next to the database is a collection (equivalent to a table in RDBMS).
+so <literal>db.clients</literal> refers to a collection named <emphasis>clients</emphasis> inside the crm
+database. Again, we haven&#8217;t defined any collections yet, but mongo is
+very helpful and returns to us the number of records inside the
+<emphasis>clients</emphasis> collection anyway (which is zero of course)</para>
+</callout>
+</calloutlist>
+<simpara>Explain that we don&#8217;t have to create the database or the table or any
+document before hand. Explain that a mongoDB is structureless
+database. And we only create these things we have actually inserted
+the first document.</simpara>
+<itemizedlist>
+<listitem>
+<simpara>Starting the server</simpara>
+</listitem>
+<listitem>
+<simpara>Connecting a client</simpara>
+</listitem>
+<listitem>
+<simpara>Listing all the databases</simpara>
+</listitem>
+<listitem>
+<simpara>Creating a database</simpara>
+</listitem>
+<listitem>
+<simpara>Create a collection</simpara>
+</listitem>
+<listitem>
+<simpara>Creating a document</simpara>
+</listitem>
+<listitem>
+<simpara>Finding a document</simpara>
+</listitem>
+<listitem>
+<simpara>Updating a document</simpara>
+</listitem>
+<listitem>
+<simpara>Deleting a document</simpara>
+</listitem>
+<listitem>
+<simpara>quit the client session</simpara>
+</listitem>
+<listitem>
+<simpara>quite the server</simpara>
+</listitem>
+</itemizedlist>
 </section>
-<section xml:id="finding_documents">
-<title>Finding documents</title>
-
 </section>
-<section xml:id="deleting_documents">
-<title>Deleting documents</title>
-
-</section>
-<section xml:id="updating_documents">
-<title>Updating documents</title>
-
-</section>
-<section xml:id="mongoose">
+</chapter>
+<chapter xml:id="mongoose">
 <title>Mongoose</title>
 <itemizedlist>
 <listitem>
@@ -689,7 +882,6 @@ mongo</simpara>
 <simpara>Basic uses in an app</simpara>
 </listitem>
 </itemizedlist>
-</section>
 </chapter>
 <chapter xml:id="express">
 <title>Express</title>
@@ -764,6 +956,37 @@ mongo</simpara>
 </listitem>
 <listitem>
 <simpara>Using the local strategy</simpara>
+</listitem>
+</itemizedlist>
+</chapter>
+<chapter xml:id="notes">
+<title>Notes</title>
+<itemizedlist mark="none">
+<listitem>
+<simpara>&#10003; Creating an HTTPS server</simpara>
+</listitem>
+<listitem>
+<simpara>&#10063; Passport Google and Facebook Strategy</simpara>
+</listitem>
+<listitem>
+<simpara>&#10063; Mustache templates/Handlebars templates</simpara>
+</listitem>
+<listitem>
+<simpara>&#10063; Polymer</simpara>
+</listitem>
+<listitem>
+<simpara>&#10063; Material Design</simpara>
+</listitem>
+<listitem>
+<simpara>&#10063; REST discussion</simpara>
+</listitem>
+<listitem>
+<simpara>&#10063; Unit testing</simpara>
+<itemizedlist mark="none">
+<listitem>
+<simpara>&#10063; Unit testing express endpoints</simpara>
+</listitem>
+</itemizedlist>
 </listitem>
 </itemizedlist>
 </chapter>
