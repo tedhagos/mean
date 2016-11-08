@@ -105,3 +105,10 @@ h1, h2, h3, h4, h5 {
 .revhistory {
   font-size: .8em;
 }
+
+.mediaobject img {
+  display:block;
+  width:90%;
+  margin-right:auto;
+  margin-left:auto;
+}
