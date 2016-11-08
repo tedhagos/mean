@@ -1,6 +1,6 @@
 == Hello World
 
-A web application written in node, will need to create a server,
+A web application written in node will need to create a server,
 specifically an HTTP server. The code listing below shows the basic
 steps in creating such as a server
 

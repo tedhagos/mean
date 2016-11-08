@@ -12,12 +12,12 @@
 </personname>
 <email>ted@thelogbox.com</email>
 </author>
-<authorinitials>tgh</authorinitials>
+<authorinitials>TGH</authorinitials>
 <revhistory>
 <revision>
 <revnumber>1.0</revnumber>
 <date>October 2016</date>
-<authorinitials>tgh</authorinitials>
+<authorinitials>TGH</authorinitials>
 </revision>
 </revhistory>
 </info>
@@ -259,7 +259,7 @@ of the program source file as a command line argument.</simpara>
 </chapter>
 <chapter xml:id="hello_world">
 <title>Hello World</title>
-<simpara>A web application written in node, will need to create a server,
+<simpara>A web application written in node will need to create a server,
 specifically an HTTP server. The code listing below shows the basic
 steps in creating such as a server</simpara>
 <example>

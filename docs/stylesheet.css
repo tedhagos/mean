@@ -1,6 +1,6 @@
 
 .calloutlist table tbody tr td {
-  vertical-align:center !important;
+  vertical-align:middle !important;
 }
 
 body {
@@ -11,7 +11,8 @@ body {
 .toc {
   margin-bottom: 1.5em
 }
-.toc a { font-weight: normal; }
+.toc a, .list-of-examples a { font-weight: normal; }
+.list-of-examples {margin-bottom:1em;}
 
 dt {font-weight: bold;}
 dd {margin-bottom:.5em; margin-top:.5em}
@@ -70,7 +71,7 @@ h1, h2, h3, h4, h5 {
 
 .tip, .warning, .important, .information, .caution, .note {
   padding: 5px;
-  border: 1px dotted #dedede;
+  border: 1px solid #dedede;
   margin-bottom: 1em;
   margin-top: 1em;
   margin-left:0px !important;
