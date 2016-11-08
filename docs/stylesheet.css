@@ -92,6 +92,16 @@ h1, h2, h3, h4, h5 {
   margin-right:0px !important;
 }
 
+.tip table td, 
+.warning table td,
+.important table td,
+.information table td,
+.caution table td,
+.note table td {
+  vertical-align:middle;
+  padding:.2em
+}
+
 .revhistory {
   font-size: .8em;
 }
