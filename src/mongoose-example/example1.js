@@ -1,12 +1,9 @@
-== Mongoose
+/*
+   Warning: mongoose mpromise is deprecated, plugin your own promise
+   library
+   How to solve this
+*/
 
-
-
-==== Basic usage
-
-.How to define a Schema and model
-====
-....
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
@@ -18,47 +15,40 @@ var employeeSchema = new Schema({
   },
   contacts: {
     email: [
-      address: {type:String, required:false}
+      { 
+        address: {type:String, required:false}
+      }
     ],
     phone: [
-      number: {type:String, required:false}
+      {
+        number: {type:String, required:false}
+      }
     ]
   }
 });
 
 var Employee = mongoose.model('Employee', employeeSchema);
 
-....
-====
+mongoose.connect('mongodb://localhost/crm2'); //<1>
 
-
-.Using a model to insert a document
-====
-....
-mongoose.connect('mongodb://localhost/crm'); //<1>
 
 var empObj = new Employee({
   name: {
     last: 'Doe',
-    first: 'John',
+    first: 'John'
   },
   contacts: {
-    [
+    email: {
       address: 'johndoe@gmail.com'
-    ],
-  phone: 
+    },
+    phone: {
+      number: '12345'
+    }
   }
+    
 });
-....
-====
 
 
-
-
-
-
-- Models
-- Schemas
-- Basic uses in an app
+empObj.save();
 
 

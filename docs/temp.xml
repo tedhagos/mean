@@ -12,12 +12,12 @@
 </personname>
 <email>ted@thelogbox.com</email>
 </author>
-<authorinitials>TGH</authorinitials>
+<authorinitials>tgh</authorinitials>
 <revhistory>
 <revision>
 <revnumber>1.0</revnumber>
 <date>October 2016</date>
-<authorinitials>TGH</authorinitials>
+<authorinitials>tgh</authorinitials>
 </revision>
 </revhistory>
 </info>
@@ -947,6 +947,35 @@ compose the documents as object literals.</simpara>
 </chapter>
 <chapter xml:id="_mongoose">
 <title>Mongoose</title>
+<section xml:id="_basic_usage_2">
+<title>Basic usage</title>
+<example>
+<title>How to define a Schema and model</title>
+<literallayout class="monospaced">const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
+
+var employeeSchema = new Schema({
+  name: {
+    last: {type:String, required:true},
+    first: {type:String, required:true},
+    middle: {type:String, required:false}
+  },
+  contacts: {
+    email: [
+      address: {type:String, required:false}
+    ],
+    phone: [
+      number: {type:String, required:false}
+    ]
+  }
+});
+
+var Employee = mongoose.model('Employee', employeeSchema);</literallayout>
+</example>
+<example>
+<title>Using a model to insert a document</title>
+<literallayout class="monospaced"></literallayout>
+</example>
 <itemizedlist>
 <listitem>
 <simpara>Models</simpara>
@@ -958,6 +987,7 @@ compose the documents as object literals.</simpara>
 <simpara>Basic uses in an app</simpara>
 </listitem>
 </itemizedlist>
+</section>
 </chapter>
 <chapter xml:id="_express">
 <title>Express</title>
