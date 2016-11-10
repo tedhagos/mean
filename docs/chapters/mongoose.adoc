@@ -1,10 +1,33 @@
+
 == Mongoose
 
+If you've worked with an object relational mapper before like
+hibernate, activerecord, propel, eloquent etc, those things do to SQL
+what mongoose does to mongoDB. Mongoose is an ODM or an object
+document mapper. 
+
+Using mongoDB straight from node is certainly workable and not that
+painful. However, mongoose allows us to work with mongoDB with a lot
+more ease and from a higher abstraction, specifically an object
+oriented abstraction.
+
+TODO: more reasons to use mongoose (a) enforces schema (b)
+connnection pools etc
 
 
-==== Basic usage
+=== Basic usage
 
-.How to define a Schema and model
+Before we can begin using mongoose, we need to pull the module via
+npm.
+
+....
+npm install mongoose --save
+....
+
+
+
+
+.Mongoose Schema and Model
 ====
 ....
 const mongoose = require('mongoose');
@@ -18,47 +41,63 @@ var employeeSchema = new Schema({
   },
   contacts: {
     email: [
-      address: {type:String, required:false}
+      { 
+        address: {type:String, required:false}
+      }
     ],
     phone: [
-      number: {type:String, required:false}
+      {
+        number: {type:String, required:false}
+      }
     ]
   }
 });
 
 var Employee = mongoose.model('Employee', employeeSchema);
-
 ....
 ====
 
 
-.Using a model to insert a document
+.Save a document using a model
 ====
 ....
-mongoose.connect('mongodb://localhost/crm'); //<1>
+mongoose.Promise = global.Promise; // <1>
+mongoose.connect('mongodb://localhost/crm2'); // <2>
 
 var empObj = new Employee({
   name: {
     last: 'Doe',
-    first: 'John',
+    first: 'John'
   },
   contacts: {
-    [
+    email: {
       address: 'johndoe@gmail.com'
-    ],
-  phone: 
+    },
+    phone: {
+      number: '12345'
+    }
   }
+    
 });
+
+
+empObj.save(); // <3>
+mongoose.connection.close(); // <4>
 ....
 ====
 
+<1> As of this writing, *mpromise*, which is the default promise
+library of mongoose has been deprecated. This line replaces mongoose's
+promise library with the default ES6 Promise library
 
+<2> `crm2` is the name of database. It doesn't matter if this database
+already exist, it will be created automatically if it doesn't exist
+yet
 
+<3> The `save` method is intelligent enough to use either `insert` or
+`update`. If the document doesn't exist yet, it will be _saved_, if it
+does exist, it will be _updated_
 
-
-
-- Models
-- Schemas
-- Basic uses in an app
+<4> Always clean up after yourself
 
 

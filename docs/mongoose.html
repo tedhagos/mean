@@ -1,5 +1,24 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><title>Chapter 8. Mongoose</title><link rel="stylesheet" type="text/css" href="stylesheet.css" /><meta name="generator" content="DocBook XSL Stylesheets V1.79.1" /><link rel="home" href="index.html" title="Programming using the MEAN stack" /><link rel="up" href="index.html" title="Programming using the MEAN stack" /><link rel="prev" href="basic_usage.html" title="7.3. Basic Usage" /><link rel="next" href="express.html" title="Chapter 9. Express" /></head><body><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Chapter 8. Mongoose</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="basic_usage.html">Prev</a> </td><th width="60%" align="center"> </th><td width="20%" align="right"> <a accesskey="n" href="express.html">Next</a></td></tr></table><hr /></div><div class="chapter"><div class="titlepage"><div><div><h1 class="title"><a id="mongoose"></a>Chapter 8. Mongoose</h1></div></div></div><div class="toc"><p><strong>Table of Contents</strong></p><dl class="toc"><dt><span class="section"><a href="mongoose.html#basic_usage_2">8.1. Basic usage</a></span></dt></dl></div><div class="section"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="basic_usage_2"></a>8.1. Basic usage</h2></div></div></div><div class="example"><a id="idm46240263610576"></a><p class="title"><strong>Example 8.1. How to define a Schema and model</strong></p><div class="example-contents"><pre class="literallayout">const mongoose = require('mongoose');
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><title>Chapter 8. Mongoose</title><link rel="stylesheet" type="text/css" href="stylesheet.css" /><meta name="generator" content="DocBook XSL Stylesheets V1.79.1" /><link rel="home" href="index.html" title="Programming using the MEAN stack" /><link rel="up" href="index.html" title="Programming using the MEAN stack" /><link rel="prev" href="basic_usage.html" title="7.3. Basic Usage" /><link rel="next" href="express.html" title="Chapter 9. Express" /></head><body><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Chapter 8. Mongoose</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="basic_usage.html">Prev</a> </td><th width="60%" align="center"> </th><td width="20%" align="right"> <a accesskey="n" href="express.html">Next</a></td></tr></table><hr /></div><div class="chapter"><div class="titlepage"><div><div><h1 class="title"><a id="mongoose"></a>Chapter 8. Mongoose</h1></div></div></div><div class="toc"><p><strong>Table of Contents</strong></p><dl class="toc"><dt><span class="section"><a href="mongoose.html#basic_usage_2">8.1. Basic usage</a></span></dt></dl></div>
+
+<p>If you’ve worked with an object relational mapper before like
+hibernate, activerecord, propel, eloquent etc, those things do to SQL
+what mongoose does to mongoDB. Mongoose is an ODM or an object
+document mapper.</p>
+<p>Using mongoDB straight from node is certainly workable and not that
+painful. However, mongoose allows us to work with mongoDB with a lot
+more ease and from a higher abstraction, specifically an object
+oriented abstraction.</p>
+<p>TODO: more reasons to use mongoose (a) enforces schema (b)
+connnection pools etc</p>
+<div class="section"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="basic_usage_2"></a>8.1. Basic usage</h2></div></div></div>
+
+<p>Before we can begin using mongoose, we need to pull the module via
+npm.</p>
+<pre class="literallayout">npm install mongoose --save</pre>
+<div class="example"><a id="idm526455142240"></a><p class="title"><strong>Example 8.1. Mongoose Schema and Model</strong></p><div class="example-contents">
+
+<pre class="literallayout">const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 var employeeSchema = new Schema({
@@ -10,12 +29,59 @@ var employeeSchema = new Schema({
   },
   contacts: {
     email: [
-      address: {type:String, required:false}
+      {
+        address: {type:String, required:false}
+      }
     ],
     phone: [
-      number: {type:String, required:false}
+      {
+        number: {type:String, required:false}
+      }
     ]
   }
 });
 
-var Employee = mongoose.model('Employee', employeeSchema);</pre></div></div><br class="example-break" /><div class="example"><a id="idm46240263608640"></a><p class="title"><strong>Example 8.2. Using a model to insert a document</strong></p><div class="example-contents"><pre class="literallayout"></pre></div></div><br class="example-break" /><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem">Models</li><li class="listitem">Schemas</li><li class="listitem">Basic uses in an app</li></ul></div></div></div><div class="navfooter"><hr /><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="basic_usage.html">Prev</a> </td><td width="20%" align="center"> </td><td width="40%" align="right"> <a accesskey="n" href="express.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">7.3. Basic Usage </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> Chapter 9. Express</td></tr></table></div></body></html>
+var Employee = mongoose.model('Employee', employeeSchema);</pre>
+</div></div><br class="example-break" />
+<div class="example"><a id="idm526455140784"></a><p class="title"><strong>Example 8.2. Save a document using a model</strong></p><div class="example-contents">
+
+<pre class="literallayout">mongoose.Promise = global.Promise; <a id="CO14-1"></a><span><img src="images/callouts/1.png" alt="1" border="0" /></span>
+mongoose.connect('mongodb://localhost/crm2'); <a id="CO14-2"></a><span><img src="images/callouts/2.png" alt="2" border="0" /></span>
+
+var empObj = new Employee({
+  name: {
+    last: 'Doe',
+    first: 'John'
+  },
+  contacts: {
+    email: {
+      address: 'johndoe@gmail.com'
+    },
+    phone: {
+      number: '12345'
+    }
+  }
+
+});
+
+
+empObj.save(); <a id="CO14-3"></a><span><img src="images/callouts/3.png" alt="3" border="0" /></span>
+mongoose.connection.close(); <a id="CO14-4"></a><span><img src="images/callouts/4.png" alt="4" border="0" /></span></pre>
+</div></div><br class="example-break" />
+<div class="calloutlist"><table border="0" summary="Callout list"><tr><td width="5%" valign="top" align="left"><p><a href="#CO14-1"><span><img src="images/callouts/1.png" alt="1" border="0" /></span></a> </p></td><td valign="top" align="left">
+<p>As of this writing, <span class="strong"><strong>mpromise</strong></span>, which is the default promise
+library of mongoose has been deprecated. This line replaces mongoose’s
+promise library with the default ES6 Promise library</p>
+</td></tr><tr><td width="5%" valign="top" align="left"><p><a href="#CO14-2"><span><img src="images/callouts/2.png" alt="2" border="0" /></span></a> </p></td><td valign="top" align="left">
+<p><code class="literal">crm2</code> is the name of database. It doesn’t matter if this database
+already exist, it will be created automatically if it doesn’t exist
+yet</p>
+</td></tr><tr><td width="5%" valign="top" align="left"><p><a href="#CO14-3"><span><img src="images/callouts/3.png" alt="3" border="0" /></span></a> </p></td><td valign="top" align="left">
+<p>The <code class="literal">save</code> method is intelligent enough to use either <code class="literal">insert</code> or
+<code class="literal">update</code>. If the document doesn’t exist yet, it will be <span class="emphasis"><em>saved</em></span>, if it
+does exist, it will be <span class="emphasis"><em>updated</em></span></p>
+</td></tr><tr><td width="5%" valign="top" align="left"><p><a href="#CO14-4"><span><img src="images/callouts/4.png" alt="4" border="0" /></span></a> </p></td><td valign="top" align="left">
+<p>Always clean up after yourself</p>
+</td></tr></table></div>
+</div>
+</div><div class="navfooter"><hr /><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="basic_usage.html">Prev</a> </td><td width="20%" align="center"> </td><td width="40%" align="right"> <a accesskey="n" href="express.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">7.3. Basic Usage </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> Chapter 9. Express</td></tr></table></div></body></html>

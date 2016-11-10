@@ -17,6 +17,10 @@ table.informaltable, table.table,
   vertical-align:middle !important;
 }
 
+.calloutlist table tbody tr td:first-child {
+  text-align:center;
+}
+
 body {
   font-size: 1.05em;
   background: #fbfbfb;

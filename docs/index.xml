@@ -12,12 +12,12 @@
 </personname>
 <email>ted@thelogbox.com</email>
 </author>
-<authorinitials>tgh</authorinitials>
+<authorinitials>TGH</authorinitials>
 <revhistory>
 <revision>
 <revnumber>1.0</revnumber>
 <date>October 2016</date>
-<authorinitials>tgh</authorinitials>
+<authorinitials>TGH</authorinitials>
 </revision>
 </revhistory>
 </info>
@@ -947,10 +947,23 @@ compose the documents as object literals.</simpara>
 </chapter>
 <chapter xml:id="mongoose">
 <title>Mongoose</title>
+<simpara>If you&#8217;ve worked with an object relational mapper before like
+hibernate, activerecord, propel, eloquent etc, those things do to SQL
+what mongoose does to mongoDB. Mongoose is an ODM or an object
+document mapper.</simpara>
+<simpara>Using mongoDB straight from node is certainly workable and not that
+painful. However, mongoose allows us to work with mongoDB with a lot
+more ease and from a higher abstraction, specifically an object
+oriented abstraction.</simpara>
+<simpara>TODO: more reasons to use mongoose (a) enforces schema (b)
+connnection pools etc</simpara>
 <section xml:id="basic_usage_2">
 <title>Basic usage</title>
+<simpara>Before we can begin using mongoose, we need to pull the module via
+npm.</simpara>
+<literallayout class="monospaced">npm install mongoose --save</literallayout>
 <example>
-<title>How to define a Schema and model</title>
+<title>Mongoose Schema and Model</title>
 <literallayout class="monospaced">const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
@@ -962,10 +975,14 @@ var employeeSchema = new Schema({
   },
   contacts: {
     email: [
-      address: {type:String, required:false}
+      {
+        address: {type:String, required:false}
+      }
     ],
     phone: [
-      number: {type:String, required:false}
+      {
+        number: {type:String, required:false}
+      }
     ]
   }
 });
@@ -973,20 +990,50 @@ var employeeSchema = new Schema({
 var Employee = mongoose.model('Employee', employeeSchema);</literallayout>
 </example>
 <example>
-<title>Using a model to insert a document</title>
-<literallayout class="monospaced"></literallayout>
+<title>Save a document using a model</title>
+<literallayout class="monospaced">mongoose.Promise = global.Promise; <co xml:id="CO14-1"/>
+mongoose.connect('mongodb://localhost/crm2'); <co xml:id="CO14-2"/>
+
+var empObj = new Employee({
+  name: {
+    last: 'Doe',
+    first: 'John'
+  },
+  contacts: {
+    email: {
+      address: 'johndoe@gmail.com'
+    },
+    phone: {
+      number: '12345'
+    }
+  }
+
+});
+
+
+empObj.save(); <co xml:id="CO14-3"/>
+mongoose.connection.close(); <co xml:id="CO14-4"/></literallayout>
 </example>
-<itemizedlist>
-<listitem>
-<simpara>Models</simpara>
-</listitem>
-<listitem>
-<simpara>Schemas</simpara>
-</listitem>
-<listitem>
-<simpara>Basic uses in an app</simpara>
-</listitem>
-</itemizedlist>
+<calloutlist>
+<callout arearefs="CO14-1">
+<para>As of this writing, <emphasis role="strong">mpromise</emphasis>, which is the default promise
+library of mongoose has been deprecated. This line replaces mongoose&#8217;s
+promise library with the default ES6 Promise library</para>
+</callout>
+<callout arearefs="CO14-2">
+<para><literal>crm2</literal> is the name of database. It doesn&#8217;t matter if this database
+already exist, it will be created automatically if it doesn&#8217;t exist
+yet</para>
+</callout>
+<callout arearefs="CO14-3">
+<para>The <literal>save</literal> method is intelligent enough to use either <literal>insert</literal> or
+<literal>update</literal>. If the document doesn&#8217;t exist yet, it will be <emphasis>saved</emphasis>, if it
+does exist, it will be <emphasis>updated</emphasis></para>
+</callout>
+<callout arearefs="CO14-4">
+<para>Always clean up after yourself</para>
+</callout>
+</calloutlist>
 </section>
 </chapter>
 <chapter xml:id="express">

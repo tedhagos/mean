@@ -1,50 +1,119 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><title>7.3. Basic Usage</title><link rel="stylesheet" type="text/css" href="stylesheet.css" /><meta name="generator" content="DocBook XSL Stylesheets V1.79.1" /><link rel="home" href="index.html" title="Programming using the MEAN stack" /><link rel="up" href="mongodb.html" title="Chapter 7. MongoDB" /><link rel="prev" href="installation_and_config.html" title="7.2. Installation and Config" /><link rel="next" href="mongoose.html" title="Chapter 8. Mongoose" /></head><body><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">7.3. Basic Usage</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="installation_and_config.html">Prev</a> </td><th width="60%" align="center">Chapter 7. MongoDB</th><td width="20%" align="right"> <a accesskey="n" href="mongoose.html">Next</a></td></tr></table><hr /></div><div class="section"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="basic_usage"></a>7.3. Basic Usage</h2></div></div></div><p><span class="strong"><strong>Starting the server</strong></span>. On a terminal window, start the server by running the <code class="literal">mongod</code>
-executable</p><pre class="screen">mongod</pre><p><span class="strong"><strong>Connecting a client</strong></span>. On another terminal window, start the mongo
-client by running</p><pre class="screen">mongo</pre><p>You should get the chevon prompt of mongodb after launching the client
-successfully.</p><p><span class="strong"><strong>To list all the databases</strong></span>, use the command</p><pre class="screen">&gt; show databases</pre><p>At this point, you won’t see much because we haven’t created any
-databases of our own just yet. We’ll do just that in the next section.</p><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="creating_collections_and_documents"></a>7.3.1. Creating Collections and Documents</h3></div></div></div><p>If we were dealing with a relational database, before we can start
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><title>7.3. Basic Usage</title><link rel="stylesheet" type="text/css" href="stylesheet.css" /><meta name="generator" content="DocBook XSL Stylesheets V1.79.1" /><link rel="home" href="index.html" title="Programming using the MEAN stack" /><link rel="up" href="mongodb.html" title="Chapter 7. MongoDB" /><link rel="prev" href="installation_and_config.html" title="7.2. Installation and Config" /><link rel="next" href="mongoose.html" title="Chapter 8. Mongoose" /></head><body><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">7.3. Basic Usage</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="installation_and_config.html">Prev</a> </td><th width="60%" align="center">Chapter 7. MongoDB</th><td width="20%" align="right"> <a accesskey="n" href="mongoose.html">Next</a></td></tr></table><hr /></div><div class="section"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="basic_usage"></a>7.3. Basic Usage</h2></div></div></div>
+
+<p><span class="strong"><strong>Starting the server</strong></span>. On a terminal window, start the server by running the <code class="literal">mongod</code>
+executable</p>
+<pre class="screen">mongod</pre>
+<p><span class="strong"><strong>Connecting a client</strong></span>. On another terminal window, start the mongo
+client by running</p>
+<pre class="screen">mongo</pre>
+<p>You should get the chevon prompt of mongodb after launching the client
+successfully.</p>
+<p><span class="strong"><strong>To list all the databases</strong></span>, use the command</p>
+<pre class="screen">&gt; show databases</pre>
+<p>At this point, you won’t see much because we haven’t created any
+databases of our own just yet. We’ll do just that in the next section.</p>
+<div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="creating_collections_and_documents"></a>7.3.1. Creating Collections and Documents</h3></div></div></div>
+
+<p>If we were dealing with a relational database, before we can start
 adding a record, we need to (1) create the database first then (2) create
 the tables and define its schema, only then can we (3) insert our
-first record.</p><p>In mongoDB, we don’t need to create a pre-defined schema because mongo
+first record.</p>
+<p>In mongoDB, we don’t need to create a pre-defined schema because mongo
 databases do not enforce schemas. Schemas are optional, you may or may
 not want to use them. If ever you will use schemas, they are not
 usually defined on the database level but are rather enforced at an
 application level (nodejs). So we can just go ahead and create a
-record (document) right away.</p><p>The command snippet below shows a session where we create a database
-named <span class="emphasis"><em>crm</em></span>.</p><pre class="literallayout">mongo <a id="CO12-1"></a><span><img src="images/callouts/1.png" alt="1" border="0" /></span>
+record (document) right away.</p>
+<p>The command snippet below shows a session where we create a database
+named <span class="emphasis"><em>crm</em></span>.</p>
+<pre class="literallayout">mongo <a id="CO12-1"></a><span><img src="images/callouts/1.png" alt="1" border="0" /></span>
 &gt; show databases <a id="CO12-2"></a><span><img src="images/callouts/2.png" alt="2" border="0" /></span>
 &gt; use crm; <a id="CO12-3"></a><span><img src="images/callouts/3.png" alt="3" border="0" /></span>
 &gt; db.clients.count(); <a id="CO12-4"></a><span><img src="images/callouts/4.png" alt="4" border="0" /></span>
-&gt; 0</pre><div class="calloutlist"><table border="0" summary="Callout list"><tr><td width="5%" valign="top" align="left"><p><a href="#CO12-1"><span><img src="images/callouts/1.png" alt="1" border="0" /></span></a> </p></td><td valign="top" align="left"><p>Start the mongo client, you need to make sure that you have
+&gt; 0</pre>
+<div class="calloutlist"><table border="0" summary="Callout list"><tr><td width="5%" valign="top" align="left"><p><a href="#CO12-1"><span><img src="images/callouts/1.png" alt="1" border="0" /></span></a> </p></td><td valign="top" align="left">
+<p>Start the mongo client, you need to make sure that you have
 started the <code class="literal">mongod</code> server on another terminal before you invoke the
-<code class="literal">mongo</code> command</p></td></tr><tr><td width="5%" valign="top" align="left"><p><a href="#CO12-2"><span><img src="images/callouts/2.png" alt="2" border="0" /></span></a> </p></td><td valign="top" align="left"><p>You’ve seen this from the previous section. This will list all the
-existing databases in our system. At the moment, this won’t show much</p></td></tr><tr><td width="5%" valign="top" align="left"><p><a href="#CO12-3"><span><img src="images/callouts/3.png" alt="3" border="0" /></span></a> </p></td><td valign="top" align="left"><p>The <code class="literal">use</code> command will switch databases. At the moment, we haven’t
+<code class="literal">mongo</code> command</p>
+</td></tr><tr><td width="5%" valign="top" align="left"><p><a href="#CO12-2"><span><img src="images/callouts/2.png" alt="2" border="0" /></span></a> </p></td><td valign="top" align="left">
+<p>You’ve seen this from the previous section. This will list all the
+existing databases in our system. At the moment, this won’t show much</p>
+</td></tr><tr><td width="5%" valign="top" align="left"><p><a href="#CO12-3"><span><img src="images/callouts/3.png" alt="3" border="0" /></span></a> </p></td><td valign="top" align="left">
+<p>The <code class="literal">use</code> command will switch databases. At the moment, we haven’t
 defined the <span class="emphasis"><em>crm</em></span> database yet, but that does not matter to mongo,
 it will assume that you actually have that database and switch to it
-anyway</p></td></tr><tr><td width="5%" valign="top" align="left"><p><a href="#CO12-4"><span><img src="images/callouts/4.png" alt="4" border="0" /></span></a> </p></td><td valign="top" align="left"><p><code class="literal">db</code> is the alias for the currently used database, in our case,
+anyway</p>
+</td></tr><tr><td width="5%" valign="top" align="left"><p><a href="#CO12-4"><span><img src="images/callouts/4.png" alt="4" border="0" /></span></a> </p></td><td valign="top" align="left">
+<p><code class="literal">db</code> is the alias for the currently used database, in our case,
 db is an alias to the <span class="emphasis"><em>crm</em></span> database. You could think of this command
 as <code class="literal">crm.clients.count()</code>, if that helps. The level of organization
 next to the database is a collection (equivalent to a table in RDBMS).
 so <code class="literal">db.clients</code> refers to a collection named <span class="emphasis"><em>clients</em></span> inside the crm
 database. Again, we haven’t defined any collections yet, but mongo is
 very helpful and returns to us the number of records inside the
-<span class="emphasis"><em>clients</em></span> collection anyway (which is zero of course)</p></td></tr></table></div><p>Let’s continue our session with the mongoDB REPL and try to insert
-some documents on the <span class="emphasis"><em>clients</em></span> collection.</p><pre class="literallayout">&gt; db.clients.insert({name: “Air BnB”, contact_owner: “Ted Hagos”,
+<span class="emphasis"><em>clients</em></span> collection anyway (which is zero of course)</p>
+</td></tr></table></div>
+<p>Let’s continue our session with the mongoDB REPL and try to insert
+some documents on the <span class="emphasis"><em>clients</em></span> collection.</p>
+<pre class="literallayout">&gt; db.clients.insert({name: “Air BnB”, contact_owner: “Ted Hagos”,
  contacts: [{name: “John Doe”, email: “johndoe@gmail.com”},
  {name:”Jane Doe”, email:”janedoe@gmail.com”}], projects:
- [{name:”project1”, status: “not moving”}, {name: “project2”}]})</pre><p>The command snippet above maybe a bit ugly to look at, but if you
+ [{name:”project1”, status: “not moving”}, {name: “project2”}]})</pre>
+<p>The command snippet above maybe a bit ugly to look at, but if you
 inspect it closely, the parameter of the <code class="literal">insert</code> method is a JSON
-object, mongoDB documents are actually JSON objects.</p><p>Alternatively,we can create documents this way</p><pre class="literallayout">&gt; var doc = {} <a id="CO13-1"></a><span><img src="images/callouts/1.png" alt="1" border="0" /></span>
+object, mongoDB documents are actually JSON objects.</p>
+<p>Alternatively,we can create documents this way</p>
+<pre class="literallayout">&gt; var doc = {} <a id="CO13-1"></a><span><img src="images/callouts/1.png" alt="1" border="0" /></span>
 &gt; doc.name = “Air BnB” <a id="CO13-2"></a><span><img src="images/callouts/2.png" alt="2" border="0" /></span>
 &gt; doc.contact_owner = “Ted Hagos” <a id="CO13-3"></a><span><img src="images/callouts/3.png" alt="3" border="0" /></span>
 &gt; doc.contacts = [{name: “John Doe”, email: “johndoe@gmail.com”},
   {name:“Jane Doe”, email:“janedoe@gmail.com”}] <a id="CO13-4"></a><span><img src="images/callouts/4.png" alt="4" border="0" /></span>
 &gt; doc.projects = [{name: “project1”, status: “not moving”}, {name:
   “project2”, status: “not moving”}] <a id="CO13-5"></a><span><img src="images/callouts/5.png" alt="5" border="0" /></span>
-&gt; db.clients.save(doc) <a id="CO13-6"></a><span><img src="images/callouts/6.png" alt="6" border="0" /></span></pre><div class="calloutlist"><table border="0" summary="Callout list"><tr><td width="5%" valign="top" align="left"><p><a href="#CO13-1"><span><img src="images/callouts/1.png" alt="1" border="0" /></span></a> </p></td><td valign="top" align="left"><p>Create an empty JSON object and assign it variable <code class="literal">doc</code></p></td></tr><tr><td width="5%" valign="top" align="left"><p><a href="#CO13-2"><span><img src="images/callouts/2.png" alt="2" border="0" /></span></a> </p></td><td valign="top" align="left"><p>Create a property named <code class="literal">name</code>, attach it to the <code class="literal">doc</code> object. We
-assign it a value of "Air BnB"</p></td></tr><tr><td width="5%" valign="top" align="left"><p><a href="#CO13-3"><span><img src="images/callouts/3.png" alt="3" border="0" /></span></a> </p></td><td valign="top" align="left"><p>Create a property named <code class="literal">contact_owner</code>, we assign it a string
-value of "Ted Hagos"</p></td></tr><tr><td width="5%" valign="top" align="left"><p><a href="#CO13-4"><span><img src="images/callouts/4.png" alt="4" border="0" /></span></a> </p></td><td valign="top" align="left"><p>Create a property named <code class="literal">contacts</code>, this is an array object which
-contains two JSON elements</p></td></tr><tr><td width="5%" valign="top" align="left"><p><a href="#CO13-5"><span><img src="images/callouts/5.png" alt="5" border="0" /></span></a> </p></td><td valign="top" align="left"><p>Create a property named <code class="literal">projects</code>, like <code class="literal">contacts</code>, this is also
-an array object</p></td></tr><tr><td width="5%" valign="top" align="left"><p><a href="#CO13-6"><span><img src="images/callouts/6.png" alt="6" border="0" /></span></a> </p></td><td valign="top" align="left"><p>The <code class="literal">save</code> method performs an insert action as well</p></td></tr></table></div><p>MongoDB documents are just JSON objects, so you can pretty much
-compose the documents as object literals.</p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="finding_a_document"></a>7.3.2. Finding a document</h3></div></div></div></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="updating_a_document"></a>7.3.3. Updating a document</h3></div></div></div></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="deleting_a_document"></a>7.3.4. Deleting a document</h3></div></div></div></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="quitting_the_mongo_repl"></a>7.3.5. Quitting the mongo REPL</h3></div></div></div></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="quitting_the_mongod_server"></a>7.3.6. Quitting the mongod server</h3></div></div></div></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="sql_commands_vs_mongodb_commands"></a>7.3.7. SQL commands vs mongoDB commands</h3></div></div></div></div></div><div class="navfooter"><hr /><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="installation_and_config.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="mongodb.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="mongoose.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">7.2. Installation and Config </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> Chapter 8. Mongoose</td></tr></table></div></body></html>
+&gt; db.clients.save(doc) <a id="CO13-6"></a><span><img src="images/callouts/6.png" alt="6" border="0" /></span></pre>
+<div class="calloutlist"><table border="0" summary="Callout list"><tr><td width="5%" valign="top" align="left"><p><a href="#CO13-1"><span><img src="images/callouts/1.png" alt="1" border="0" /></span></a> </p></td><td valign="top" align="left">
+<p>Create an empty JSON object and assign it variable <code class="literal">doc</code></p>
+</td></tr><tr><td width="5%" valign="top" align="left"><p><a href="#CO13-2"><span><img src="images/callouts/2.png" alt="2" border="0" /></span></a> </p></td><td valign="top" align="left">
+<p>Create a property named <code class="literal">name</code>, attach it to the <code class="literal">doc</code> object. We
+assign it a value of "Air BnB"</p>
+</td></tr><tr><td width="5%" valign="top" align="left"><p><a href="#CO13-3"><span><img src="images/callouts/3.png" alt="3" border="0" /></span></a> </p></td><td valign="top" align="left">
+<p>Create a property named <code class="literal">contact_owner</code>, we assign it a string
+value of "Ted Hagos"</p>
+</td></tr><tr><td width="5%" valign="top" align="left"><p><a href="#CO13-4"><span><img src="images/callouts/4.png" alt="4" border="0" /></span></a> </p></td><td valign="top" align="left">
+<p>Create a property named <code class="literal">contacts</code>, this is an array object which
+contains two JSON elements</p>
+</td></tr><tr><td width="5%" valign="top" align="left"><p><a href="#CO13-5"><span><img src="images/callouts/5.png" alt="5" border="0" /></span></a> </p></td><td valign="top" align="left">
+<p>Create a property named <code class="literal">projects</code>, like <code class="literal">contacts</code>, this is also
+an array object</p>
+</td></tr><tr><td width="5%" valign="top" align="left"><p><a href="#CO13-6"><span><img src="images/callouts/6.png" alt="6" border="0" /></span></a> </p></td><td valign="top" align="left">
+<p>The <code class="literal">save</code> method performs an insert action as well</p>
+</td></tr></table></div>
+<p>MongoDB documents are just JSON objects, so you can pretty much
+compose the documents as object literals.</p>
+</div>
+<div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="finding_a_document"></a>7.3.2. Finding a document</h3></div></div></div>
+
+
+</div>
+<div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="updating_a_document"></a>7.3.3. Updating a document</h3></div></div></div>
+
+
+</div>
+<div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="deleting_a_document"></a>7.3.4. Deleting a document</h3></div></div></div>
+
+
+</div>
+<div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="quitting_the_mongo_repl"></a>7.3.5. Quitting the mongo REPL</h3></div></div></div>
+
+
+</div>
+<div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="quitting_the_mongod_server"></a>7.3.6. Quitting the mongod server</h3></div></div></div>
+
+
+</div>
+<div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="sql_commands_vs_mongodb_commands"></a>7.3.7. SQL commands vs mongoDB commands</h3></div></div></div>
+
+
+</div>
+</div><div class="navfooter"><hr /><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="installation_and_config.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="mongodb.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="mongoose.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">7.2. Installation and Config </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> Chapter 8. Mongoose</td></tr></table></div></body></html>
