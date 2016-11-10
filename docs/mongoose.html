@@ -1,27 +1,40 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><title>Chapter 8. Mongoose</title><link rel="stylesheet" type="text/css" href="stylesheet.css" /><meta name="generator" content="DocBook XSL Stylesheets V1.79.1" /><link rel="home" href="index.html" title="Programming using the MEAN stack" /><link rel="up" href="index.html" title="Programming using the MEAN stack" /><link rel="prev" href="basic_usage.html" title="7.3. Basic Usage" /><link rel="next" href="express.html" title="Chapter 9. Express" /></head><body><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Chapter 8. Mongoose</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="basic_usage.html">Prev</a> </td><th width="60%" align="center"> </th><td width="20%" align="right"> <a accesskey="n" href="express.html">Next</a></td></tr></table><hr /></div><div class="chapter"><div class="titlepage"><div><div><h1 class="title"><a id="mongoose"></a>Chapter 8. Mongoose</h1></div></div></div><div class="toc"><p><strong>Table of Contents</strong></p><dl class="toc"><dt><span class="section"><a href="mongoose.html#basic_usage_2">8.1. Basic usage</a></span></dt></dl></div>
-
-<p>If you’ve worked with an object relational mapper before like
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><title>Chapter 8. Mongoose</title><link rel="stylesheet" type="text/css" href="stylesheet.css" /><meta name="generator" content="DocBook XSL Stylesheets V1.79.1" /><link rel="home" href="index.html" title="Programming using the MEAN stack" /><link rel="up" href="index.html" title="Programming using the MEAN stack" /><link rel="prev" href="basic_usage.html" title="7.3. Basic Usage" /><link rel="next" href="express.html" title="Chapter 9. Express" /></head><body><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Chapter 8. Mongoose</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="basic_usage.html">Prev</a> </td><th width="60%" align="center"> </th><td width="20%" align="right"> <a accesskey="n" href="express.html">Next</a></td></tr></table><hr /></div><div class="chapter"><div class="titlepage"><div><div><h1 class="title"><a id="mongoose"></a>Chapter 8. Mongoose</h1></div></div></div><div class="toc"><p><strong>Table of Contents</strong></p><dl class="toc"><dt><span class="section"><a href="mongoose.html#basic_usage_2">8.1. Basic usage</a></span></dt></dl></div><p>If you’ve worked with an object relational mapper before like
 hibernate, activerecord, propel, eloquent etc, those things do to SQL
 what mongoose does to mongoDB. Mongoose is an ODM or an object
-document mapper.</p>
-<p>Using mongoDB straight from node is certainly workable and not that
+document mapper.</p><p>Using mongoDB straight from node is certainly workable and not that
 painful. However, mongoose allows us to work with mongoDB with a lot
 more ease and from a higher abstraction, specifically an object
-oriented abstraction.</p>
-<p>TODO: more reasons to use mongoose (a) enforces schema (b)
-connnection pools etc</p>
-<div class="section"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="basic_usage_2"></a>8.1. Basic usage</h2></div></div></div>
+oriented abstraction.</p><p>TODO: more reasons to use mongoose (a) enforces schema (b)
+connnection pools etc</p><div class="section"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="basic_usage_2"></a>8.1. Basic usage</h2></div></div></div><p>Before we can begin using mongoose, we need to pull the module via
+npm.</p><pre class="literallayout">npm install mongoose --save</pre><p>The next thing to do is to create a schema for each of our
+collection. MongoDB itself does not require a schema, so you might be
+wondering why are putting this self-imposed constraint upon ourselves?
+That may seem counter-intuitive doesn’t it? But a schema makes your life a bit
+more sane as a developer. Imagine working with a collection that
+doesn’t have a consistent structure. It is impractical to write
+program logic for each document (record). The programming idiom for
+database manipulation is that we process a set of records from top to
+bottom, we stop until there are no more records to process. This would
+be fairly difficult to do if the structure of our documents are not
+consistent. So, most of the time, you need a schema.</p><div class="example"><a id="idm46006905269472"></a><p class="title"><strong>Example 8.1. Basic Schema and Model</strong></p><div class="example-contents"><pre class="literallayout">const mongoose = require('mongoose'); <a id="CO14-1"></a><span><img src="images/callouts/1.png" alt="1" border="0" /></span>
+const Schema  = mongoose.Schema; <a id="CO14-2"></a><span><img src="images/callouts/2.png" alt="2" border="0" /></span>
 
-<p>Before we can begin using mongoose, we need to pull the module via
-npm.</p>
-<pre class="literallayout">npm install mongoose --save</pre>
-<div class="example"><a id="idm526455142240"></a><p class="title"><strong>Example 8.1. Mongoose Schema and Model</strong></p><div class="example-contents">
+var personSchema = new Schema({ <a id="CO14-3"></a><span><img src="images/callouts/3.png" alt="3" border="0" /></span>
+  lastname: {type: String, required: true}, <a id="CO14-4"></a><span><img src="images/callouts/4.png" alt="4" border="0" /></span>
+  firstname: {type:String, required:true},
+  middlename : {type:String, required:false}
+});
 
-<pre class="literallayout">const mongoose = require('mongoose');
+var Person = mongoose.model('Person', personSchema); <a id="CO14-5"></a><span><img src="images/callouts/5.png" alt="5" border="0" /></span> <a id="CO14-6"></a><span><img src="images/callouts/6.png" alt="6" border="0" /></span></pre></div></div><br class="example-break" /><div class="calloutlist"><table border="0" summary="Callout list"><tr><td width="5%" valign="top" align="left"><p><a href="#CO14-1"><span><img src="images/callouts/1.png" alt="1" border="0" /></span></a> </p></td><td valign="top" align="left"><p>Like all other modules, we need to require it in our app before we
+can use it</p></td></tr><tr><td width="5%" valign="top" align="left"><p><a href="#CO14-2"><span><img src="images/callouts/2.png" alt="2" border="0" /></span></a> </p></td><td valign="top" align="left"><p>Get the Schema constructor</p></td></tr><tr><td width="5%" valign="top" align="left"><p><a href="#CO14-3"><span><img src="images/callouts/3.png" alt="3" border="0" /></span></a> </p></td><td valign="top" align="left"><p>When creating a new Schema, we just need to pass a JSON literal to
+its constructor. This JSON literal becomes the structure of a document
+or record</p></td></tr></table></div><p>&lt;4&gt;</p><p>&lt;5&gt;</p><p>&lt;6&gt;</p><p><a class="link" href="http://mongoosejs.com/docs/connections.html" target="_top">http://mongoosejs.com/docs/connections.html</a>
+<a class="link" href="http://mongoosejs.com/docs/schematypes.html" target="_top">http://mongoosejs.com/docs/schematypes.html</a>
+<a class="link" href="http://mongoosejs.com/docs/models.html" target="_top">http://mongoosejs.com/docs/models.html</a></p><div class="example"><a id="idm46006905256416"></a><p class="title"><strong>Example 8.2. Mongoose Schema and Model</strong></p><div class="example-contents"><pre class="literallayout">const mongoose = require('mongoose'); //
 const Schema = mongoose.Schema;
 
-var employeeSchema = new Schema({
+var employeeSchema = new Schema({ //
   name: {
     last: {type:String, required:true},
     first: {type:String, required:true},
@@ -41,12 +54,8 @@ var employeeSchema = new Schema({
   }
 });
 
-var Employee = mongoose.model('Employee', employeeSchema);</pre>
-</div></div><br class="example-break" />
-<div class="example"><a id="idm526455140784"></a><p class="title"><strong>Example 8.2. Save a document using a model</strong></p><div class="example-contents">
-
-<pre class="literallayout">mongoose.Promise = global.Promise; <a id="CO14-1"></a><span><img src="images/callouts/1.png" alt="1" border="0" /></span>
-mongoose.connect('mongodb://localhost/crm2'); <a id="CO14-2"></a><span><img src="images/callouts/2.png" alt="2" border="0" /></span>
+var Employee = mongoose.model('Employee', employeeSchema);</pre></div></div><br class="example-break" /><div class="example"><a id="idm46006905254432"></a><p class="title"><strong>Example 8.3. Save a document using a model</strong></p><div class="example-contents"><pre class="literallayout">mongoose.Promise = global.Promise; <a id="CO15-1"></a><span><img src="images/callouts/1.png" alt="1" border="0" /></span>
+mongoose.connect('mongodb://localhost/crm2'); <a id="CO15-2"></a><span><img src="images/callouts/2.png" alt="2" border="0" /></span>
 
 var empObj = new Employee({
   name: {
@@ -65,23 +74,11 @@ var empObj = new Employee({
 });
 
 
-empObj.save(); <a id="CO14-3"></a><span><img src="images/callouts/3.png" alt="3" border="0" /></span>
-mongoose.connection.close(); <a id="CO14-4"></a><span><img src="images/callouts/4.png" alt="4" border="0" /></span></pre>
-</div></div><br class="example-break" />
-<div class="calloutlist"><table border="0" summary="Callout list"><tr><td width="5%" valign="top" align="left"><p><a href="#CO14-1"><span><img src="images/callouts/1.png" alt="1" border="0" /></span></a> </p></td><td valign="top" align="left">
-<p>As of this writing, <span class="strong"><strong>mpromise</strong></span>, which is the default promise
+empObj.save(); <a id="CO15-3"></a><span><img src="images/callouts/3.png" alt="3" border="0" /></span>
+mongoose.connection.close(); <a id="CO15-4"></a><span><img src="images/callouts/4.png" alt="4" border="0" /></span></pre></div></div><br class="example-break" /><div class="calloutlist"><table border="0" summary="Callout list"><tr><td width="5%" valign="top" align="left"><p><a href="#CO15-1"><span><img src="images/callouts/1.png" alt="1" border="0" /></span></a> </p></td><td valign="top" align="left"><p>As of this writing, <span class="strong"><strong>mpromise</strong></span>, which is the default promise
 library of mongoose has been deprecated. This line replaces mongoose’s
-promise library with the default ES6 Promise library</p>
-</td></tr><tr><td width="5%" valign="top" align="left"><p><a href="#CO14-2"><span><img src="images/callouts/2.png" alt="2" border="0" /></span></a> </p></td><td valign="top" align="left">
-<p><code class="literal">crm2</code> is the name of database. It doesn’t matter if this database
+promise library with the default ES6 Promise library</p></td></tr><tr><td width="5%" valign="top" align="left"><p><a href="#CO15-2"><span><img src="images/callouts/2.png" alt="2" border="0" /></span></a> </p></td><td valign="top" align="left"><p><code class="literal">crm2</code> is the name of database. It doesn’t matter if this database
 already exist, it will be created automatically if it doesn’t exist
-yet</p>
-</td></tr><tr><td width="5%" valign="top" align="left"><p><a href="#CO14-3"><span><img src="images/callouts/3.png" alt="3" border="0" /></span></a> </p></td><td valign="top" align="left">
-<p>The <code class="literal">save</code> method is intelligent enough to use either <code class="literal">insert</code> or
+yet</p></td></tr><tr><td width="5%" valign="top" align="left"><p><a href="#CO15-3"><span><img src="images/callouts/3.png" alt="3" border="0" /></span></a> </p></td><td valign="top" align="left"><p>The <code class="literal">save</code> method is intelligent enough to use either <code class="literal">insert</code> or
 <code class="literal">update</code>. If the document doesn’t exist yet, it will be <span class="emphasis"><em>saved</em></span>, if it
-does exist, it will be <span class="emphasis"><em>updated</em></span></p>
-</td></tr><tr><td width="5%" valign="top" align="left"><p><a href="#CO14-4"><span><img src="images/callouts/4.png" alt="4" border="0" /></span></a> </p></td><td valign="top" align="left">
-<p>Always clean up after yourself</p>
-</td></tr></table></div>
-</div>
-</div><div class="navfooter"><hr /><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="basic_usage.html">Prev</a> </td><td width="20%" align="center"> </td><td width="40%" align="right"> <a accesskey="n" href="express.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">7.3. Basic Usage </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> Chapter 9. Express</td></tr></table></div></body></html>
+does exist, it will be <span class="emphasis"><em>updated</em></span></p></td></tr><tr><td width="5%" valign="top" align="left"><p><a href="#CO15-4"><span><img src="images/callouts/4.png" alt="4" border="0" /></span></a> </p></td><td valign="top" align="left"><p>Always clean up after yourself</p></td></tr></table></div></div></div><div class="navfooter"><hr /><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="basic_usage.html">Prev</a> </td><td width="20%" align="center"> </td><td width="40%" align="right"> <a accesskey="n" href="express.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">7.3. Basic Usage </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> Chapter 9. Express</td></tr></table></div></body></html>

@@ -24,16 +24,68 @@ npm.
 npm install mongoose --save
 ....
 
+The next thing to do is to create a schema for each of our
+collection. MongoDB itself does not require a schema, so you might be
+wondering why are putting this self-imposed constraint upon ourselves?
+That may seem counter-intuitive doesn't it? But a schema makes your life a bit
+more sane as a developer. Imagine working with a collection that
+doesn't have a consistent structure. It is impractical to write
+program logic for each document (record). The programming idiom for
+database manipulation is that we process a set of records from top to
+bottom, we stop until there are no more records to process. This would
+be fairly difficult to do if the structure of our documents are not
+consistent. So, most of the time, you need a schema. 
+
+
+.Basic Schema and Model
+====
+....
+const mongoose = require('mongoose'); // <1>
+const Schema  = mongoose.Schema; // <2>
+
+var personSchema = new Schema({ // <3>
+  lastname: {type: String, required: true}, // <4>
+  firstname: {type:String, required:true},
+  middlename : {type:String, required:false}
+});
+
+var Person = mongoose.model('Person', personSchema); // <5> <6>
+....
+====
+
+<1> Like all other modules, we need to require it in our app before we
+can use it
+
+<2> Get the Schema constructor
+
+<3> When creating a new Schema, we just need to pass a JSON literal to
+its constructor. This JSON literal becomes the structure of a document
+or record
+
+<4>   
+
+<5>
+
+<6>
+
+
+
+http://mongoosejs.com/docs/connections.html
+http://mongoosejs.com/docs/schematypes.html
+http://mongoosejs.com/docs/models.html
+
+.Data types of Mongoose
+
 
 
 
 .Mongoose Schema and Model
 ====
 ....
-const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
+const mongoose = require('mongoose'); // 
+const Schema = mongoose.Schema; 
 
-var employeeSchema = new Schema({
+var employeeSchema = new Schema({ // 
   name: {
     last: {type:String, required:true},
     first: {type:String, required:true},

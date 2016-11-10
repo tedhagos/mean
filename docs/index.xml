@@ -12,12 +12,12 @@
 </personname>
 <email>ted@thelogbox.com</email>
 </author>
-<authorinitials>TGH</authorinitials>
+<authorinitials>tgh</authorinitials>
 <revhistory>
 <revision>
 <revnumber>1.0</revnumber>
 <date>October 2016</date>
-<authorinitials>TGH</authorinitials>
+<authorinitials>tgh</authorinitials>
 </revision>
 </revhistory>
 </info>
@@ -962,12 +962,56 @@ connnection pools etc</simpara>
 <simpara>Before we can begin using mongoose, we need to pull the module via
 npm.</simpara>
 <literallayout class="monospaced">npm install mongoose --save</literallayout>
+<simpara>The next thing to do is to create a schema for each of our
+collection. MongoDB itself does not require a schema, so you might be
+wondering why are putting this self-imposed constraint upon ourselves?
+That may seem counter-intuitive doesn&#8217;t it? But a schema makes your life a bit
+more sane as a developer. Imagine working with a collection that
+doesn&#8217;t have a consistent structure. It is impractical to write
+program logic for each document (record). The programming idiom for
+database manipulation is that we process a set of records from top to
+bottom, we stop until there are no more records to process. This would
+be fairly difficult to do if the structure of our documents are not
+consistent. So, most of the time, you need a schema.</simpara>
+<example>
+<title>Basic Schema and Model</title>
+<literallayout class="monospaced">const mongoose = require('mongoose'); <co xml:id="CO14-1"/>
+const Schema  = mongoose.Schema; <co xml:id="CO14-2"/>
+
+var personSchema = new Schema({ <co xml:id="CO14-3"/>
+  lastname: {type: String, required: true}, <co xml:id="CO14-4"/>
+  firstname: {type:String, required:true},
+  middlename : {type:String, required:false}
+});
+
+var Person = mongoose.model('Person', personSchema); <co xml:id="CO14-5"/> <co xml:id="CO14-6"/></literallayout>
+</example>
+<calloutlist>
+<callout arearefs="CO14-1">
+<para>Like all other modules, we need to require it in our app before we
+can use it</para>
+</callout>
+<callout arearefs="CO14-2">
+<para>Get the Schema constructor</para>
+</callout>
+<callout arearefs="CO14-3">
+<para>When creating a new Schema, we just need to pass a JSON literal to
+its constructor. This JSON literal becomes the structure of a document
+or record</para>
+</callout>
+</calloutlist>
+<simpara>&lt;4&gt;</simpara>
+<simpara>&lt;5&gt;</simpara>
+<simpara>&lt;6&gt;</simpara>
+<simpara><link xl:href="http://mongoosejs.com/docs/connections.html">http://mongoosejs.com/docs/connections.html</link>
+<link xl:href="http://mongoosejs.com/docs/schematypes.html">http://mongoosejs.com/docs/schematypes.html</link>
+<link xl:href="http://mongoosejs.com/docs/models.html">http://mongoosejs.com/docs/models.html</link></simpara>
 <example>
 <title>Mongoose Schema and Model</title>
-<literallayout class="monospaced">const mongoose = require('mongoose');
+<literallayout class="monospaced">const mongoose = require('mongoose'); //
 const Schema = mongoose.Schema;
 
-var employeeSchema = new Schema({
+var employeeSchema = new Schema({ //
   name: {
     last: {type:String, required:true},
     first: {type:String, required:true},
@@ -991,8 +1035,8 @@ var Employee = mongoose.model('Employee', employeeSchema);</literallayout>
 </example>
 <example>
 <title>Save a document using a model</title>
-<literallayout class="monospaced">mongoose.Promise = global.Promise; <co xml:id="CO14-1"/>
-mongoose.connect('mongodb://localhost/crm2'); <co xml:id="CO14-2"/>
+<literallayout class="monospaced">mongoose.Promise = global.Promise; <co xml:id="CO15-1"/>
+mongoose.connect('mongodb://localhost/crm2'); <co xml:id="CO15-2"/>
 
 var empObj = new Employee({
   name: {
@@ -1011,26 +1055,26 @@ var empObj = new Employee({
 });
 
 
-empObj.save(); <co xml:id="CO14-3"/>
-mongoose.connection.close(); <co xml:id="CO14-4"/></literallayout>
+empObj.save(); <co xml:id="CO15-3"/>
+mongoose.connection.close(); <co xml:id="CO15-4"/></literallayout>
 </example>
 <calloutlist>
-<callout arearefs="CO14-1">
+<callout arearefs="CO15-1">
 <para>As of this writing, <emphasis role="strong">mpromise</emphasis>, which is the default promise
 library of mongoose has been deprecated. This line replaces mongoose&#8217;s
 promise library with the default ES6 Promise library</para>
 </callout>
-<callout arearefs="CO14-2">
+<callout arearefs="CO15-2">
 <para><literal>crm2</literal> is the name of database. It doesn&#8217;t matter if this database
 already exist, it will be created automatically if it doesn&#8217;t exist
 yet</para>
 </callout>
-<callout arearefs="CO14-3">
+<callout arearefs="CO15-3">
 <para>The <literal>save</literal> method is intelligent enough to use either <literal>insert</literal> or
 <literal>update</literal>. If the document doesn&#8217;t exist yet, it will be <emphasis>saved</emphasis>, if it
 does exist, it will be <emphasis>updated</emphasis></para>
 </callout>
-<callout arearefs="CO14-4">
+<callout arearefs="CO15-4">
 <para>Always clean up after yourself</para>
 </callout>
 </calloutlist>
